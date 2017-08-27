@@ -1,0 +1,21 @@
+/* CSS declarations go here */
+
+body {
+    background-color: #ecf0f1;
+}
+
+.container {
+  max-width: 480px;
+  margin: 50px auto;
+  position: relative;
+  padding: 20px;
+}
+
+.title {
+  margin: 30px 0;
+  letter-spacing: 5px;
+  font-size: small;
+  color: #bdc3c7;
+  text-align: center;
+  text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.5);
+}
