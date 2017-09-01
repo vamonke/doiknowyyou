@@ -2,28 +2,33 @@ import { Mongo } from 'meteor/mongo';
 
 export const Players = new Mongo.Collection('players');
 
-// function generateNewPlayer(game, name){
-//   var player = {
-//     gameID: game._id,
-//     name: name,
-//     role: null,
-//     isSpy: false,
-//     isFirstPlayer: false
-//   };
-
-//   var playerID = Players.insert(player);
-
-//   return Players.findOne(playerID);
-// }
+if (Meteor.isServer) {
+  Meteor.publish('players', function playersPublication() {
+    return Players.find();
+  });
+}
 
 Meteor.methods({
-  'players.insert'(name, gameID) {
-    Players.insert({
-      gameID: gameID,
+  'players.insert'(name, gameCode) {
+    return Players.insert({
+      gameCode: gameCode,
       name: name,
       role: null,
-      isSpy: false,
-      isFirstPlayer: false
+      isReady: false
+    });
+  },
+  'players.ready'(id) {
+    return Players.update({ _id: id }, {
+      $set: {
+        isReady: true
+      }
+    });
+  },
+  'players.unReady'(id) {
+    return Players.update({ _id: id }, {
+      $set: {
+        isReady: false
+      }
     });
   }
 });

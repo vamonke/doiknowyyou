@@ -1,23 +1,13 @@
 import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
 
 export const Games = new Mongo.Collection('games');
 
-// function generateNewGame(){
-//   var game = {
-//     accessCode: generateAccessCode(),
-//     state: "waitingForPlayers",
-//     location: null,
-//     lengthInMinutes: 8,
-//     endTime: null,
-//     paused: false,
-//     pausedTime: null
-//   };
-
-//   var gameID = Games.insert(game);
-//   game = Games.findOne(gameID);
-
-//   return game;
-// }
+if (Meteor.isServer) {
+  Meteor.publish('games', function gamesPublication() {
+    return Games.find();
+  });
+}
 
 Meteor.methods({
   'games.insert'() {
@@ -29,7 +19,6 @@ Meteor.methods({
 
     var gameID = Games.insert(game);
     game = Games.findOne(gameID);
-    console.log(game);
     return game;
   }
 });
