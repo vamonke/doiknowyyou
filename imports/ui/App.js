@@ -7,8 +7,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Card, Row, Col, Button, FormField, FormInput, Pill } from 'elemental';
 import { Link } from 'react-router-dom';
- 
-import Lobby from './Lobby.js';
+
 import { Games } from '../api/games.js';
 import { Players } from '../api/players.js';
 
@@ -27,7 +26,7 @@ class App extends Component {
     return this.props.games.map((game) => (
       <Card key={game._id}>
         <div className='gameTitle'>
-          <Link to={`/${game.code}`}>
+          <Link to={`/lobby/${game.code}`}>
             {'Game '}
             {game.code}
           </Link>
@@ -79,8 +78,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="title">DO I KNOW YOU?</div>
+      <div className="paddingTop">
         <FormField>
           <FormInput ref={(input) => { this.name = input; }} placeholder="Enter name" type="text" autoFocus />
         </FormField>

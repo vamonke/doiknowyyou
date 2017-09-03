@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Link } from 'react-router-dom';
 import { Table, Card, FormField, FormInput, Button, Pill } from 'elemental';
 
 import { Games } from '../api/games.js';
 import { Players } from '../api/players.js';
 import { Questions } from '../api/questions.js';
+
+import './Lobby.css';
 
 // Game lobby component
 class Lobby extends Component {
@@ -16,6 +17,7 @@ class Lobby extends Component {
     super(props);
     this.addQuestions = this.addQuestions.bind(this);
     this.editQuestions = this.editQuestions.bind(this);
+    this.startGame = this.startGame.bind(this);
   }
 
   componentDidUpdate() {
@@ -72,12 +74,46 @@ class Lobby extends Component {
       )
     });
   }
+
+  renderQuestions() {
+    return this.props.questions.map((question) => {
+      return (
+        <Card key={question._id}>
+          {question.text}
+        </Card>
+      )
+    });
+  }
+
+  displayStartButton() {
+    let players = this.props.players;
+    for (let i = 0; i < players.length; i += 1) {
+      if (!players[i].isReady) {
+        return null;
+      }
+    };
+    return (
+      <div className="fixed">
+        <div className="buttonWrap">
+          <Button onClick={this.startGame} type="success" block>
+            Start
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  startGame() {
+    let code = this.props.game.code;
+    Meteor.call('games.start', code);
+    Meteor.call('questions.select');
+    this.props.history.push(`/game/${code}`);
+  }
+
   render() {
     Session.set('currentUserId', 'ukgjDMXfDTrbW8cYW');
     return (
-      <div className="container">
-        <Link to={'/'}>Home</Link>
-
+      <div>
         <div className="title">
           QUESTIONS
         </div>
@@ -89,6 +125,7 @@ class Lobby extends Component {
               disabled={this.props.viewer.isReady}
               placeholder="Question 1"
               autoFocus
+              value="Do I like fruits?"
             />
           </FormField>
           <FormField>
@@ -96,6 +133,7 @@ class Lobby extends Component {
               ref={(input) => { this.q2 = input; }}
               disabled={this.props.viewer.isReady}
               placeholder="Question 2"
+              value="Have I failed an exam?"
             />
           </FormField>
           <FormField>
@@ -103,6 +141,7 @@ class Lobby extends Component {
               ref={(input) => { this.q3 = input; }}
               disabled={this.props.viewer.isReady}
               placeholder="Question 3"
+              value="Am I vain?"
             />
           </FormField>  
           {(this.props.viewer.isReady) ? (
@@ -110,7 +149,7 @@ class Lobby extends Component {
               Edit questions
             </Button>
           ) : (
-            <Button onClick={this.addQuestions} type="success" block>
+            <Button onClick={this.addQuestions} type="primary" block>
               Ready
             </Button>
           )}
@@ -137,7 +176,8 @@ class Lobby extends Component {
             </tbody>
           </Table>
         </Card>
-
+        {this.renderQuestions()}
+        {this.displayStartButton()}
       </div>
     );
   }
@@ -163,9 +203,11 @@ export default createContainer((value) => {
   let code = Number(value.match.params.code);
   Meteor.subscribe('games');
   Meteor.subscribe('players');
+  Meteor.subscribe('questions');
   return {
     game: Games.findOne({ code: code }),
     players: Players.find({ gameCode: code }).fetch(),
+    questions: Questions.find({ gameCode: code }).fetch(),
     viewer: Players.findOne({ _id: Session.get('currentUserId') }),
   };
 }, Lobby);

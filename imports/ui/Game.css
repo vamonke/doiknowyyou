@@ -1,0 +1,18 @@
+.currentQuestion {
+  font-size: x-large;
+  margin: 20px 0;
+}
+
+.questionLight {
+  color: #7f8c8d;
+  margin-bottom: 15px;
+}
+
+.questionOwner {
+  color: #7f8c8d;
+  font-size: small;
+}
+
+.questionDark {
+  margin-bottom: 15px;
+}

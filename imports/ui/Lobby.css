@@ -1,0 +1,15 @@
+.fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #bdc3c7;
+}
+
+.buttonWrap {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 15px 20px;
+}

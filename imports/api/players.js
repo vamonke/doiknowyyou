@@ -18,17 +18,20 @@ Meteor.methods({
     });
   },
   'players.ready'(id) {
-    return Players.update({ _id: id }, {
+    Players.update({ _id: id }, {
       $set: {
         isReady: true
       }
     });
   },
   'players.unReady'(id) {
-    return Players.update({ _id: id }, {
+    Players.update({ _id: id }, {
       $set: {
         isReady: false
       }
     });
-  }
+  },
+  'players.getNameById'(id) {
+    return Players.findOne({ _id: id }).name;
+  },
 });
