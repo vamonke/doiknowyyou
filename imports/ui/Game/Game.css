@@ -1,0 +1,39 @@
+.currentQuestion {
+  font-size: x-large;
+  margin: 20px 0;
+}
+
+.questionLight {
+  color: #7f8c8d;
+  margin-bottom: 15px;
+}
+
+.questionOwner {
+  color: #7f8c8d;
+  font-size: small;
+}
+
+.marginBottom {
+  margin-bottom: 15px;
+}
+
+.marginTop {
+  margin-top: 15px;
+  color: #7f8c8d;
+}
+
+.answering {
+  border-radius: 3px;
+  border: 1px solid #e67e22;
+  font-weight: bold;
+  vertical-align: middle;
+  font-size: x-small;
+  padding: 3px 5px;
+  margin: 0 10px;
+  color: #e67e22;
+}
+
+.done {
+  color: #2980b9;
+  font-weight: bold;
+}

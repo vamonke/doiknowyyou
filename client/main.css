@@ -8,8 +8,17 @@ body {
   padding-top: 20px;
 }
 
+.paddingRight {
+  padding-right: 10px;
+}
+
 .center {
   text-align: center;
+}
+
+.floatRight {
+  float: right;
+  margin: -45px 10px 0 0;
 }
 
 .container {
@@ -32,7 +41,7 @@ body {
 }
 
 .title {
-  margin: 30px 0;
+  margin: 30px 0 20px;
   letter-spacing: 5px;
   font-size: small;
   color: #bdc3c7;
@@ -43,6 +52,10 @@ body {
 .title a {
   color: #ecf0f1;
   text-decoration: none;
+}
+
+.title.lessPad {
+  margin: 10px 0 20px;
 }
 
 .gameTitle {

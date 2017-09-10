@@ -13,3 +13,12 @@
   margin: 0 auto;
   padding: 15px 20px;
 }
+
+.ready {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.readyText {
+  margin: 5px 0 15px;
+}

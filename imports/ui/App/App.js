@@ -8,8 +8,8 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Card, Row, Col, Button, FormField, FormInput, Pill } from 'elemental';
 import { Link } from 'react-router-dom';
 
-import { Games } from '../api/games.js';
-import { Players } from '../api/players.js';
+import { Games } from '../../api/games.js';
+import { Players } from '../../api/players.js';
 
 // App component - represents the whole app
 class App extends Component {
@@ -57,8 +57,9 @@ class App extends Component {
 
   addPlayer(gameCode) {
     let name = ReactDOM.findDOMNode(this.name).value;
-    Meteor.call('players.insert', name, gameCode, (error, player) => {
-      Session.set('currentUserId', name);
+    Meteor.call('players.insert', name, gameCode, (error, playerId) => {
+      Session.set('currentUserId', playerId);
+      this.props.history.push(`/lobby/${gameCode}`);
     });
     ReactDOM.findDOMNode(this.name).value = '';
   }
@@ -97,13 +98,13 @@ class App extends Component {
             </Button>
           </Col>
         </Row>
-
+        {/*
         <p>Games</p>
         {this.renderGames()}
       
         <p>Players</p>
         {this.renderPlayers()}
-
+        */}
       </div>
     );
   }

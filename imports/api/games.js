@@ -13,8 +13,8 @@ Meteor.methods({
   'games.insert'() {
     let game = {
       code: Math.floor(1000 + Math.random() * 9000),
+      status: 'waiting',
       createdAt: new Date(),
-      started: false
     };
 
     var gameID = Games.insert(game);
@@ -24,8 +24,16 @@ Meteor.methods({
   'games.start'(code) {
     Games.update({ code: code }, {
       $set: {
-        started: true
+        status: 'started'
       }
     });
-  }
+    Meteor.call('questions.select', code);
+  },
+  'games.end'(code) {
+    Games.update({ code: code }, {
+      $set: {
+        status: 'ended'
+      }
+    });
+  },
 });

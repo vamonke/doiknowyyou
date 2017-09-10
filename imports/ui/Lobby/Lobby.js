@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Table, Card, FormField, FormInput, Button, Pill } from 'elemental';
+import { Table, Card, FormField, FormInput, Button, Spinner } from 'elemental';
 
-import { Games } from '../api/games.js';
-import { Players } from '../api/players.js';
-import { Questions } from '../api/questions.js';
+import { Games } from '../../api/games.js';
+import { Players } from '../../api/players.js';
+import { Questions } from '../../api/questions.js';
 
 import './Lobby.css';
 
@@ -21,7 +21,7 @@ class Lobby extends Component {
   }
 
   componentDidUpdate() {
-    document.title = this.props.game.code;
+    document.title = `DIKY: Game ${this.props.game.code}`;
   }
 
   addQuestions() {
@@ -33,15 +33,15 @@ class Lobby extends Component {
     let qna = [
       {
         question: q1,
-        answers: [true, false]
+        options: [true, false]
       },
       {
         question: q2,
-        answers: [true, false]
+        options: [true, false]
       },
       {
         question: q3,
-        answers: [true, false]
+        options: [true, false]
       },
     ];
     Meteor.call('questions.insert', gameCode, playerId, qna);
@@ -54,9 +54,6 @@ class Lobby extends Component {
   editQuestions() {
     let playerId = Session.get('currentUserId');
     Meteor.call('players.unReady', playerId);
-    this.setState({
-      editable: true
-    });
   }
 
   renderPlayers() {
@@ -67,7 +64,7 @@ class Lobby extends Component {
           <td>
             {playerName}
           </td>
-          <td>
+          <td className="ready">
             {player.isReady && 'Ready'}
           </td>
         </tr>
@@ -86,15 +83,27 @@ class Lobby extends Component {
   }
 
   displayStartButton() {
+    if (this.props.viewer && !this.props.viewer.isReady) {
+      return null;
+    }
     let players = this.props.players;
+    let gameStatus = (
+      <div className="fixed center">
+        <div className="buttonWrap">
+          <Spinner type="primary" className="paddingRight"/>
+          Waiting for players to get ready
+        </div>
+      </div>
+    );
     for (let i = 0; i < players.length; i += 1) {
       if (!players[i].isReady) {
-        return null;
+        return gameStatus;
       }
     };
     return (
-      <div className="fixed">
+      <div className="fixed center">
         <div className="buttonWrap">
+          <div className="readyText">All players are ready!</div>
           <Button onClick={this.startGame} type="success" block>
             Start
           </Button>
@@ -106,26 +115,36 @@ class Lobby extends Component {
   startGame() {
     let code = this.props.game.code;
     Meteor.call('games.start', code);
-    Meteor.call('questions.select');
     this.props.history.push(`/game/${code}`);
   }
 
   render() {
-    Session.set('currentUserId', 'ukgjDMXfDTrbW8cYW');
     return (
-      <div>
+      <div className="paddingTop">
+        <Card className="center">
+          Game Code:
+          {' '}
+          <strong>
+            {this.props.game.code}
+          </strong>
+        </Card>
         <div className="title">
-          QUESTIONS
+          YOUR QUESTIONS
         </div>
-
         <Card>
+          <div className="center">
+            Add questions to ask players
+            <div className="questionLight">
+              (You may receive your own questions)
+            </div>
+          </div>
           <FormField>
             <FormInput
               ref={(input) => { this.q1 = input; }}
               disabled={this.props.viewer.isReady}
               placeholder="Question 1"
               autoFocus
-              value="Do I like fruits?"
+              value="Do you like pigs?"
             />
           </FormField>
           <FormField>
@@ -133,7 +152,7 @@ class Lobby extends Component {
               ref={(input) => { this.q2 = input; }}
               disabled={this.props.viewer.isReady}
               placeholder="Question 2"
-              value="Have I failed an exam?"
+              value="Have you ever failed an exam?"
             />
           </FormField>
           <FormField>
@@ -141,7 +160,7 @@ class Lobby extends Component {
               ref={(input) => { this.q3 = input; }}
               disabled={this.props.viewer.isReady}
               placeholder="Question 3"
-              value="Am I vain?"
+              value="Do you consider yourself vain?"
             />
           </FormField>  
           {(this.props.viewer.isReady) ? (
@@ -163,7 +182,7 @@ class Lobby extends Component {
           <Table>
             <colgroup>
               <col width="" />
-              <col width="50" />
+              <col width="80" />
             </colgroup>
             <thead>
               <tr>
@@ -176,7 +195,7 @@ class Lobby extends Component {
             </tbody>
           </Table>
         </Card>
-        {this.renderQuestions()}
+        {/*this.renderQuestions()*/}
         {this.displayStartButton()}
       </div>
     );
