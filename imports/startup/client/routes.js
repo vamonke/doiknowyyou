@@ -12,23 +12,6 @@ import { Button } from 'elemental';
 
 const browserHistory = createBrowserHistory();
 
-function logIn() {
-  let userIds = [
-    'G8NyM7gS9XT3b2x8W',
-    '8p96cfQDd4jwBPeJb',
-    'qdqMfQpgAA54AvgkK',
-  ];
-  let no = 0;
-  for (let i = 0; i < userIds.length; i += 1) {
-    if (userIds[i] === Session.get('currentUserId')) {
-      no = (i+1)%userIds.length;
-      break;
-    }
-  }
-  Session.set('currentUserId', userIds[no]);
-}
-
-
 export const renderRoutes = () => (
   <Router history={browserHistory}>
     <div className="container">
@@ -38,7 +21,6 @@ export const renderRoutes = () => (
             DO I KNOW YOU?
           </Link>
         </div>
-        <Button onClick={logIn} className="floatRight">Next Log In</Button>
       </div>
       <Switch>
         <Route path="/" exact component={App} />

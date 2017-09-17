@@ -19,7 +19,7 @@ import QuestionResults from './QuestionResults';
 import './Game.css';
 
 class Game extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.toggleModal = this.toggleModal.bind(this);
     this.state = {
@@ -29,7 +29,7 @@ class Game extends Component {
   }
   componentDidUpdate() {
     let previousQuestion = this.getPreviousQuestion();
-    if (this.state.modalQuestionId !== previousQuestion.text) {
+    if (previousQuestion && this.state.modalQuestionId !== previousQuestion.text) {
       this.setState({
         modalQuestionId: previousQuestion.text,
         modalIsOpen: true
