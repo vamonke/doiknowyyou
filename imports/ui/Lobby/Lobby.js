@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Table, Card, FormField, FormInput, Button, Spinner } from 'elemental';
+import { Table, Card, FormField, FormInput, Button, Spinner, Glyph } from 'elemental';
 
 import { Games } from '../../api/games.js';
 import { Players } from '../../api/players.js';
@@ -64,8 +64,13 @@ class Lobby extends Component {
           <td>
             {playerName}
           </td>
-          <td className="ready">
-            {player.isReady && 'Ready'}
+          <td>
+            {
+              player.isReady ?
+              <div className="ready">Ready</div>
+              : 
+              '-'
+            }
           </td>
         </tr>
       )
@@ -121,12 +126,15 @@ class Lobby extends Component {
   render() {
     return (
       <div className="paddingTop">
-        <Card className="center">
+        <Card className="center relative">
           Game Code:
           {' '}
           <strong>
             {this.props.game.code}
           </strong>
+          <Button type="link" className="absoluteRight">
+            <Glyph icon="link" />
+          </Button>
         </Card>
         <div className="title">
           YOUR QUESTIONS
@@ -194,6 +202,13 @@ class Lobby extends Component {
               {this.renderPlayers()}
             </tbody>
           </Table>
+          <div className="center borderTop">
+            <Button type="hollow-primary" size="sm">
+              <Glyph icon="plus" className="plusIcon" />
+              {' '}
+              Invite friends
+            </Button>
+          </div>
         </Card>
         {/*this.renderQuestions()*/}
         {this.displayStartButton()}

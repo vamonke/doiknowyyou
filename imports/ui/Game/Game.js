@@ -21,10 +21,20 @@ import './Game.css';
 class Game extends Component {
   constructor(props){
     super(props);
+    this.toggleModal = this.toggleModal.bind(this);
     this.state = {
+      modalQuestionId: null,
       modalIsOpen: false
     }
-    this.toggleModal = this.toggleModal.bind(this);
+  }
+  componentDidUpdate() {
+    let previousQuestion = this.getPreviousQuestion();
+    if (this.state.modalQuestionId !== previousQuestion.text) {
+      this.setState({
+        modalQuestionId: previousQuestion.text,
+        modalIsOpen: true
+      });
+    }
   }
   toggleModal() {
     this.setState({
@@ -141,7 +151,7 @@ class Game extends Component {
             </Row>
             <div className="marginTop">
               {(recipient._id === this.props.viewer._id) && (
-                '(Answer honestly and let the other players guess your answer!)'
+                '(Answer honestly and let the other players guess your answer)'
               )}
             </div>
           </Card>

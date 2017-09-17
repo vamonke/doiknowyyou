@@ -21,6 +21,16 @@ body {
   margin: -45px 10px 0 0;
 }
 
+.relative {
+  position: relative;
+}
+
+.absoluteRight {
+  position: absolute;
+  right: 0;
+  top: 6px;
+}
+
 .container {
   max-width: 480px;
   margin: 40px auto;

@@ -21,6 +21,11 @@ class App extends Component {
     this.createGame = this.createGame.bind(this);
     this.joinGame = this.joinGame.bind(this);
   }
+
+  componentDidUpdate() {
+    document.title = `Do I Know You?`;
+  }
+
   renderGames() {
     let players = this.props.players;
     return this.props.games.map((game) => (

@@ -22,3 +22,13 @@
 .readyText {
   margin: 5px 0 15px;
 }
+
+.borderTop {
+  border-top: 1px solid rgba(51,51,51,0.15);
+  padding-top: 15px;
+}
+
+.plusIcon {
+  font-size: small;
+  padding-right: 3px;
+}
