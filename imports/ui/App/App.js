@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import { Games } from '../../api/games.js';
 import { Players } from '../../api/players.js';
 
+import './App.css';
+
 // App component - represents the whole app
 class App extends Component {
   constructor(props) {
@@ -103,6 +105,16 @@ class App extends Component {
             </Button>
           </Col>
         </Row>
+        <div className="instructions">
+          <div className="title">INSTRUCTIONS</div>
+          Before starting the game, every player will write down questions to add to the question pool. Once all players are ready, the game begins and the starting player is randomly selected.
+          <br />
+          <br />
+          In each player's turn, he/she will randomly draw a question and answer it in secret. Other players will try to guess his\her answer. Players who guess the answer correctly are rewarded 1 point and the rest get no points.
+          <br />
+          <br />
+          Questions will not be repeated and the game ends when the question pool is empty. The player with the highest points at the end of the game is the winner.
+          </div>
         {/*
         <p>Games</p>
         {this.renderGames()}

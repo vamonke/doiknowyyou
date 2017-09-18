@@ -141,10 +141,9 @@ class Lobby extends Component {
         </div>
         <Card>
           <div className="center">
-            Add questions to ask players
-            <div className="questionLight">
-              (You may receive your own questions)
-            </div>
+            Add questions to ask other players
+            <br />
+            <br />
           </div>
           <FormField>
             <FormInput
@@ -152,7 +151,6 @@ class Lobby extends Component {
               disabled={this.props.viewer.isReady}
               placeholder="Question 1"
               autoFocus
-              value="Do you like pigs?"
             />
           </FormField>
           <FormField>
@@ -160,7 +158,6 @@ class Lobby extends Component {
               ref={(input) => { this.q2 = input; }}
               disabled={this.props.viewer.isReady}
               placeholder="Question 2"
-              value="Have you ever failed an exam?"
             />
           </FormField>
           <FormField>
@@ -168,7 +165,6 @@ class Lobby extends Component {
               ref={(input) => { this.q3 = input; }}
               disabled={this.props.viewer.isReady}
               placeholder="Question 3"
-              value="Do you consider yourself vain?"
             />
           </FormField>  
           {(this.props.viewer.isReady) ? (
