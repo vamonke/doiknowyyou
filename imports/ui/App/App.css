@@ -1,4 +1,4 @@
-.card {
+.bigCard {
   background-color: white;
   padding: 2em 1.5em 3em;
   border-radius: 30px 30px 20px 20px;
@@ -8,7 +8,7 @@
 }
 
 @media only screen and (min-width : 380px) {
-  .card {
+  .bigCard {
     padding: 2em 2em 3em;
   }
 }
@@ -35,5 +35,4 @@
 
 .marginTopBottom {
   margin-top: 15px;
-  
 }

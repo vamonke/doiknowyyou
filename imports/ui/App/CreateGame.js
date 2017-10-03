@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Row, Col, Modal, ModalHeader, ModalBody, FormField, FormInput } from 'elemental';
+import { Row, Col, Modal, ModalBody, FormField, FormInput } from 'elemental';
 
 import { Games } from '../../api/games.js';
 
@@ -23,12 +23,12 @@ export default class createGame extends Component {
   }
 
   handleClick() {
-    this.props.createGame(this.state.code, this.state.name);
+    this.props.createGame(this.state.name);
   }
 
   render() {
     return (
-      <Modal className="center" isOpen={this.props.modalIsOpen} width={500} backdropClosesModal>
+      <Modal className="center" isOpen={this.props.modalIsOpen} width={500} backdropClosesModal={true}>
         <ModalBody>
           <div className="paddingTop">
             <FormField>

@@ -33,7 +33,7 @@ export default class joinGame extends Component {
 
   handleCodeChange(e) {
     this.setState({
-      code: e.target.value
+      code: Number(e.target.value)
     });
   }
 

@@ -68,21 +68,20 @@ export default class App extends Component {
   addPlayer(gameCode, playerName) {
     Meteor.call('players.insert', playerName, gameCode, (error, playerId) => {
       Session.set('currentUserId', playerId);
+      this.showHome();
       this.props.history.push(`/lobby/${gameCode}`);
     });
   }
 
   createGame(playerName) {
-    console.log(this);
     Meteor.call('games.insert', (error, game) => {
-      console.log(this);
       this.addPlayer(game.code, playerName);
     });
   }
 
   render() {
     return (
-      <div className="card">
+      <div className="bigCard">
         <Home showJoinGame={this.showJoinGame} showCreateGame={this.showCreateGame} />
         <CreateGame
           modalIsOpen={(this.state.mode === 'create')}

@@ -77,27 +77,14 @@ class Lobby extends Component {
     });
   }
 
-  renderQuestions() {
-    return this.props.questions.map((question) => {
-      return (
-        <Card key={question._id}>
-          {question.text}
-        </Card>
-      )
-    });
-  }
-
   displayStartButton() {
-    if (this.props.viewer && !this.props.viewer.isReady) {
-      return null;
-    }
+    let ready = (this.props.viewer && !this.props.viewer.isReady) ? null : "appear";
     let players = this.props.players;
     let gameStatus = (
-      <div className="fixed center">
-        <div className="buttonWrap">
-          <Spinner type="primary" className="paddingRight"/>
-          Waiting for players to get ready
-        </div>
+      <div className={`center popDown ${ready}`}>
+        <Spinner type="primary" className="paddingRight"/>
+        {' '}
+        Waiting for players to get ready
       </div>
     );
     for (let i = 0; i < players.length; i += 1) {
@@ -106,13 +93,8 @@ class Lobby extends Component {
       }
     };
     return (
-      <div className="fixed center">
-        <div className="buttonWrap">
-          <div className="readyText">All players are ready!</div>
-          <Button onClick={this.startGame} type="success" block>
-            Start
-          </Button>
-        </div>
+      <div className={`center popDown ${ready}`}>
+        Start game
       </div>
     );
   }
@@ -125,8 +107,8 @@ class Lobby extends Component {
 
   render() {
     return (
-      <div className="paddingTop">
-        <Card className="center relative">
+      <div>
+        <div className="center relative">
           Game Code:
           {' '}
           <strong>
@@ -135,15 +117,13 @@ class Lobby extends Component {
           <Button type="link" className="absoluteRight">
             <Glyph icon="link" />
           </Button>
-        </Card>
-        <div className="title">
-          YOUR QUESTIONS
         </div>
-        <Card>
-          <div className="center">
+        <div className="header">
+          your questions
+        </div>
+        <div className="card">
+          <div className="center paddingBottom">
             Add questions to ask other players
-            <br />
-            <br />
           </div>
           <FormField>
             <FormInput
@@ -168,22 +148,22 @@ class Lobby extends Component {
             />
           </FormField>  
           {(this.props.viewer.isReady) ? (
-            <Button onClick={this.editQuestions} type="link" block>
+            <button className="whiteButton" onClick={this.editQuestions} type="link" block>
               Edit questions
-            </Button>
+            </button>
           ) : (
-            <Button onClick={this.addQuestions} type="primary" block>
+            <button className="greenButton" onClick={this.addQuestions} type="primary" block>
               Ready
-            </Button>
+            </button>
           )}
-        </Card>
-
-        <div className="title">
-          PLAYERS
         </div>
-
-        <Card>
-          <Table>
+        {this.displayStartButton()}
+        
+        <div className="header">
+          players
+        </div>
+        <div className="card">
+          <Table className="reduceTop">
             <colgroup>
               <col width="" />
               <col width="80" />
@@ -205,9 +185,7 @@ class Lobby extends Component {
               Invite friends
             </Button>
           </div>
-        </Card>
-        {/*this.renderQuestions()*/}
-        {this.displayStartButton()}
+        </div>
       </div>
     );
   }

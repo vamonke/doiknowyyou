@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Card, Row, Col } from 'elemental';
+import { Row, Col } from 'elemental';
 
 import styles from './App.css';
 
