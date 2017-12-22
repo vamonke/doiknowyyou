@@ -24,7 +24,7 @@
 }
 
 .popDown {
-  margin: -102px 2px 0;
+  margin: -87px 2px 15px;
   background-color: #EAEAEA;
   padding: 30px 0 15px;
   z-index: 2;
@@ -36,14 +36,9 @@
 }
 
 .popDown.appear {
-  margin-top: -45px;
+  margin-top: -25px;
   -webkit-transition: margin-top 0.3s ease 0.1s;
   transition: margin-top 0.3s ease 0.1s;
-}
-
-.borderTop {
-  border-top: 1px solid rgba(51,51,51,0.15);
-  padding-top: 15px;
 }
 
 .plusIcon {
@@ -55,6 +50,11 @@
   padding-bottom: 15px;
 }
 
+.paddingRight {
+  padding-right: 10px;
+}
+
 .reduceTop {
   margin-top: -15px;
 }
+

@@ -12,24 +12,18 @@ if (Meteor.isServer) {
 Meteor.methods({
   'answers.insert'(gameCode, questionId, playerId, selected) {
     Answers.upsert({
-      gameCode: gameCode,
       questionId: questionId,
       playerId: playerId,
     }, {
-      gameCode: gameCode,
       questionId: questionId,
       playerId: playerId,
       selected: selected,
       createdAt: new Date(),
     });
     Meteor.call('questions.answer', playerId, questionId, selected);
-    let hasAllAnswered = Meteor.call('answers.hasAllAnswered', gameCode, questionId);
-    if (hasAllAnswered) {
-      Meteor.call('questions.complete', gameCode, questionId);
-    }
-    return hasAllAnswered;
+    Meteor.call('answers.checkAllAnswered', gameCode, questionId);
   },
-  'answers.hasAllAnswered'(gameCode, questionId) {
+  'answers.checkAllAnswered'(gameCode, questionId) {
     let answeredPlayerIds = Answers.find( // get playerIds from all answers for current question
       { questionId: questionId },
       { 
@@ -46,9 +40,14 @@ Meteor.methods({
       }
     ).fetch();
 
-    return (
-      (answeredPlayerIds.length === playerIds.length) &&
-      playerIds.every((idObject, i) => (idObject._id === answeredPlayerIds[i].playerId))
-    );
+    if (
+      (answeredPlayerIds.length === playerIds.length) // number of answers and players match
+      &&
+      playerIds.every(
+        (idObject, i) => (idObject._id === answeredPlayerIds[i].playerId) // every id matches
+      )
+    ) {
+      Meteor.call('questions.complete', gameCode, questionId);
+    };
   }
 });

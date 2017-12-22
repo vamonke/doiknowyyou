@@ -9,7 +9,10 @@ import { Games } from '../../api/games.js';
 import { Players } from '../../api/players.js';
 import { Questions } from '../../api/questions.js';
 
+import Countdown from './Countdown';
+
 import './Lobby.css';
+
 
 // Game lobby component
 class Lobby extends Component {
@@ -21,7 +24,7 @@ class Lobby extends Component {
   }
 
   componentDidUpdate() {
-    document.title = `DIKY: Game ${this.props.game.code}`;
+    document.title = `Game ${this.props.game.code}`;
   }
 
   addQuestions() {
@@ -77,13 +80,12 @@ class Lobby extends Component {
     });
   }
 
-  displayStartButton() {
+  displayGameStatus() {
     let ready = (this.props.viewer && !this.props.viewer.isReady) ? null : "appear";
     let players = this.props.players;
     let gameStatus = (
       <div className={`center popDown ${ready}`}>
         <Spinner type="primary" className="paddingRight"/>
-        {' '}
         Waiting for players to get ready
       </div>
     );
@@ -94,7 +96,7 @@ class Lobby extends Component {
     };
     return (
       <div className={`center popDown ${ready}`}>
-        Start game
+        <Countdown gameCode={this.props.gameCode} startGame={this.startGame}/>
       </div>
     );
   }
@@ -114,16 +116,13 @@ class Lobby extends Component {
           <strong>
             {this.props.game.code}
           </strong>
-          <Button type="link" className="absoluteRight">
-            <Glyph icon="link" />
-          </Button>
         </div>
         <div className="header">
           your questions
         </div>
         <div className="card">
           <div className="center paddingBottom">
-            Add questions to ask other players
+            Write yes/no questions to ask other players
           </div>
           <FormField>
             <FormInput
@@ -148,16 +147,16 @@ class Lobby extends Component {
             />
           </FormField>  
           {(this.props.viewer.isReady) ? (
-            <button className="whiteButton" onClick={this.editQuestions} type="link" block>
+            <button className="whiteButton" onClick={this.editQuestions}>
               Edit questions
             </button>
           ) : (
-            <button className="greenButton" onClick={this.addQuestions} type="primary" block>
+            <button className="greenButton" onClick={this.addQuestions}>
               Ready
             </button>
           )}
         </div>
-        {this.displayStartButton()}
+        {this.displayGameStatus()}
         
         <div className="header">
           players
@@ -178,13 +177,13 @@ class Lobby extends Component {
               {this.renderPlayers()}
             </tbody>
           </Table>
-          <div className="center borderTop">
+          {/*<div className="center">
             <Button type="hollow-primary" size="sm">
               <Glyph icon="plus" className="plusIcon" />
               {' '}
               Invite friends
             </Button>
-          </div>
+          </div>*/}
         </div>
       </div>
     );

@@ -1,0 +1,57 @@
+.cardHeader {
+  padding: 15px;
+  line-height: 1.5em;
+  transition: all 0.3s;
+}
+
+.cardHeader.highlight {
+  color: #3fb7a1;
+  transition: all 0.3s;
+}
+
+.cardHeader.highlight .arrow {
+  color: black;
+  transform: rotate(90deg);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.relative {
+  position: relative;
+}
+
+.lessPadding {
+  padding: 3px 10px;
+}
+
+.cardShadow {
+  position: relative;
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.4s;
+  padding: 0px 15px;
+  border-top: 0px solid #EEE;
+}
+
+.cardShadow.show {
+  border-top: 1px solid #EEE;
+  height: auto;
+  padding: 15px 15px;
+  transition: all 0.4s;
+}
+
+.arrow {
+  color: black;
+  position: absolute;
+  left: 10px;
+  top: 18px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+}

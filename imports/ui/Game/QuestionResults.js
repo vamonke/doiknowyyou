@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Answers } from '../../api/answers.js';
 
 import { Card, Row, Col, Button, Modal, ModalHeader,  ModalBody, ModalFooter } from 'elemental';
 
 import './QuestionResults.css';
 
-export default function QuestionResults(props) {
+function QuestionResults(props) {
   function getPlayerNameFromAnswer(answer) {
     let playerId = answer.playerId;
     return props.players.find((player) => (player._id === playerId)).name;
@@ -39,7 +41,6 @@ export default function QuestionResults(props) {
       <ModalHeader text={modalHeader} showCloseButton onClose={props.toggleModal} />
       <ModalBody>
         <div className="resultsQuestion">
-          {'Q: '}
           {props.question.text}
         </div>
         <div className="recipient">
@@ -116,3 +117,12 @@ QuestionResults.defaultProps = {
     },
   ],
 }
+
+export default createContainer((props) => {
+  let answers = (props.question) ? Answers.find({ questionId: props.question._id }).fetch() : [];
+  return {
+    players: props.players,
+    question: props.question,
+    answers: answers
+  };
+}, QuestionResults);

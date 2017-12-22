@@ -36,3 +36,7 @@
 .marginTopBottom {
   margin-top: 15px;
 }
+
+.Modal-dialog {
+  margin: 0 auto;
+}

@@ -14,6 +14,7 @@ Meteor.methods({
     let game = {
       code: Math.floor(1000 + Math.random() * 9000),
       status: 'waiting',
+      nextCode: null,
       createdAt: new Date(),
     };
 
@@ -34,6 +35,17 @@ Meteor.methods({
       $set: {
         status: 'ended'
       }
+    });
+  },
+  'games.restart'(code) {
+    Meteor.call('games.insert', (error, newGame) => {
+      console.log(newGame);
+      Games.update({ code: code }, {
+        $set: {
+          nextCode: newGame.code
+        }
+      });
+      return newGame;
     });
   },
 });
