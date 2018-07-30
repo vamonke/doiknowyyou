@@ -23,12 +23,15 @@ Meteor.methods({
     return game;
   },
   'games.start'(code) {
-    Games.update({ code: code }, {
-      $set: {
-        status: 'started'
-      }
-    });
-    Meteor.call('questions.select', code);
+    let game = Games.findOne({ code: code }, { fields: { status: 1 }});
+    if (game.status == 'waiting') {
+      Meteor.call('questions.select', code);
+      Games.update({ code: code }, {
+        $set: {
+          status: 'started'
+        }
+      });
+    }
   },
   'games.end'(code) {
     Games.update({ code: code }, {

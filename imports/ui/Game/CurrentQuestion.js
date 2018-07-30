@@ -88,11 +88,11 @@ CurrentQuestion.defaultProps = {
   },
 }
 
-export default createContainer((props) => {
+export default createContainer(props => {
   return {
     question: props.question,
     questionOwner: props.questionOwner,
-    recipient: Players.findOne({ isRecipient: true  }),
+    recipient: Players.findOne({ gameCode: props.gameCode, isRecipient: true }),
     viewer: Players.findOne({ _id: Session.get('currentUserId') }),
   };
 }, CurrentQuestion);

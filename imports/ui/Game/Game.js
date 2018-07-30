@@ -7,7 +7,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button, FormField, FormInput, Table } from 'elemental';
- 
+
 import { Games } from '../../api/games.js';
 import { Players } from '../../api/players.js';
 import { Questions } from '../../api/questions.js';
@@ -92,6 +92,7 @@ class Game extends Component {
         {this.props.game.status === 'started' && (
           <div className="paddingTop">
             <CurrentQuestion
+              gameCode={this.props.game.code}
               question={this.getCurrentQuestion()}
               questionOwner={this.getPlayer(this.getCurrentQuestion().playerId)}
               toggleModal={this.toggleModal}
@@ -112,12 +113,12 @@ class Game extends Component {
           question={this.getCurrentQuestion()}
           ended={this.props.game.status === 'ended'}
         />
-        
+
         <div className="header">
           previous questions
         </div>
-        
-        { this.getAnsweredQuestions().length > 0 ? 
+
+        { this.getAnsweredQuestions().length > 0 ?
           (
             <div className="card lessPadding">
               { this.getAnsweredQuestions().map((question, i) => (
@@ -149,6 +150,12 @@ class Game extends Component {
             Restart
           </button>
         }
+
+        <center>
+          <p>
+            <a href="/">Home</a>
+          </p>
+        </center>
 
       </div>
     );

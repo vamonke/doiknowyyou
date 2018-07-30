@@ -6,7 +6,7 @@ import { Session } from 'meteor/session';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Table } from 'elemental';
- 
+
 import { Players } from '../../api/players.js';
 import { Answers } from '../../api/answers.js';
 
@@ -21,16 +21,12 @@ class PlayerList extends Component {
     this.hasPlayerAnswered = this.hasPlayerAnswered.bind(this);
   }
   hasPlayerAnswered(playerId) {
-    let currentQuestion = this.props.question;
-    let answer = this.props.answers.filter((answer) => (
-      (answer.questionId === currentQuestion._id) && (answer.playerId === playerId)
-    ));
-    return answer.length > 0;
+    const answered = this.props.answers.some(answer => answer.playerId === playerId);
+    return answered;
   }
   renderPlayers() {
     let viewer = this.props.viewer;
     let recipient = this.props.players.find((player) => player.isRecipient);
-    let currentQuestion = this.props.question;
     return this.props.players.map((player) => {
       let isRecipient = (recipient && player._id === recipient._id);
       let playerName = (player._id === viewer._id) ? (<strong>{player.name}</strong>) : player.name;
@@ -99,10 +95,13 @@ export default createContainer((props) => {
   Meteor.subscribe('players');
   Meteor.subscribe('answers');
   const gameCode = Number(props.gameCode);
+  let answers = [];
+  if (!props.ended && props.question && props.question._id) {
+    answers = Answers.find({ questionId: props.question._id }).fetch();
+  }
   return {
-    question: props.question,
     players: Players.find({ gameCode: gameCode }, { sort: { score: -1 } }).fetch(),
-    answers: Answers.find({ gameCode: gameCode }).fetch(),
+    answers: answers,
     viewer: Players.findOne({ _id: Session.get('currentUserId') }),
     ended: props.ended,
   };
