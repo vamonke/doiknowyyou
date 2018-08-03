@@ -25,7 +25,7 @@ Meteor.methods({
   'games.start'(code) {
     let game = Games.findOne({ code: code }, { fields: { status: 1 }});
     if (game.status == 'waiting') {
-      Meteor.call('questions.select', code);
+      Meteor.call('questions.select', code, 1);
       Games.update({ code: code }, {
         $set: {
           status: 'started'
@@ -41,6 +41,9 @@ Meteor.methods({
     });
   },
   'games.restart'(code) {
+    if (!code) {
+      throw 'No code';
+    }
     Meteor.call('games.insert', (error, newGame) => {
       console.log(newGame);
       Games.update({ code: code }, {

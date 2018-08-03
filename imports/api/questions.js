@@ -12,7 +12,9 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   'questions.insert'(gameCode, playerId, qna) {
-    qna.forEach((set, i) => {
+    qna.filter(set => {
+      return set.question // remove empty questions
+    }).forEach((set, i) => {
       Questions.upsert({
         gameCode: gameCode,
         playerId: playerId,
@@ -20,18 +22,19 @@ Meteor.methods({
       }, {
         gameCode: gameCode,
         playerId: playerId,
-        recipientId: null,
-        correctAnswer: null,
         number: i + 1,
+        round: null,
         text: set.question,
         options: set.options,
         status: 'unasked',
+        recipientId: null,
+        correctAnswer: null,
+        answeredAt: null,
         createdAt: new Date(),
-        answeredAt: null
       });
     });
   },
-  'questions.select'(gameCode) { // choose a question
+  'questions.select'(gameCode, round) { // choose a question
     let unaskedIds = Questions.find({ gameCode: gameCode, status: 'unasked' }, { fields: { _id: 1 } }).fetch();
     if (unaskedIds.length !== 0) {
       let recipientId = Meteor.call('players.getRecipient', gameCode);
@@ -40,6 +43,7 @@ Meteor.methods({
         $set: {
           status: 'asking',
           recipientId: recipientId,
+          round: round
         }
       });
     } else { // End game when there no more unasked questions
@@ -64,14 +68,14 @@ Meteor.methods({
         Meteor.call('players.addScore', answer.playerId);
       }
     });
-    Meteor.call('questions.select', gameCode);
+    Meteor.call('questions.select', gameCode, question.round + 1);
   },
   'questions.answer'(playerId, id, answer) { // set the recipient's answer as the correct answer
     let question = Questions.findOne({ _id: id });
     if (playerId === question.recipientId) {
       Questions.update({ _id: id }, {
         $set: {
-          correctAnswer: answer,
+          correctAnswer: Number(answer),
         }
       });
     }

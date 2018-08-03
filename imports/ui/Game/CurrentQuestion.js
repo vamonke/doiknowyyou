@@ -19,9 +19,10 @@ class CurrentQuestion extends Component {
     this.submitAnswer = this.submitAnswer.bind(this);
   }
 
-  submitAnswer(answer) {
-    let viewer = this.props.viewer;
-    let currentQuestion = this.props.question;
+  submitAnswer(event) {
+    const viewer = this.props.viewer;
+    const currentQuestion = this.props.question;
+    const answer = event.target.name;
 
     Meteor.call('answers.insert',
       this.props.question.gameCode,
@@ -33,10 +34,11 @@ class CurrentQuestion extends Component {
 
   render() {
     let currentQuestion = this.props.question;
+    let buttonWidth = currentQuestion.options.length > 2 ? '100%' : '50%';
     return (
       <Card className="center">
         <div className="questionLight">
-          Round 1
+          {'Round ' + currentQuestion.round}
         </div>
         <hr />
         <div className="currentQuestion">
@@ -53,18 +55,21 @@ class CurrentQuestion extends Component {
           )}
         </div>
         <Row>
-          <Col xs="1/2">
-            <Button onClick={() => this.submitAnswer(0)} type="primary" block>Yes</Button>
-          </Col>
-          <Col xs="1/2">
-            <Button onClick={() => this.submitAnswer(1)} type="primary" block>No</Button>
-          </Col>
+          {
+            currentQuestion.options.map((option, index) => (
+              <Col xs={buttonWidth} key={index} className="paddingBottom">
+                <Button name={index} onClick={this.submitAnswer} type="primary" block>
+                  {option}
+                </Button>
+              </Col>
+            ))
+          }
         </Row>
-        <div className="marginTop">
-          {(this.props.recipient._id === this.props.viewer._id) && (
-            '(Answer honestly and let the other players guess your answer)'
-          )}
-        </div>
+        {(this.props.recipient._id === this.props.viewer._id) && (
+          <div>
+            (Answer honestly and let the other players guess your answer)
+          </div>
+        )}
       </Card>
     );
   }

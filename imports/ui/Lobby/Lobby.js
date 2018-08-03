@@ -10,6 +10,7 @@ import { Players } from '../../api/players.js';
 import { Questions } from '../../api/questions.js';
 
 import Countdown from './Countdown';
+import QuestionSet from './QuestionSet';
 
 import './Lobby.css';
 
@@ -18,45 +19,46 @@ import './Lobby.css';
 class Lobby extends Component {
   constructor(props) {
     super(props);
-    this.addQuestions = this.addQuestions.bind(this);
+    this.submitQuestions = this.submitQuestions.bind(this);
+    this.changeQuestion = this.changeQuestion.bind(this);
     this.editQuestions = this.editQuestions.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.state = {
+      stage: 0,
+      questions: [{}, {}, {}]
+    }
   }
 
   componentDidUpdate() {
     document.title = `Game ${this.props.game.code}`;
   }
 
-  addQuestions() {
-    let q1 = ReactDOM.findDOMNode(this.q1).value.trim();
-    let q2 = ReactDOM.findDOMNode(this.q2).value.trim();
-    let q3 = ReactDOM.findDOMNode(this.q3).value.trim();
-    let gameCode = this.props.game.code;
-    let playerId = Session.get('currentUserId');
-    let qna = [
-      {
-        question: q1,
-        options: [true, false]
-      },
-      {
-        question: q2,
-        options: [true, false]
-      },
-      {
-        question: q3,
-        options: [true, false]
-      },
-    ];
+  changeQuestion(questionNo, qna, direction) {
+    let questions = this.state.questions;
+    questions[questionNo] = qna;
+    const newStage = this.state.stage + (direction ? 1 : -1);
+    this.setState({
+      questions: questions,
+      stage: newStage
+    });
+    if (newStage === 3) {
+      this.submitQuestions();
+    }
+  }
+
+  submitQuestions() {
+    const qna = this.state.questions;
+    const gameCode = this.props.game.code;
+    const playerId = Session.get('currentUserId');
+
     Meteor.call('questions.insert', gameCode, playerId, qna);
     Meteor.call('players.ready', playerId);
-    this.setState({
-      editable: false
-    });
   }
 
   editQuestions() {
     let playerId = Session.get('currentUserId');
     Meteor.call('players.unReady', playerId);
+    this.setState({ stage: 2 });
   }
 
   renderPlayers() {
@@ -71,7 +73,7 @@ class Lobby extends Component {
             {
               player.isReady ?
               <div className="ready">Ready</div>
-              : 
+              :
               '-'
             }
           </td>
@@ -122,42 +124,27 @@ class Lobby extends Component {
         </div>
         <div className="card">
           <div className="center paddingBottom">
-            Write yes/no questions to ask other players
+            Write questions to ask other players
           </div>
-          <FormField>
-            <FormInput
-              ref={(input) => { this.q1 = input; }}
-              disabled={this.props.viewer.isReady}
-              placeholder="Question 1"
-              autoFocus
-            />
-          </FormField>
-          <FormField>
-            <FormInput
-              ref={(input) => { this.q2 = input; }}
-              disabled={this.props.viewer.isReady}
-              placeholder="Question 2"
-            />
-          </FormField>
-          <FormField>
-            <FormInput
-              ref={(input) => { this.q3 = input; }}
-              disabled={this.props.viewer.isReady}
-              placeholder="Question 3"
-            />
-          </FormField>  
-          {(this.props.viewer.isReady) ? (
+          {['','',''].map((_, index) => {
+            return (
+              <div key={index} style={{display: (this.state.stage === index) ? 'block' : 'none'}}>
+                <QuestionSet
+                  questionNo={index}
+                  ready={this.submitQuestions}
+                  changeQuestion={this.changeQuestion} />
+              </div>
+            );
+          })}
+
+          {this.props.viewer.isReady && (
             <button className="whiteButton" onClick={this.editQuestions}>
               Edit questions
-            </button>
-          ) : (
-            <button className="greenButton" onClick={this.addQuestions}>
-              Ready
             </button>
           )}
         </div>
         {this.displayGameStatus()}
-        
+
         <div className="header">
           players
         </div>
@@ -196,7 +183,7 @@ Lobby.propTypes = {
     code: PropTypes.number,
   })
 };
- 
+
 Lobby.defaultProps = {
   game: {
     code: null

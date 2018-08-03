@@ -1,5 +1,6 @@
 .cardHeader {
-  padding: 15px;
+  cursor: pointer;
+  padding: 15px 30px;
   line-height: 1.5em;
   transition: all 0.3s;
 }
@@ -11,7 +12,7 @@
 
 .cardHeader.highlight .arrow {
   color: black;
-  transform: rotate(90deg);
+  transform: rotate(-180deg);
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -47,11 +48,17 @@
 .arrow {
   color: black;
   position: absolute;
-  left: 10px;
+  right: 12px;
   top: 18px;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
   -ms-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.round {
+  position: absolute;
+  left: 12px;
+  color: #CCC;
 }

@@ -3,29 +3,53 @@ import PropTypes from 'prop-types';
 
 import { Row, Col } from 'elemental';
 
+import parseQuestionResults from './parseQuestionResults.js';
 import './QuestionResults.css';
 
 export default function ResultsTable(props) {
+  let correct = (
+    <span className="correct">
+      +1
+    </span>
+  );
+  let answerSets = parseQuestionResults(props.question, props.players, props.answers);
+  let options = props.question.options;
+  let correctOption = props.question.correctAnswer;
+
+  function playersWhoSelected(option) {
+    const answerSet = answerSets.find(answerSet => (answerSet.option == option));
+    if (answerSet) {
+      return answerSet.players.map(player => (
+        <div key={player}>
+          {player}
+        </div>
+      ))
+    }
+  }
+
   return (
-    <Row>
-      <Col xs="1/2" className="borderRight">
-        {props.answers.map((answer) => (
-          (answer.selected === 0) && (
-            <div key={answer._id} className="name">
-              {getPlayerNameFromAnswer(answer)}
-            </div>
-          )
+    <div className="outline center">
+        {options.map((option, index) => (
+          <Row key={option} className="borderBottom">
+            <Col xs="1/2" className="borderRight cellPadding">
+              <b>
+                {option}
+                {correctOption === index && correct}
+              </b>
+            </Col>
+            <Col key={option} xs="1/2" className="borderRight cellPadding">
+              {playersWhoSelected(option)}
+            </Col>
+          </Row>
         ))}
-      </Col>
-      <Col xs="1/2">
-        {props.answers.map((answer) => (
-          (answer.selected === 1) && (
-            <div key={answer._id} className="name">
-              {getPlayerNameFromAnswer(answer)}
-            </div>
-          )
-        ))}
-      </Col>
-    </Row>
+    </div>
   )
 }
+
+ResultsTable.propTypes = {
+  question: PropTypes.shape({
+    options: PropTypes.array,
+  }),
+  players: PropTypes.array,
+  answers: PropTypes.array
+};

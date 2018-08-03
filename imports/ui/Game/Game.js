@@ -13,7 +13,7 @@ import { Players } from '../../api/players.js';
 import { Questions } from '../../api/questions.js';
 
 import AnsweredQuestion from './AnsweredQuestion';
-import QuestionResults from './QuestionResults';
+import QuestionResultsModal from './QuestionResultsModal';
 import PlayerList from './PlayerList';
 import CurrentQuestion from './CurrentQuestion';
 
@@ -80,9 +80,11 @@ class Game extends Component {
       this.addPlayer(nextCode);
     } else {
       let currentCode = this.props.game.code;
-      Meteor.call('games.restart', currentCode, (error, newGame) => {
-        this.addPlayer(newGame.code);
-      });
+      if (currentCode) {
+        Meteor.call('games.restart', currentCode, (error, newGame) => {
+          this.addPlayer(newGame.code);
+        });
+      }
     }
   }
 
@@ -138,12 +140,14 @@ class Game extends Component {
           )
         }
 
-        <QuestionResults
+        <QuestionResultsModal
           question={this.getPreviousQuestion()}
           players={this.props.players}
           modalIsOpen={this.state.modalIsOpen}
           toggleModal={this.toggleModal}
         />
+
+        <div className="paddingTop" />
 
         { (this.props.game.status === 'ended') &&
           <button className="greenButton" onClick={this.restartGame}>
@@ -151,11 +155,9 @@ class Game extends Component {
           </button>
         }
 
-        <center>
-          <p>
-            <a href="/">Home</a>
-          </p>
-        </center>
+        <div className="center paddingTop">
+          <a href="/">Home</a>
+        </div>
 
       </div>
     );

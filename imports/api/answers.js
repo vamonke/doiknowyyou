@@ -23,10 +23,10 @@ Meteor.methods({
     Meteor.call('questions.answer', playerId, questionId, selected);
     Meteor.call('answers.checkAllAnswered', gameCode, questionId);
   },
-  'answers.checkAllAnswered'(gameCode, questionId) {
+  'answers.checkAllAnswered'(gameCode, questionId, round) {
     let answeredPlayerIds = Answers.find( // get playerIds from all answers for current question
       { questionId: questionId },
-      { 
+      {
         fields: { playerId: 1 },
         sort: { playerId: 1 }
       }

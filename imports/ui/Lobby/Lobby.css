@@ -46,6 +46,11 @@
   padding-right: 3px;
 }
 
+
+.paddingTop {
+  padding-top: 15px;
+}
+
 .paddingBottom {
   padding-bottom: 15px;
 }
@@ -58,3 +63,33 @@
   margin-top: -15px;
 }
 
+/* .circle {
+  height: 20px;
+  width: 20px;
+  line-height: 18px;
+  border-radius: 100%;
+  border: 1px solid #DDD;
+} */
+
+.addOption {
+  border: none;
+  height: 40px;
+  line-height: 38px;
+  background-color: white;
+  display: block;
+  margin: -10px auto 15px;
+  color: #BBB;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-transition: 0.1s linear;
+  -moz-transition: 0.1s linear;
+  -moz-transition: 0.1s linear;
+  -ms-transition: 0.1s linear;
+  -o-transition: 0.1s linear;
+  transition: 0.1s linear;
+}
+
+.addOption:hover {
+  color: black;
+}
