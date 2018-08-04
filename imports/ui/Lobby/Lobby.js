@@ -22,6 +22,8 @@ class Lobby extends Component {
     this.submitQuestions = this.submitQuestions.bind(this);
     this.changeQuestion = this.changeQuestion.bind(this);
     this.editQuestions = this.editQuestions.bind(this);
+    this.getPlayerNames = this.getPlayerNames.bind(this);
+    this.waitingBooth = this.waitingBooth.bind(this);
     this.startGame = this.startGame.bind(this);
     this.state = {
       stage: 0,
@@ -74,12 +76,16 @@ class Lobby extends Component {
               player.isReady ?
               <div className="ready">Ready</div>
               :
-              '-'
+              'Not ready'
             }
           </td>
         </tr>
       )
     });
+  }
+
+  getPlayerNames() {
+    return this.props.players.map(player => player.name);
   }
 
   displayGameStatus() {
@@ -103,6 +109,40 @@ class Lobby extends Component {
     );
   }
 
+  waitingBooth() {
+    let allReady = this.props.players.every(player => player.isReady);
+    let submittedQuestions = this.props.questions.map((question, index, questions) => {
+      return (
+        <div key={index}>
+          {question.text}
+          {index !== questions.length && (<hr />)}
+        </div>
+      );
+    })
+    let gameStatus = allReady ? (
+      <div className="paddingBottom">
+        <Countdown gameCode={this.props.gameCode} startGame={this.startGame}/>
+      </div>
+    ) : (
+      <div className="paddingBottom">
+        <div id="preloader">
+          <div id="loader"></div>
+        </div>
+        Waiting for other players
+      </div>
+    );
+    return (
+      <div className="center">
+        {gameStatus}
+        {/* submittedQuestions */}
+        <button className="whiteButton" onClick={this.editQuestions}>
+          <Glyph icon="pencil" />
+          {' Edit questions'}
+        </button>
+      </div>
+    );
+  }
+
   startGame() {
     let code = this.props.game.code;
     Meteor.call('games.start', code);
@@ -122,28 +162,21 @@ class Lobby extends Component {
         <div className="header">
           your questions
         </div>
-        <div className="card">
-          <div className="center paddingBottom">
-            Write questions to ask other players
-          </div>
+        <div className="card animateHeight">
           {['','',''].map((_, index) => {
             return (
-              <div key={index} style={{display: (this.state.stage === index) ? 'block' : 'none'}}>
-                <QuestionSet
-                  questionNo={index}
-                  ready={this.submitQuestions}
-                  changeQuestion={this.changeQuestion} />
-              </div>
+              <QuestionSet
+                key={index}
+                display={this.state.stage === index}
+                playerNames={this.getPlayerNames()}
+                questionNo={index}
+                ready={this.submitQuestions}
+                changeQuestion={this.changeQuestion} />
             );
           })}
-
-          {this.props.viewer.isReady && (
-            <button className="whiteButton" onClick={this.editQuestions}>
-              Edit questions
-            </button>
-          )}
+          {this.state.stage === 3 && this.waitingBooth()}
         </div>
-        {this.displayGameStatus()}
+        {/* this.displayGameStatus() */}
 
         <div className="header">
           players
@@ -152,7 +185,7 @@ class Lobby extends Component {
           <Table className="reduceTop">
             <colgroup>
               <col width="" />
-              <col width="80" />
+              <col width="100" />
             </colgroup>
             <thead>
               <tr>
@@ -179,8 +212,12 @@ class Lobby extends Component {
 
 Lobby.propTypes = {
   players: PropTypes.array.isRequired,
+  questions: PropTypes.array.isRequired,
+  viewer: PropTypes.shape({
+    isReady: PropTypes.bool
+  }),
   game: PropTypes.shape({
-    code: PropTypes.number,
+    code: PropTypes.number
   })
 };
 
@@ -188,9 +225,11 @@ Lobby.defaultProps = {
   game: {
     code: null
   },
+  players: [],
   viewer: {
     isReady: false
-  }
+  },
+  questions: []
 }
 
 export default createContainer((value) => {
@@ -198,10 +237,13 @@ export default createContainer((value) => {
   Meteor.subscribe('games');
   Meteor.subscribe('players');
   Meteor.subscribe('questions');
+  let players = Players.find({ gameCode: code }).fetch();
+  let viewer = players.find(player => player._id == Session.get('currentUserId'));
+  let questions = viewer ? Questions.find({ playerId: viewer._id, gameCode: code }).fetch() : [];
   return {
     game: Games.findOne({ code: code }),
-    players: Players.find({ gameCode: code }).fetch(),
-    questions: Questions.find({ gameCode: code }).fetch(),
-    viewer: Players.findOne({ _id: Session.get('currentUserId') }),
+    players: players,
+    questions: questions,
+    viewer: viewer
   };
 }, Lobby);

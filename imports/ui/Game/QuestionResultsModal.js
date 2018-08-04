@@ -10,8 +10,6 @@ import './QuestionResults.css';
 
 function QuestionResultsModal(props) {
   let recipient = props.players.find(player => (player._id === props.question.recipientId));
-  let recipientIndex = props.answers.findIndex(answer => (answer.playerId === props.question.recipientId));
-  props.answers.splice(recipientIndex, 1);
   let correctAnswer = props.question.options[props.question.correctAnswer];
   let modalHeader = (
     <div className="modalHeader">

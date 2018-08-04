@@ -63,13 +63,22 @@
   margin-top: -15px;
 }
 
-/* .circle {
-  height: 20px;
-  width: 20px;
-  line-height: 18px;
-  border-radius: 100%;
-  border: 1px solid #DDD;
-} */
+.submittedQuestion {
+  display: block;
+}
+
+.generateButton {
+  display: inline-block;
+  position: absolute;
+  right: 8px;
+  top: 21px;
+  background: white;
+  border: none;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: smaller;
+  color: #00c4a2;
+}
 
 .addOption {
   border: none;
@@ -90,6 +99,134 @@
   transition: 0.1s linear;
 }
 
+/* OptionsDropdown */
+
+.dropdownContainer {
+  position: relative;
+}
+
 .addOption:hover {
   color: black;
+}
+
+.optionsButton {
+  position: absolute;
+  top: 3px;
+  right: 0px;
+  display: inline-block;
+  margin-left: 8px;
+  width: 22px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0;
+  border-radius: 3px;
+  background-color: white;
+  border: 1px solid #DDD;
+  color: #00c4a2;
+  cursor: pointer;
+}
+
+.optionsButton:hover {
+  border-color: #BBB;
+}
+
+.optionsDropdown {
+  display: none;
+  position: absolute;
+  right: 0px;
+  padding: 8px 0;
+  top: 30px;
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid #DDD;
+}
+
+.optionsDropdown.show {
+  display: block;
+}
+
+.optionsDropdown > div {
+  cursor: pointer;
+  line-height: 2em;
+  text-align: right;
+  padding: 0 15px;
+}
+
+.optionsDropdown > div:hover {
+  background-color: #F2F2F2;
+}
+
+.countdownText {
+  font-size: xx-large;
+  line-height: 167.2px;
+}
+
+/* Spinner */
+
+#preloader {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+}
+#loader {
+    display: block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    /* margin: -75px 0 0 -75px; */
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: rgb(0,145,175);
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: rgb(0,185,165);
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: rgb(0,225,155);
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }

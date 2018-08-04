@@ -27,7 +27,7 @@ class AnsweredQuestion extends Component {
     let recipient = this.props.players.find((player) => (player._id === this.props.question.recipientId));
     let correctOption = this.props.question.correctAnswer;
     return (
-      <div className="center relative">
+      <div className="relative">
   	    <div className={`cardHeader ${this.state.show && 'highlight'}`} onClick={this.toggleShow}>
           <span className="round">
             {this.props.question.round}
@@ -35,7 +35,7 @@ class AnsweredQuestion extends Component {
           {this.props.question.text}
           <Glyph icon="chevron-down" className="arrow" />
         </div>
-        <div className={`cardShadow ${this.state.show && 'show'}`}>
+        <div className={`cardShadow center ${this.state.show && 'show'}`}>
           <div>
             <b>{recipient.name}: </b>
             {this.props.question.options[correctOption]}

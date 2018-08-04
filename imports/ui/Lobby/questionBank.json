@@ -1,0 +1,372 @@
+{
+  "questionBank": [
+    {
+      "question": "Would you rather always be 10 minutes late or always be 20 minutes early",
+      "options": ["Always be 10 minutes late", "Always be 20 minutes early"]
+    },
+    {
+      "question": "Would you rather have a horrible job, but be able to retire comfortably in 10 years or have your dream job, but have to work until the day you die?",
+      "options": ["Horrible job for 10 years", "Dream job til the day I die"]
+    },
+    {
+      "question": "Would you rather be able to teleport anywhere or be able to read minds?",
+      "options": ["Teleport", "Read minds"]
+    },
+    {
+      "question": "Would you rather die in 10 years with no regrets or die in 50 years with many regrets?",
+      "options": ["Die in 10 years with no regrets", "Die in 50 years with many regrets?"]
+    },
+    {
+      "question": "Would you rather never lose your phone again or never lose your wallet again?",
+      "options": ["Never lose your phone again", "Never lose your wallet again"]
+    },
+    {
+      "question": "Would you rather lose the ability to read or lose the ability to speak?",
+      "options": ["Lose the ability to read", "Lose the ability to speak"]
+    },
+    {
+      "question": "Would you rather live on the beach or in a cabin in the woods?",
+      "options": ["Beach", "Cabin in the woods"]
+    },
+    {
+      "question": "Would you rather spend two years with your soul mate only to have them die and you never love again or spend your life with someone nice you settled for?",
+      "options": ["Two years with your soul mate and die", "Settle for someone nice for life"]
+    },
+    {
+      "question": "Would you rather live the next 10 years of your life in China or Russia?",
+      "options": ["China", "Russia"]
+    },
+    {
+      "question": "Would you rather wear slippers or shoes for the rest of your life?",
+      "options": ["Slippers", "Shoes"]
+    },
+    {
+      "question": "Do you prefer a good book or a good movie?",
+      "options": ["Book", "Movie"]
+    },
+    {
+      "question": "Would you rather have three kids and no money, or no kids with three million dollars?",
+      "options": ["Three kids and no money", "No kids with three million dollars"]
+    },
+    {
+      "question": "Would you rather know how you will die or when you will die?",
+      "options": ["How I will die", "When I will die"]
+    },
+    {
+      "question": "Do you consider yourself lucky?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Western or chinese food?",
+      "options": ["Western", "Chinese"]
+    },
+    {
+      "question": "Do you consider yourself an extrovert or introvert?",
+      "options": ["Extrovert", "Introvert"]
+    },
+    {
+      "question": "What age do you think you'll be married?",
+      "options": ["Below 28", "28-30",  "30-32", "Above 32"]
+    },
+    {
+      "question": "Are you confrontational?",
+      "options": ["Yes",  "No"]
+    },
+    {
+      "question": "Do you believe in second chances?",
+      "options": ["Yes",  "No"]
+    },
+    {
+      "question": "Have you ever cried tears of joy?",
+      "options": ["Yes",  "No"]
+    },
+    {
+      "question": "Would you rather be loved or love?",
+      "options": ["Be loved",  "Love"]
+    },
+    {
+      "question": "Do you believe yourself to be truly free?",
+      "options": ["Yes",  "No"]
+    },
+    {
+      "question": "Would you rather have AIDS or no sex forever?",
+      "options": ["AIDS", "No sex forever"]
+    },
+    {
+      "question": "Would you allow your one of us to marry your sibling?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Would you spend 50 dollars on one meal",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you done anything illegal?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you made someone cry before?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Would you rather lose both arms or lose both legs?",
+      "options": ["Lose both arms", "Lose both legs"]
+    },
+    {
+      "question": "Have you ever been slapped on the face?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "When it comes to relationships, are you a settler or a reacher?",
+      "options": ["Settler", "Reacher"]
+    },
+    {
+      "question": "\"I care a lot about what others think about me\"",
+      "options": ["True", "False"]
+    },
+    {
+      "question": "Will you ever consider to be a househusband/housewife?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Which would be your go-to first date?",
+      "options": ["Dinner and a movie", "Picnic in the Park", "Visit to a museum or gallery"]
+    },
+    {
+      "question": "Which do you consider the most important in a relationship?",
+      "options": ["Physical chemistry", "Lifestyle compatibility", "Emotional compatibility", "Intellectual compatibility"]
+    },
+    {
+      "question": "What was the best phase in your life?",
+      "options": ["Primary School", "Secondary School", "Poly/JC", "Uni", "Working"]
+    },
+    {
+      "question": "What was the worst phase in your life?",
+      "options": ["Primary School", "Secondary School", "Poly/JC", "Uni", "Working"]
+    },
+    {
+      "question": "Dogs or Cats?",
+      "options": ["Dogs", "Cats"]
+    },
+    {
+      "question": "Which parent are you closer to?",
+      "options": ["Mom", "Dad"]
+    },
+    {
+      "question": "Would you ever take back someone who cheated?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Which emotion do you consider to be is your biggest strength?",
+      "options": ["Compassion", "Positivity", "Enthusiasm", "Initiative"]
+    },
+    {
+      "question": "Which characteristic do you hate the most?",
+      "options": ["Dishonesty", "Impatience", "Narcissism", "Jealousy"]
+    },
+    {
+      "question": "Which negative emotion would you say affects you the most?",
+      "options": ["Dishonesty", "Impatience", "Narcissism", "Jealousy"]
+    },
+    {
+      "question": "If you had to pick one, which is the most important value you would teach your children??",
+      "options": ["Honesty", "Kindness ", "Courage"]
+    },
+    {
+      "question": "Which of the 7 sins do you identify with the most?",
+      "options": ["Lust", "Gluttony", "Greed", "Sloth", "Wrath", "Envy", "Pride"]
+    },
+    {
+      "question": "What's your favorite kind of vacation?",
+      "options": ["Cultural", "Active", "Exotic"]
+    },
+    {
+      "question": "Pick a food",
+      "options": ["Rice", "Noodles"]
+    },
+    {
+      "question": "Pick a food",
+      "options": ["Pizza", "Burgers"]
+    },
+    {
+      "question": "Pick your favourite activity",
+      "options": ["Taking a stroll at the park", "Tidying my house", "Enjoying a cup of coffee", "Reading a book"]
+    },
+    {
+      "question": "Which is your favourite colour?",
+      "options": ["Red", "Blue", "Black", "White", "Pink"]
+    },
+    {
+      "question": "What is your spirit animal?",
+      "options": ["Horse", "Mouse", "Peacock", "Wolf"]
+    },
+    {
+      "question": "How do you want to impact the world?",
+      "options": ["Bring justice to all", "Leave my mark on it", "Invent something new", "Create an empire"]
+    },
+    {
+      "question": "Which is your favorite TV show?",
+      "options": ["Friends", "Game of Thrones", "Running Man", "Master Chef"]
+    },
+    {
+      "question": "Which type of TV drama do you enjoy the most?",
+      "options": ["Korean", "American", "Hong Kong", "Mediacorp"]
+    },
+    {
+      "question": "Which movie genre do you enjoy the most?",
+      "options": ["Comedy", "Thriller", "Action", "Horror"]
+    },
+    {
+      "question": "If you were born again, would you choose to be a male or female?",
+      "options": ["Male", "Female"]
+    },
+    {
+      "question": "What do you value most personally?",
+      "options": ["Fun", "Wellness", "Intelligence", "Loyalty"]
+    },
+    {
+      "question": "What's your texting style?",
+      "options": ["Short", "Full sentences with correct grammer", "I just txt as quickly as pssible whtevr", "I rarely text"]
+    },
+    {
+      "question": "Which do you regret more?",
+      "options": ["Action", "Inaction"]
+    },
+    {
+      "question": "Which are you afraid of the most?",
+      "options": ["Horror movies", "Roller Coasters", "Bugs and insects"]
+    },
+    {
+      "question": "What is your love language?",
+      "options": ["Words of affirmation", "Quality time", "Gifts", "Acts of service", "Physical touch"]
+    },
+    {
+      "question": "Would you rather cook or wash dishes?",
+      "options": ["Cook", "Wash dishes"]
+    },
+    {
+      "question": "Have you ever lied in a job interview?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever taken MC when you weren't sick?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever shat in your pants?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever shoplifted from a store?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever had detention?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever been drunk in public?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever dated more than one person at once?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever played strip poker?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever been had a one night stand?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever had a crush on a teacher?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever stayed friends with an ex?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever been on a blind date?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever gone through a surgery?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever showered with someone of the opposite sex?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever showered with someone of the opposite sex?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever stalked your ex?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever cheated in a test or exam?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever used a dating app?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever had doubts in your sexuality?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever smoked weed?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever bought undergarments for your partner?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever made out for more than 5 minutes?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever gotten together with your friend's ex?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever taken a shower with the opposite sex?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever been a part of a cheating scenario?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever gone to a strip club?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever watched 50 Shades of Grey?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever watched Magic Mike?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever given a guy a fake number?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever kissed someone of the same sex?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever given a guy a fake number?",
+      "options": ["Yes", "No"]
+    }
+  ]
+}

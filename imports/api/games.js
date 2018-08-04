@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import { Promise } from 'meteor/promise';
 
 export const Games = new Mongo.Collection('games');
 
@@ -40,18 +41,15 @@ Meteor.methods({
       }
     });
   },
-  'games.restart'(code) {
-    if (!code) {
-      throw 'No code';
-    }
-    Meteor.call('games.insert', (error, newGame) => {
-      console.log(newGame);
+  async 'games.restart'(code) {
+    if (code) {
+      let newGame = await Meteor.call('games.insert');
       Games.update({ code: code }, {
         $set: {
           nextCode: newGame.code
         }
       });
-      return newGame;
-    });
+      return newGame.code;
+    };
   },
 });

@@ -26,7 +26,7 @@ export default class Countdown extends Component {
       })
     } else {
       this.setState({
-        seconds: "Let's go"
+        seconds: 0
       })
       clearInterval(this.interval);
       this.props.startGame();
@@ -41,9 +41,11 @@ export default class Countdown extends Component {
 
   render() {
     return (
-      <span>
-        {this.state.seconds}
-      </span>
+      <div className="countdownText">
+        {this.state.seconds === 0 ? "Let's go" : (
+          'Game starts in ' + this.state.seconds
+        )}
+      </div>
     );
   }
 }
@@ -52,7 +54,7 @@ Countdown.propTypes = {
   gameCode: PropTypes.number,
   startGame: PropTypes.func,
 };
- 
+
 Countdown.defaultProps = {
   gameCode: null,
   startGame: () => null,

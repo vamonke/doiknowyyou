@@ -80,11 +80,9 @@ class Game extends Component {
       this.addPlayer(nextCode);
     } else {
       let currentCode = this.props.game.code;
-      if (currentCode) {
-        Meteor.call('games.restart', currentCode, (error, newGame) => {
-          this.addPlayer(newGame.code);
-        });
-      }
+      Meteor.call('games.restart', currentCode, (error, newGameCode) => {
+        this.addPlayer(newGameCode);
+      });
     }
   }
 
@@ -96,7 +94,6 @@ class Game extends Component {
             <CurrentQuestion
               gameCode={this.props.game.code}
               question={this.getCurrentQuestion()}
-              questionOwner={this.getPlayer(this.getCurrentQuestion().playerId)}
               toggleModal={this.toggleModal}
             />
             <div className="header">

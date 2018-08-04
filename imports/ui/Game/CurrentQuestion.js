@@ -22,7 +22,7 @@ class CurrentQuestion extends Component {
   submitAnswer(event) {
     const viewer = this.props.viewer;
     const currentQuestion = this.props.question;
-    const answer = event.target.name;
+    const answer = Number(event.target.name);
 
     Meteor.call('answers.insert',
       this.props.question.gameCode,
@@ -86,6 +86,7 @@ CurrentQuestion.defaultProps = {
     _id: null,
     gameCode: null,
     playerId: null,
+    options: []
   },
   viewer: {
     _id: '',
@@ -96,7 +97,6 @@ CurrentQuestion.defaultProps = {
 export default createContainer(props => {
   return {
     question: props.question,
-    questionOwner: props.questionOwner,
     recipient: Players.findOne({ gameCode: props.gameCode, isRecipient: true }),
     viewer: Players.findOne({ _id: Session.get('currentUserId') }),
   };

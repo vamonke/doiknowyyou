@@ -12,7 +12,12 @@ export default function ResultsTable(props) {
       +1
     </span>
   );
-  let answerSets = parseQuestionResults(props.question, props.players, props.answers);
+  let answers = props.answers.slice(0); // Duplicate props.answers array
+  let recipientIndex = answers.findIndex(answer => (answer.playerId === props.question.recipientId));
+  if (recipientIndex > -1) {
+    answers.splice(recipientIndex, 1);
+  }
+  let answerSets = parseQuestionResults(props.question, props.players, answers);
   let options = props.question.options;
   let correctOption = props.question.correctAnswer;
 

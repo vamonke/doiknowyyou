@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
-import { FormField, FormInput, Button, Glyph, Row, Col } from 'elemental';
+import { FormField, FormInput, Button, Glyph, Row, Col, Dropdown, InputGroup } from 'elemental';
+
+import OptionsDropdown from './OptionsDropdown';
+import { questionBank } from './questionBank';
 
 // Lobby question and options component
 export default class QuestionSet extends Component {
@@ -12,10 +15,18 @@ export default class QuestionSet extends Component {
     this.prevQuestion = this.prevQuestion.bind(this);
     this.addOption = this.addOption.bind(this);
     this.optionField = this.optionField.bind(this);
+    this.renderButtons = this.renderButtons.bind(this);
+    this.setOptionType = this.setOptionType.bind(this);
+    this.generateQuestion = this.generateQuestion.bind(this);
     this.state = {
       question: '',
       options: ['', '']
     };
+  }
+
+  generateQuestion() {
+    let qna = questionBank[Math.floor(Math.random() * questionBank.length)];
+    this.setState(qna);
   }
 
   addOption() {
@@ -37,7 +48,11 @@ export default class QuestionSet extends Component {
   }
 
   nextQuestion() {
-    this.props.changeQuestion(this.props.questionNo, this.state, true);
+    let qna = {
+      question: this.state.question,
+      options: this.state.options.filter(String)
+    }
+    this.props.changeQuestion(this.props.questionNo, qna, true);
   }
 
   prevQuestion() {
@@ -49,6 +64,7 @@ export default class QuestionSet extends Component {
       <div key={optionNo} className="paddingBottom">
         <FormInput
           placeholder={'Option ' + (optionNo + 1)}
+          value={this.state.options[optionNo]}
           name={optionNo.toString()}
           onChange={this.handleChange}
         />
@@ -56,19 +72,86 @@ export default class QuestionSet extends Component {
     );
   }
 
+  setOptionType(type) {
+    let options = [];
+    if (type === 0) {
+      options = ['True', 'False'];
+    } else if (type === 1) {
+      options = ['Yes', 'No'];
+    } else if (type === 2) {
+      options = this.props.playerNames;
+    }
+    this.setState({ options: options })
+  }
+
+  renderButtons() {
+    let questionNo = this.props.questionNo;
+    if (questionNo === 0) {
+      return (
+        <button className="greenButton" onClick={this.nextQuestion}>
+          {'Next '}
+          <Glyph icon="chevron-right" />
+        </button>
+      );
+    } else if (questionNo === 2) {
+      return (
+        <Row>
+          <Col xs="1/2">
+            <button className="whiteButton" onClick={this.prevQuestion}>
+              <Glyph icon="chevron-left" />
+              {' Previous'}
+            </button>
+          </Col>
+          <Col xs="1/2">
+            <button className="greenButton" onClick={this.nextQuestion}>
+              {'Ready ' }
+              <Glyph icon="check" />
+            </button>
+          </Col>
+        </Row>
+      );
+    } else {
+      return (
+        <Row>
+          <Col xs="1/2">
+            <button className="whiteButton" onClick={this.prevQuestion}>
+              <Glyph icon="chevron-left" />
+              {' Previous'}
+            </button>
+          </Col>
+          <Col xs="1/2">
+            <button className="greenButton" onClick={this.nextQuestion}>
+            {'Next '}
+            <Glyph icon="chevron-right" />
+            </button>
+          </Col>
+        </Row>
+      );
+    }
+  }
+
   render() {
     return (
-      <div>
+      <div style={{display: (this.props.display ? 'block' : 'none')}}>
+        <div className="paddingBottom">
+          <b>{'Question ' + (this.props.questionNo + 1) + ' of 3'}</b>
+        </div>
+        <button onClick={this.generateQuestion} className="generateButton">
+          Randomize
+        </button>
         <FormInput
-          placeholder={"Question " + (this.props.questionNo + 1)}
+          placeholder="Write a question to ask other players"
           name="question"
+          value={this.state.question}
           onChange={this.handleChange}
-          autoFocus
+          autoFocus={this.props.display}
+          multiline
         />
 
-        <div className="center paddingBottom paddingTop">
-          Options
+        <div className="paddingTop paddingBottom">
+          <OptionsDropdown onSelect={this.setOptionType} />
         </div>
+
         {this.state.options.map(this.optionField)}
 
         <button className="addOption" onClick={this.addOption}>
@@ -76,22 +159,7 @@ export default class QuestionSet extends Component {
           {' Add option'}
         </button>
 
-        <Row>
-          <Col sm="1/2">
-            {this.props.questionNo !== 0 && (
-              <button className="whiteButton" onClick={this.prevQuestion}>
-                <Glyph icon="chevron-left" />
-                {' Previous'}
-              </button>
-            )}
-        	</Col>
-          <Col sm="1/2">
-            <button className="greenButton" onClick={this.nextQuestion}>
-            {this.props.questionNo === 2 ? 'Ready ' : 'Next '}
-            {this.props.questionNo === 2 ? (<Glyph icon="check" />) : (<Glyph icon="chevron-right" />)}
-            </button>
-        	</Col>
-        </Row>
+        {this.renderButtons()}
       </div>
     );
   }
