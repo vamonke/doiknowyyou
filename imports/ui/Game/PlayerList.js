@@ -26,9 +26,9 @@ class PlayerList extends Component {
   }
   renderPlayers() {
     let viewer = this.props.viewer;
-    let recipient = this.props.players.find((player) => player.isRecipient);
-    return this.props.players.map((player) => {
-      let isRecipient = (recipient && player._id === recipient._id);
+    let question = this.props.question;
+    return this.props.players.map(player => {
+      let isRecipient = player._id === question.recipientId;
       let playerName = (player._id === viewer._id) ? (<strong>{player.name}</strong>) : player.name;
       return (
         <tr key={player._id}>
@@ -37,7 +37,7 @@ class PlayerList extends Component {
           </td>
           <td>
             {playerName}
-            { isRecipient ? (<span className="answering">ANSWERING</span>) : '' }
+            { (isRecipient && !this.props.ended) ? (<span className="answering">ANSWERING</span>) : '' }
           </td>
           <td className="done">
             {this.hasPlayerAnswered(player._id) && 'Done' }
@@ -79,30 +79,31 @@ PlayerList.propTypes = {
 };
 
 PlayerList.defaultProps = {
-  gameCode: null,
-  players: [],
+  players: [{
+    _id: 'abc'
+  }],
   question: {
     _id: null,
+    recipientId: 'abc'
   },
   answers: [],
   viewer: {
-    _id: '',
+    _id: 'abc',
   },
 }
 
 
-export default createContainer((props) => {
-  Meteor.subscribe('players');
+export default createContainer(props => {
   Meteor.subscribe('answers');
-  const gameCode = Number(props.gameCode);
   let answers = [];
   if (!props.ended && props.question && props.question._id) {
     answers = Answers.find({ questionId: props.question._id }).fetch();
   }
   return {
-    players: Players.find({ gameCode: gameCode }, { sort: { score: -1 } }).fetch(),
+    players: props.players,
+    question: props.question,
     answers: answers,
-    viewer: Players.findOne({ _id: Session.get('currentUserId') }),
+    viewer: props.viewer,
     ended: props.ended,
   };
 }, PlayerList);

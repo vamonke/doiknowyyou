@@ -50,17 +50,17 @@ class Lobby extends Component {
 
   submitQuestions() {
     const qna = this.state.questions;
-    const gameCode = this.props.game.code;
+    const gameId = this.props.game._id;
     const playerId = Session.get('currentUserId');
 
-    Meteor.call('questions.insert', gameCode, playerId, qna);
-    Meteor.call('players.ready', playerId);
+    Meteor.call('questions.insert', gameId, playerId, qna);
+    Meteor.call('players.ready', playerId, gameId);
   }
 
   editQuestions() {
     let playerId = Session.get('currentUserId');
     Meteor.call('players.unReady', playerId);
-    this.setState({ stage: 2 });
+    this.setState({ stage: 0 });
   }
 
   renderPlayers() {
@@ -104,7 +104,7 @@ class Lobby extends Component {
     };
     return (
       <div className={`center popDown ${ready}`}>
-        <Countdown gameCode={this.props.gameCode} startGame={this.startGame}/>
+        <Countdown gameId={this.props.game._id} startGame={this.startGame}/>
       </div>
     );
   }
@@ -121,32 +121,34 @@ class Lobby extends Component {
     })
     let gameStatus = allReady ? (
       <div className="paddingBottom">
-        <Countdown gameCode={this.props.gameCode} startGame={this.startGame}/>
+        <Countdown gameId={this.props.game._id} startGame={this.startGame}/>
       </div>
     ) : (
-      <div className="paddingBottom">
+      <div>
         <div id="preloader">
           <div id="loader"></div>
         </div>
-        Waiting for other players
-      </div>
-    );
-    return (
-      <div className="center">
-        {gameStatus}
-        {/* submittedQuestions */}
+        <div className="paddingBottom">
+          Waiting for other players
+        </div>
         <button className="whiteButton" onClick={this.editQuestions}>
           <Glyph icon="pencil" />
           {' Edit questions'}
         </button>
       </div>
     );
+    return (
+      <div className="center">
+        {gameStatus}
+        {/* submittedQuestions */}
+      </div>
+    );
   }
 
   startGame() {
-    let code = this.props.game.code;
-    Meteor.call('games.start', code);
-    this.props.history.push(`/game/${code}`);
+    let id = this.props.game._id;
+    // Meteor.call('games.start', id);
+    this.props.history.push(`/game/${id}`);
   }
 
   render() {
@@ -205,6 +207,10 @@ class Lobby extends Component {
             </Button>
           </div>*/}
         </div>
+        <div className="paddingTop paddingBottom" />
+        <div className="center">
+          <a href="/">Home</a>
+        </div>
       </div>
     );
   }
@@ -217,13 +223,15 @@ Lobby.propTypes = {
     isReady: PropTypes.bool
   }),
   game: PropTypes.shape({
-    code: PropTypes.number
+    code: PropTypes.number,
+    _id: PropTypes.string
   })
 };
 
 Lobby.defaultProps = {
   game: {
-    code: null
+    code: null,
+    _id: null
   },
   players: [],
   viewer: {
@@ -233,15 +241,16 @@ Lobby.defaultProps = {
 }
 
 export default createContainer((value) => {
-  let code = Number(value.match.params.code);
+  let gameId = value.match.params.id;
+  Meteor.subscribe('games');
   Meteor.subscribe('games');
   Meteor.subscribe('players');
   Meteor.subscribe('questions');
-  let players = Players.find({ gameCode: code }).fetch();
+  let players = Players.find({ gameId: gameId }).fetch();
   let viewer = players.find(player => player._id == Session.get('currentUserId'));
-  let questions = viewer ? Questions.find({ playerId: viewer._id, gameCode: code }).fetch() : [];
+  let questions = viewer ? Questions.find({ playerId: viewer._id, gameCode: gameId }).fetch() : [];
   return {
-    game: Games.findOne({ code: code }),
+    game: Games.findOne(gameId),
     players: players,
     questions: questions,
     viewer: viewer

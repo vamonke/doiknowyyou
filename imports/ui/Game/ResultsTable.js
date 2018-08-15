@@ -48,7 +48,7 @@ export default function ResultsTable(props) {
           </Row>
         ))}
     </div>
-  )
+  );
 }
 
 ResultsTable.propTypes = {

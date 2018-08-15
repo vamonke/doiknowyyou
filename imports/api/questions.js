@@ -1,4 +1,5 @@
 import { Mongo } from 'meteor/mongo';
+import { Games } from './games';
 import { Players } from './players';
 import { Answers } from './answers';
 
@@ -11,16 +12,16 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'questions.insert'(gameCode, playerId, qna) {
+  'questions.insert'(gameId, playerId, qna) {
     qna.filter(set => {
       return set.question // remove empty questions
     }).forEach((set, i) => {
       Questions.upsert({
-        gameCode: gameCode,
+        gameId: gameId,
         playerId: playerId,
         number: i + 1,
       }, {
-        gameCode: gameCode,
+        gameId: gameId,
         playerId: playerId,
         number: i + 1,
         round: null,
@@ -34,33 +35,40 @@ Meteor.methods({
       });
     });
   },
-  'questions.select'(gameCode, round) { // choose a question
-    let unaskedIds = Questions.find({ gameCode: gameCode, status: 'unasked' }, { fields: { _id: 1 } }).fetch();
+  'questions.select'(gameId, round) { // choose a question
+    let unaskedIds = Questions.find({ gameId: gameId, status: 'unasked' }, { fields: { _id: 1 } }).fetch();
     if (unaskedIds.length !== 0) {
-      let recipientId = Meteor.call('players.getRecipient', gameCode);
-      let id = unaskedIds[Math.floor(Math.random() * unaskedIds.length)]._id;
-      Questions.update({ _id: id }, {
+      let recipientId = Meteor.call('players.getRecipient', gameId);
+      let questionId = unaskedIds[Math.floor(Math.random() * unaskedIds.length)]._id;
+      Questions.update(questionId, {
         $set: {
           status: 'asking',
           recipientId: recipientId,
           round: round
         }
       });
+      Games.update(gameId, {
+        $set: {
+          currentQuestion: questionId,
+        }
+      });
+      console.log('New question: ' + questionId);
     } else { // End game when there no more unasked questions
-      Meteor.call('players.deselect', gameCode);
-      Meteor.call('games.end', gameCode);
+      Meteor.call('players.deselect', gameId);
+      Meteor.call('games.end', gameId);
+      return null;
     }
   },
-  'questions.complete'(gameCode, id) {
-    Questions.update({ _id: id }, {
+  'questions.complete'(id) {
+    Questions.update(id, {
       $set: {
         status: 'asked',
         answeredAt: new Date(),
       }
     });
     // Tabulate scores
-    let question = Questions.findOne({ _id: id });
-    Answers.find({ questionId: id }).fetch().map((answer) => {
+    let question = Questions.findOne(id);
+    Answers.find({ questionId: id }).fetch().map(answer => {
       if (
         (answer.playerId !== question.recipientId) &&
         (answer.selected === question.correctAnswer)
@@ -68,7 +76,7 @@ Meteor.methods({
         Meteor.call('players.addScore', answer.playerId);
       }
     });
-    Meteor.call('questions.select', gameCode, question.round + 1);
+    Meteor.call('questions.select', question.gameId, question.round + 1);
   },
   'questions.answer'(playerId, id, answer) { // set the recipient's answer as the correct answer
     let question = Questions.findOne({ _id: id });

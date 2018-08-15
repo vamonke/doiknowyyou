@@ -13,8 +13,8 @@ export const renderRoutes = () => (
     <div className="container">
       <Switch>
         <Route path="/" exact component={App} />
-        <Route path="/lobby/:code" component={Lobby} />
-        <Route path="/game/:code" component={Game} />
+        <Route path="/lobby/:id" component={Lobby} />
+        <Route path="/game/:id" component={Game} />
       </Switch>
     </div>
   </Router>

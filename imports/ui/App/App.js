@@ -65,17 +65,17 @@ export default class App extends Component {
     });
   }
 
-  addPlayer(gameCode, playerName) {
-    Meteor.call('players.insert', playerName, gameCode, (error, playerId) => {
-      Session.set('currentUserId', playerId);
-      this.showHome();
-      this.props.history.push(`/lobby/${gameCode}`);
+  addPlayer(playerName, gameId, gameCode) {
+    Meteor.call('players.insert', playerName, gameId, gameCode, (error, player) => {
+      Session.set('currentUserId', player._id);
+      // this.showHome();
+      this.props.history.push(`/lobby/${player.gameId}`);
     });
   }
 
   createGame(playerName) {
-    Meteor.call('games.insert', (error, game) => {
-      this.addPlayer(game.code, playerName);
+    Meteor.call('games.insert', (error, gameId) => {
+      this.addPlayer(playerName, gameId, null);
     });
   }
 
@@ -86,7 +86,7 @@ export default class App extends Component {
         <CreateGame
           modalIsOpen={(this.state.mode === 'create')}
           createGame={this.createGame}
-          showHome={this.showHome} 
+          showHome={this.showHome}
         />
         <JoinGame
           modalIsOpen={this.state.mode === 'join'}

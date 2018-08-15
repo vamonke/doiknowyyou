@@ -12,44 +12,61 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   'games.insert'() {
+    // Generate unique gameCode
+    let existingGameCodes = Games.find({}, { fields: { code: 1 }}).fetch().map(game => game.code);
+    let collision = true;
+    let code;
+    while (collision) {
+      code = Math.floor(1000 + Math.random() * 9000);
+      collision = existingGameCodes.includes(code);
+    }
+
     let game = {
-      code: Math.floor(1000 + Math.random() * 9000),
+      code: code,
       status: 'waiting',
-      nextCode: null,
+      nextId: null,
       createdAt: new Date(),
+      currentQuestion: null,
     };
 
-    var gameID = Games.insert(game);
-    game = Games.findOne(gameID);
-    return game;
+    let gameId = Games.insert(game);
+    return gameId;
   },
-  'games.start'(code) {
-    let game = Games.findOne({ code: code }, { fields: { status: 1 }});
+  'games.findGameByCode'(code) {
+    console.log('games.findGameByCode:', code);
+    return Games.findOne({ code: code });
+  },
+  'games.start'(id) {
+    console.log('games.start:', id);
+    let game = Games.findOne(id, { fields: { status: 1 }});
     if (game.status == 'waiting') {
-      Meteor.call('questions.select', code, 1);
-      Games.update({ code: code }, {
+      Meteor.call('questions.select', id, 1);
+      Games.update(id, {
         $set: {
           status: 'started'
         }
       });
     }
   },
-  'games.end'(code) {
-    Games.update({ code: code }, {
+  'games.end'(id) {
+    console.log('games.end:', id);
+    Games.update(id, {
       $set: {
+        // currentQuestion: null, // may need refactoring?
         status: 'ended'
       }
     });
   },
-  async 'games.restart'(code) {
-    if (code) {
-      let newGame = await Meteor.call('games.insert');
-      Games.update({ code: code }, {
+  async 'games.restart'(id) {
+    console.log('games.restart:', id);
+    if (id) {
+      let newGameId = await Meteor.call('games.insert');
+      Games.update(id, {
         $set: {
-          nextCode: newGame.code
+          nextId: newGameId
         }
       });
-      return newGame.code;
+      return newGameId;
     };
   },
 });

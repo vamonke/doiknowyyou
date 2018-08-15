@@ -49,7 +49,6 @@ function QuestionResultsModal(props) {
 QuestionResultsModal.defaultProps = {
   question: {
     _id: 'abc',
-    gameCode: null,
     playerId: 'abc',
     text: '',
     recipient: 'abc',

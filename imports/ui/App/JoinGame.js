@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Session } from 'meteor/session';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Card, Row, Col, Modal, ModalHeader, ModalBody, FormField, FormInput } from 'elemental';
@@ -38,7 +37,7 @@ export default class joinGame extends Component {
   }
 
   handleClick() {
-    this.props.addPlayer(this.state.code, this.state.name);
+    this.props.addPlayer(this.state.name, null, this.state.code);
   }
 
   render() {

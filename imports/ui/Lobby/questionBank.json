@@ -1,10 +1,6 @@
 {
   "questionBank": [
     {
-      "question": "Would you rather always be 10 minutes late or always be 20 minutes early",
-      "options": ["Always be 10 minutes late", "Always be 20 minutes early"]
-    },
-    {
       "question": "Would you rather have a horrible job, but be able to retire comfortably in 10 years or have your dream job, but have to work until the day you die?",
       "options": ["Horrible job for 10 years", "Dream job til the day I die"]
     },
@@ -25,8 +21,8 @@
       "options": ["Lose the ability to read", "Lose the ability to speak"]
     },
     {
-      "question": "Would you rather live on the beach or in a cabin in the woods?",
-      "options": ["Beach", "Cabin in the woods"]
+      "question": "Would you rather live in a beach house or in a cabin in the woods?",
+      "options": ["Beach house", "Cabin in the woods"]
     },
     {
       "question": "Would you rather spend two years with your soul mate only to have them die and you never love again or spend your life with someone nice you settled for?",
@@ -45,20 +41,12 @@
       "options": ["Book", "Movie"]
     },
     {
-      "question": "Would you rather have three kids and no money, or no kids with three million dollars?",
-      "options": ["Three kids and no money", "No kids with three million dollars"]
+      "question": "Would you rather have three kids and no money, or no kids with $2,000,000?",
+      "options": ["Three kids and no money", "No kids with $2,000,000"]
     },
     {
       "question": "Would you rather know how you will die or when you will die?",
       "options": ["How I will die", "When I will die"]
-    },
-    {
-      "question": "Do you consider yourself lucky?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Western or chinese food?",
-      "options": ["Western", "Chinese"]
     },
     {
       "question": "Do you consider yourself an extrovert or introvert?",
@@ -85,10 +73,6 @@
       "options": ["Be loved",  "Love"]
     },
     {
-      "question": "Do you believe yourself to be truly free?",
-      "options": ["Yes",  "No"]
-    },
-    {
       "question": "Would you rather have AIDS or no sex forever?",
       "options": ["AIDS", "No sex forever"]
     },
@@ -97,15 +81,15 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Would you spend 50 dollars on one meal",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you done anything illegal?",
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you made someone cry before?",
+      "question": "Have you made someone cry before? (Excluding your parents)",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Are you vain?",
       "options": ["Yes", "No"]
     },
     {
@@ -121,7 +105,7 @@
       "options": ["Settler", "Reacher"]
     },
     {
-      "question": "\"I care a lot about what others think about me\"",
+      "question": "\"I care a lot about what other people think about me.\"",
       "options": ["True", "False"]
     },
     {
@@ -130,7 +114,7 @@
     },
     {
       "question": "Which would be your go-to first date?",
-      "options": ["Dinner and a movie", "Picnic in the Park", "Visit to a museum or gallery"]
+      "options": ["Dinner and a movie", "Picnic in the park", "Visit to a museum/gallery", "Brunch at a cafe"]
     },
     {
       "question": "Which do you consider the most important in a relationship?",
@@ -138,14 +122,14 @@
     },
     {
       "question": "What was the best phase in your life?",
-      "options": ["Primary School", "Secondary School", "Poly/JC", "Uni", "Working"]
+      "options": ["Secondary School", "Poly/JC", "Uni", "Working"]
     },
     {
       "question": "What was the worst phase in your life?",
-      "options": ["Primary School", "Secondary School", "Poly/JC", "Uni", "Working"]
+      "options": ["Secondary School", "Poly/JC", "Uni", "Working"]
     },
     {
-      "question": "Dogs or Cats?",
+      "question": "Dogs or cats?",
       "options": ["Dogs", "Cats"]
     },
     {
@@ -157,11 +141,11 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Which emotion do you consider to be is your biggest strength?",
-      "options": ["Compassion", "Positivity", "Enthusiasm", "Initiative"]
+      "question": "Which do you consider to be your biggest strength?",
+      "options": ["Compassion", "Positivity", "Enthusiasm", "Trustworthy"]
     },
     {
-      "question": "Which characteristic do you hate the most?",
+      "question": "Which characteristic do you hate the most in other people?",
       "options": ["Dishonesty", "Impatience", "Narcissism", "Jealousy"]
     },
     {
@@ -169,8 +153,8 @@
       "options": ["Dishonesty", "Impatience", "Narcissism", "Jealousy"]
     },
     {
-      "question": "If you had to pick one, which is the most important value you would teach your children??",
-      "options": ["Honesty", "Kindness ", "Courage"]
+      "question": "Which is the single most important value you would teach your children?",
+      "options": ["Gratitude", "Honesty", "Generosity", "Responsibility"]
     },
     {
       "question": "Which of the 7 sins do you identify with the most?",
@@ -181,28 +165,12 @@
       "options": ["Cultural", "Active", "Exotic"]
     },
     {
-      "question": "Pick a food",
-      "options": ["Rice", "Noodles"]
-    },
-    {
-      "question": "Pick a food",
-      "options": ["Pizza", "Burgers"]
-    },
-    {
       "question": "Pick your favourite activity",
-      "options": ["Taking a stroll at the park", "Tidying my house", "Enjoying a cup of coffee", "Reading a book"]
-    },
-    {
-      "question": "Which is your favourite colour?",
-      "options": ["Red", "Blue", "Black", "White", "Pink"]
+      "options": ["Taking a stroll at the park", "Exercising", "Enjoying a cup of tea/coffee", "Reading a book"]
     },
     {
       "question": "What is your spirit animal?",
       "options": ["Horse", "Mouse", "Peacock", "Wolf"]
-    },
-    {
-      "question": "How do you want to impact the world?",
-      "options": ["Bring justice to all", "Leave my mark on it", "Invent something new", "Create an empire"]
     },
     {
       "question": "Which is your favorite TV show?",
@@ -217,12 +185,8 @@
       "options": ["Comedy", "Thriller", "Action", "Horror"]
     },
     {
-      "question": "If you were born again, would you choose to be a male or female?",
+      "question": "Would you choose to reborn as a male or female?",
       "options": ["Male", "Female"]
-    },
-    {
-      "question": "What do you value most personally?",
-      "options": ["Fun", "Wellness", "Intelligence", "Loyalty"]
     },
     {
       "question": "What's your texting style?",
@@ -234,7 +198,7 @@
     },
     {
       "question": "Which are you afraid of the most?",
-      "options": ["Horror movies", "Roller Coasters", "Bugs and insects"]
+      "options": ["Horror movies", "Roller coasters and drop towers", "Bugs and insects"]
     },
     {
       "question": "What is your love language?",
@@ -250,14 +214,6 @@
     },
     {
       "question": "Have you ever taken MC when you weren't sick?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever shat in your pants?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever shoplifted from a store?",
       "options": ["Yes", "No"]
     },
     {
@@ -301,14 +257,6 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever showered with someone of the opposite sex?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever stalked your ex?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you ever cheated in a test or exam?",
       "options": ["Yes", "No"]
     },
@@ -329,10 +277,6 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever made out for more than 5 minutes?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you ever gotten together with your friend's ex?",
       "options": ["Yes", "No"]
     },
@@ -341,23 +285,11 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever been a part of a cheating scenario?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you ever gone to a strip club?",
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever watched 50 Shades of Grey?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever watched Magic Mike?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever given a guy a fake number?",
+      "question": "Have you ever given a suitor a fake number?",
       "options": ["Yes", "No"]
     },
     {
@@ -365,8 +297,8 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever given a guy a fake number?",
-      "options": ["Yes", "No"]
+      "question": "Rate your physical appearance from 1 to 10",
+      "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     }
   ]
 }

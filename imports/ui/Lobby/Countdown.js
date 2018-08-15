@@ -33,12 +33,6 @@ export default class Countdown extends Component {
     }
   }
 
-  startGame() {
-    let code = this.props.gameCode;
-    Meteor.call('games.start', code);
-    this.props.history.push(`/game/${code}`);
-  }
-
   render() {
     return (
       <div className="countdownText">
@@ -51,11 +45,11 @@ export default class Countdown extends Component {
 }
 
 Countdown.propTypes = {
-  gameCode: PropTypes.number,
+  gameId: PropTypes.string,
   startGame: PropTypes.func,
 };
 
 Countdown.defaultProps = {
-  gameCode: null,
+  gameId: null,
   startGame: () => null,
 }

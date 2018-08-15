@@ -15,7 +15,7 @@ import { Questions } from '../../api/questions.js';
 import AnsweredQuestion from './AnsweredQuestion';
 import QuestionResultsModal from './QuestionResultsModal';
 import PlayerList from './PlayerList';
-import CurrentQuestion from './CurrentQuestion';
+import CurrentQuestionBox from './CurrentQuestionBox';
 
 import './Game.css';
 
@@ -29,6 +29,7 @@ class Game extends Component {
       modalIsOpen: false
     }
   }
+
   componentDidUpdate() {
     let previousQuestion = this.getPreviousQuestion();
     if (previousQuestion && (previousQuestion._id !== this.state.modalQuestionId)) {
@@ -38,17 +39,22 @@ class Game extends Component {
       });
     }
   }
+
   toggleModal() {
     this.setState({
       modalIsOpen: false
     });
   }
+
   getCurrentQuestion() {
-    return this.props.questions.find((question) => (question.status === 'asking'));
+    let currentQuestionId = this.props.game.currentQuestion;
+    return this.props.questions.find(question => question._id == currentQuestionId);
   }
-  getRecipient() {
-    return this.props.players.find((player) => player.isRecipient);
+
+  getRecipient(question) {
+    return this.props.players.find(player => player._id == question.recipientId);
   }
+
   getAnsweredQuestions() {
     let answeredQuestions = this.props.questions.filter((question) => (question.status === 'asked'));
     if (answeredQuestions.length !== 0) {
@@ -57,43 +63,48 @@ class Game extends Component {
     }
     return [];
   }
+
   getPreviousQuestion() {
     let answeredQuestions = this.getAnsweredQuestions();
     if (answeredQuestions.length !== 0) {
       return answeredQuestions[0];
     }
   }
+
   getPlayer(id) {
     return this.props.players.find(player => (player._id === id));
   }
 
-  addPlayer(gameCode) {
-    Meteor.call('players.insert', this.props.viewer.name, gameCode, (error, playerId) => {
-      Session.set('currentUserId', playerId);
-      this.props.history.push(`/lobby/${gameCode}`);
+  addPlayer(newGameId) {
+    Meteor.call('players.insert', this.props.viewer.name, newGameId, null, (error, player) => {
+      Session.set('currentUserId', player._id);
+      this.props.history.push(`/lobby/${player.gameId}`);
     });
   }
 
   restartGame() {
-    let nextCode = this.props.game.nextCode;
-    if (nextCode) {
-      this.addPlayer(nextCode);
+    let nextId = this.props.game.nextId;
+    if (nextId) {
+      this.addPlayer(nextId);
     } else {
-      let currentCode = this.props.game.code;
-      Meteor.call('games.restart', currentCode, (error, newGameCode) => {
-        this.addPlayer(newGameCode);
+      let currentId = this.props.game._id;
+      Meteor.call('games.restart', currentId, (error, newGameId) => {
+        this.addPlayer(newGameId);
       });
     }
   }
 
   render() {
+    let currentQuestion = this.getCurrentQuestion();
+    let recipient = this.getRecipient(currentQuestion);
     return (
       <div>
         {this.props.game.status === 'started' && (
           <div className="paddingTop">
-            <CurrentQuestion
-              gameCode={this.props.game.code}
-              question={this.getCurrentQuestion()}
+            <CurrentQuestionBox
+              question={currentQuestion}
+              recipient={recipient}
+              viewer={this.props.viewer}
               toggleModal={this.toggleModal}
             />
             <div className="header">
@@ -108,8 +119,9 @@ class Game extends Component {
         )}
 
         <PlayerList
-          gameCode={this.props.game.code}
-          question={this.getCurrentQuestion()}
+          question={currentQuestion}
+          viewer={this.props.viewer}
+          players={this.props.players}
           ended={this.props.game.status === 'ended'}
         />
 
@@ -144,7 +156,7 @@ class Game extends Component {
           toggleModal={this.toggleModal}
         />
 
-        <div className="paddingTop" />
+        <div className="paddingTop paddingBottom" />
 
         { (this.props.game.status === 'ended') &&
           <button className="greenButton" onClick={this.restartGame}>
@@ -168,31 +180,32 @@ Game.propTypes = {
 
 Game.defaultProps = {
   game: {
-    code: null,
-    status: 'ended'
+    _id: 'abc',
+    status: 'started',
+    currentQuestion: 'abc'
   },
-  players: [],
-  questions: [
-    {
-      _id: null,
-      status: ''
-    }
-  ],
+  players: [{
+    _id: 'abc'
+  }],
+  questions: [{
+    _id: 'abc',
+    recipientId: 'abc'
+  }],
   viewer: {
-    _id: '',
+    _id: 'abc',
     isReady: false
   },
 }
 
-export default createContainer((value) => {
+export default createContainer(value => {
   Meteor.subscribe('games');
   Meteor.subscribe('players');
   Meteor.subscribe('questions');
-  let gameCode = Number(value.match.params.code);
+  let gameId = value.match.params.id;
   return {
-    game: Games.findOne({ code: gameCode }),
-    players: Players.find({ gameCode: gameCode }, { sort: { score: -1 } }).fetch(),
-    questions: Questions.find({ gameCode: gameCode }).fetch(),
+    game: Games.findOne(gameId),
+    players: Players.find({ gameId: gameId }, { sort: { score: -1 } }).fetch(),
+    questions: Questions.find({ gameId: gameId }).fetch(),
     viewer: Players.findOne({ _id: Session.get('currentUserId') }),
   };
 }, Game);

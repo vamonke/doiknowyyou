@@ -10,7 +10,8 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'answers.insert'(gameCode, questionId, playerId, selected) {
+  'answers.insert'(gameId, questionId, playerId, selected) {
+    console.log('answers.insert:', gameId, questionId, playerId, selected);
     Answers.upsert({
       questionId: questionId,
       playerId: playerId,
@@ -21,9 +22,10 @@ Meteor.methods({
       createdAt: new Date(),
     });
     Meteor.call('questions.answer', playerId, questionId, selected);
-    Meteor.call('answers.checkAllAnswered', gameCode, questionId);
+    Meteor.call('answers.checkAllAnswered', gameId, questionId);
   },
-  'answers.checkAllAnswered'(gameCode, questionId, round) {
+  'answers.checkAllAnswered'(gameId, questionId) {
+    console.log('answers.checkAllAnswered:', gameId, questionId);
     let answeredPlayerIds = Answers.find( // get playerIds from all answers for current question
       { questionId: questionId },
       {
@@ -31,15 +33,13 @@ Meteor.methods({
         sort: { playerId: 1 }
       }
     ).fetch();
-
     let playerIds = Players.find( // get ids from all players from current game
-      { gameCode: gameCode },
+      { gameId: gameId },
       {
         fields: { _id: 1 },
         sort: { _id: 1 }
       }
     ).fetch();
-
     if (
       (answeredPlayerIds.length === playerIds.length) // number of answers and players match
       &&
@@ -47,7 +47,7 @@ Meteor.methods({
         (idObject, i) => (idObject._id === answeredPlayerIds[i].playerId) // every id matches
       )
     ) {
-      Meteor.call('questions.complete', gameCode, questionId);
+      Meteor.call('questions.complete', questionId);
     };
   }
 });
