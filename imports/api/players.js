@@ -11,6 +11,7 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   'players.insert'(name, gameId, gameCode) {
+    console.log('players.insert', name, gameId, gameCode);
     if (!gameId) {
       let game = Games.findOne({ code: gameCode });
       if (game) {
@@ -29,6 +30,10 @@ Meteor.methods({
     let playerId = Players.insert(player);
     player._id = playerId;
     return player;
+  },
+  'players.remove'(id) {
+    console.log('players.remove:', id);
+    Players.remove(id);
   },
   'players.checkAllReady'(gameId) {
     let playerReady = Players.find({ gameId: gameId }).map(player => player.isReady);

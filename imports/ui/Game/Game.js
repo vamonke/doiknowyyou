@@ -24,10 +24,15 @@ class Game extends Component {
     super(props);
     this.toggleModal = this.toggleModal.bind(this);
     this.restartGame = this.restartGame.bind(this);
+    // this.checkSessionId = this.checkSessionId.bind(this);
     this.state = {
       modalQuestionId: null,
       modalIsOpen: false
     }
+  }
+
+  componentDidMount() {
+    Session.makePersistent('currentUserId');
   }
 
   componentDidUpdate() {
@@ -38,6 +43,29 @@ class Game extends Component {
         modalIsOpen: true
       });
     }
+  }
+
+  // checkSessionId(checks) {
+  //   let currentUserId = Session.get('currentUserId');
+  //   if (
+  //     !currentUserId || (
+  //       this.props.players.length > 0 &&
+  //       !this.props.players.map(player => player._id).includes(currentUserId)
+  //     )
+  //   ) {
+  //     checks.stop();
+  //     this.props.history.push('/');
+  //   }
+  // }
+
+  componentWillMount() {
+    window.onbeforeunload = event => {
+      let confirmationMessage = 'Exit game?';
+      (event || window.event).returnValue = confirmationMessage;  // Gecko + IE
+      return confirmationMessage;                                 // Webkit, Safari, Chrome
+    };
+    window.onpagehide = () => {};
+    window.onunload = () => {};
   }
 
   toggleModal() {
@@ -77,7 +105,7 @@ class Game extends Component {
 
   addPlayer(newGameId) {
     Meteor.call('players.insert', this.props.viewer.name, newGameId, null, (error, player) => {
-      Session.set('currentUserId', player._id);
+      Session.update('currentUserId', player._id);
       this.props.history.push(`/lobby/${player.gameId}`);
     });
   }
@@ -184,9 +212,7 @@ Game.defaultProps = {
     status: 'started',
     currentQuestion: 'abc'
   },
-  players: [{
-    _id: 'abc'
-  }],
+  players: [],
   questions: [{
     _id: 'abc',
     recipientId: 'abc'

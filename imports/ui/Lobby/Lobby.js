@@ -25,14 +25,48 @@ class Lobby extends Component {
     this.getPlayerNames = this.getPlayerNames.bind(this);
     this.waitingBooth = this.waitingBooth.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.checkSessionId = this.checkSessionId.bind(this);
     this.state = {
       stage: 0,
       questions: [{}, {}, {}]
     }
   }
-
   componentDidUpdate() {
     document.title = `Game ${this.props.game.code}`;
+    this.checkSessionId();
+  }
+
+  checkSessionId() {
+    let currentUserId = Session.get('currentUserId');
+    if (
+      !currentUserId || (
+        this.props.players.length > 0 &&
+        !this.props.players.map(player => player._id).includes(currentUserId)
+      )
+    ) {
+      this.props.history.push('/');
+    }
+  }
+
+  componentWillMount() {
+    window.onbeforeunload = event => {
+      let confirmationMessage = 'Exit game?';
+      (event || window.event).returnValue = confirmationMessage;  // Gecko + IE
+      return confirmationMessage;                                 // Webkit, Safari, Chrome
+    };
+
+    window.onpagehide = this.removePlayer;
+    window.onunload = this.removePlayer;
+  }
+
+  componentWillUnmount() {
+    window.onpagehide = () => {};
+    window.onunload = () => {};
+  }
+
+  removePlayer() {
+    let playerId = Session.get('currentUserId');
+    Meteor.call('players.remove', playerId);
   }
 
   changeQuestion(questionNo, qna, direction) {
@@ -240,7 +274,7 @@ Lobby.defaultProps = {
   questions: []
 }
 
-export default createContainer((value) => {
+export default createContainer(value => {
   let gameId = value.match.params.id;
   Meteor.subscribe('games');
   Meteor.subscribe('games');
