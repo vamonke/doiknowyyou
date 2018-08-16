@@ -26,7 +26,15 @@ export default class QuestionSet extends Component {
 
   generateQuestion() {
     let qna = questionBank[Math.floor(Math.random() * questionBank.length)];
-    this.setState(qna);
+    if (Array.isArray(qna.options)) {
+      this.setState(qna);
+    } else if (qna.options == 'players') {
+      this.setState({
+        question: qna.question,
+        options: this.props.playerNames
+      });
+
+    }
   }
 
   addOption() {
