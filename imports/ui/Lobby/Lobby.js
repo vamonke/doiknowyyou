@@ -14,7 +14,6 @@ import QuestionSet from './QuestionSet';
 
 import './Lobby.css';
 
-
 // Game lobby component
 class Lobby extends Component {
   constructor(props) {
@@ -122,48 +121,23 @@ class Lobby extends Component {
     return this.props.players.map(player => player.name);
   }
 
-  displayGameStatus() {
-    let ready = (this.props.viewer && !this.props.viewer.isReady) ? null : "appear";
-    let players = this.props.players;
-    let gameStatus = (
-      <div className={`center popDown ${ready}`}>
-        <Spinner type="primary" className="paddingRight"/>
-        Waiting for players to get ready
-      </div>
-    );
-    for (let i = 0; i < players.length; i += 1) {
-      if (!players[i].isReady) {
-        return gameStatus;
-      }
-    };
-    return (
-      <div className={`center popDown ${ready}`}>
-        <Countdown gameId={this.props.game._id} startGame={this.startGame}/>
-      </div>
-    );
-  }
-
   waitingBooth() {
-    let allReady = this.props.players.every(player => player.isReady);
-    let submittedQuestions = this.props.questions.map((question, index, questions) => {
+    if (this.props.game.status == 'started') {
       return (
-        <div key={index}>
-          {question.text}
-          {index !== questions.length && (<hr />)}
+        <div className="center paddingBottom">
+          <Countdown gameId={this.props.game._id} startGame={this.startGame}/>
         </div>
       );
-    })
-    let gameStatus = allReady ? (
-      <div className="paddingBottom">
-        <Countdown gameId={this.props.game._id} startGame={this.startGame}/>
-      </div>
-    ) : (
-      <div>
+    }
+    return (
+      <div className="center">
         <div id="preloader">
           <div id="loader"></div>
         </div>
         <div className="paddingBottom">
-          Waiting for other players
+          Waiting for
+          {this.props.players.length === 1 ? ' more ' : ' other '}
+          players
         </div>
         <button className="whiteButton" onClick={this.editQuestions}>
           <Glyph icon="pencil" />
@@ -171,17 +145,10 @@ class Lobby extends Component {
         </button>
       </div>
     );
-    return (
-      <div className="center">
-        {gameStatus}
-        {/* submittedQuestions */}
-      </div>
-    );
   }
 
   startGame() {
     let id = this.props.game._id;
-    // Meteor.call('games.start', id);
     this.props.history.push(`/game/${id}`);
   }
 
@@ -212,7 +179,6 @@ class Lobby extends Component {
           })}
           {this.state.stage === 3 && this.waitingBooth()}
         </div>
-        {/* this.displayGameStatus() */}
 
         <div className="header">
           players

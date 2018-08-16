@@ -23,29 +23,10 @@
   margin: 5px 0 15px;
 }
 
-.popDown {
-  margin: -87px 2px 15px;
-  background-color: #EAEAEA;
-  padding: 30px 0 15px;
-  z-index: 2;
-  color: #333;
-  border-radius: 0 0 20px 20px;
-  position: relative;
-  -webkit-transition: margin-top 0.3s ease 0.1s;
-  transition: margin-top 0.3s ease 0.1s;
-}
-
-.popDown.appear {
-  margin-top: -25px;
-  -webkit-transition: margin-top 0.3s ease 0.1s;
-  transition: margin-top 0.3s ease 0.1s;
-}
-
 .plusIcon {
   font-size: small;
   padding-right: 3px;
 }
-
 
 .paddingTop {
   padding-top: 15px;

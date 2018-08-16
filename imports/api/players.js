@@ -37,7 +37,7 @@ Meteor.methods({
   },
   'players.checkAllReady'(gameId) {
     let playerReady = Players.find({ gameId: gameId }).map(player => player.isReady);
-    return !playerReady.includes(false);
+    return playerReady.length > 1 && !playerReady.includes(false);
   },
   'players.ready'(id, gameId) {
     Players.update({ _id: id }, {

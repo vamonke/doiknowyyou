@@ -68,7 +68,7 @@ export default class App extends Component {
   addPlayer(playerName, gameId, gameCode) {
     Meteor.call('players.insert', playerName, gameId, gameCode, (error, player) => {
       if (player && player.gameId) {
-        Session.set('currentUserId', player._id);
+        Session.setTemp('currentUserId', player._id);
         this.showHome();
         this.props.history.push(`/lobby/${player.gameId}`);
       } else {

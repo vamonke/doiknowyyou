@@ -105,7 +105,7 @@ class Game extends Component {
 
   addPlayer(newGameId) {
     Meteor.call('players.insert', this.props.viewer.name, newGameId, null, (error, player) => {
-      Session.update('currentUserId', player._id);
+      Session.setTemp('currentUserId', player._id);
       this.props.history.push(`/lobby/${player.gameId}`);
     });
   }

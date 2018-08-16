@@ -36,7 +36,7 @@ export default function ResultsTable(props) {
     <div className="outline center">
         {options.map((option, index) => (
           <Row key={option} className="borderBottom">
-            <Col xs="1/2" className="borderRight cellPadding">
+            <Col xs="1/2" className="borderRight cellPadding grayBackground">
               <b>
                 {option}
                 {correctOption === index && correct}
