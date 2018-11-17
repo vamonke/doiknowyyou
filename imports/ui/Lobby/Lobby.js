@@ -43,6 +43,7 @@ class Lobby extends Component {
         !this.props.players.map(player => player._id).includes(currentUserId)
       )
     ) {
+      console.error('Player not found');
       this.props.history.push('/');
     }
   }

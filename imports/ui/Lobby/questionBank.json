@@ -17,20 +17,12 @@
       "options": ["Never lose your phone again", "Never lose your wallet again"]
     },
     {
-      "question": "Would you rather lose the ability to read or lose the ability to speak?",
-      "options": ["Lose the ability to read", "Lose the ability to speak"]
-    },
-    {
       "question": "Would you rather live in a beach house or in a cabin in the woods?",
       "options": ["Beach house", "Cabin in the woods"]
     },
     {
       "question": "Would you rather spend two years with your soul mate only to have them die and you never love again or spend your life with someone nice you settled for?",
       "options": ["Two years with your soul mate and die", "Settle for someone nice for life"]
-    },
-    {
-      "question": "Would you rather live the next 10 years of your life in China or Russia?",
-      "options": ["China", "Russia"]
     },
     {
       "question": "Would you rather wear slippers or shoes for the rest of your life?",
@@ -61,10 +53,6 @@
       "options": ["Yes. FITE ME.",  "No. I'm a pussy."]
     },
     {
-      "question": "Have you ever cried tears of joy?",
-      "options": ["Yes",  "No"]
-    },
-    {
       "question": "Would you rather be loved or love?",
       "options": ["Be loved",  "Love"]
     },
@@ -85,7 +73,7 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Are you vain?",
+      "question": "Do you think you are vain?",
       "options": ["Yes", "No"]
     },
     {
@@ -93,16 +81,8 @@
       "options": ["Lose both arms", "Lose both legs"]
     },
     {
-      "question": "Have you ever been slapped on the face?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "When it comes to relationships, are you a settler or a reacher?",
       "options": ["Settler", "Reacher"]
-    },
-    {
-      "question": "\"I care a lot about what other people think about me.\"",
-      "options": ["True", "False"]
     },
     {
       "question": "Will you ever consider to be a househusband/housewife?",
@@ -209,14 +189,6 @@
       "options": ["Words of affirmation", "Quality time", "Gifts", "Acts of service", "Physical touch"]
     },
     {
-      "question": "Would you rather cook or wash dishes?",
-      "options": ["Cook", "Wash dishes"]
-    },
-    {
-      "question": "Have you ever lied in a job interview?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you ever taken MC when you weren't sick?",
       "options": ["Yes", "No"]
     },
@@ -227,6 +199,14 @@
     {
       "question": "Have you ever been drunk in public?",
       "options": ["Yes *burp*", "No"]
+    },
+    {
+      "question": "Have you ever been so drunk that you puked in public?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Have you ever been wasted in public?",
+      "options": ["Yes", "No"]
     },
     {
       "question": "Have you ever dated more than one person at once?",
@@ -250,10 +230,6 @@
     },
     {
       "question": "Have you ever been on a blind date?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever gone through a surgery?",
       "options": ["Yes", "No"]
     },
     {
@@ -326,6 +302,10 @@
     },
     {
       "question": "Who do you think is bisexual?",
+      "options": "players"
+    },
+    {
+      "question": "Who would you go gay/lesbian for?",
       "options": "players"
     },
     {
@@ -417,11 +397,7 @@
       "options": "players"
     },
     {
-      "question": "Would you rather be..?",
-      "options": ["Cool", "Fit", "Cute"]
-    },
-    {
-      "question": "What id the last app you use on your phone before sleeping?",
+      "question": "What is the last app you use on your phone before sleeping?",
       "options": ["Facebook", "YouTube", "Instagram", "WhatsApp"]
     },
     {
@@ -433,7 +409,7 @@
       "options": "players"
     },
     {
-      "question": "Do you believe in abstinence? (I.e. no sex before marriage)",
+      "question": "Do you believe in abstinence? (No sex before marriage)",
       "options": ["Yes", "No"]
     },
     {
@@ -447,10 +423,6 @@
     {
       "question": "Which would you rather be addicted to?",
       "options": ["Gambling", "Smoking", "Drugs", "Drinking"]
-    },
-    {
-      "question": "Punch someone for $100",
-      "options": "players"
     },
     {
       "question": "Would you rather be gay/lesbian and unlimited partners or straight with an ugly partner?",
@@ -489,7 +461,7 @@
       "options": "players"
     },
     {
-      "question": "If you had to, who would you slap? (Other than yourself)",
+      "question": "If you had to, who here would you slap? (Other than yourself)",
       "options": "players"
     },
     {
@@ -505,6 +477,10 @@
       "options": "players"
     },
     {
+      "question": "Who do you think will be divorced in the future?",
+      "options": "players"
+    },
+    {
       "question": "Would you rather date a spoilt brat or someone extremely lazy?",
       "options": ["Brat", "Sloth"]
     },
@@ -515,6 +491,138 @@
     {
       "question": "Would you abort your baby if you knew he/she would be mentally disabled?",
       "options": ["Yes", "No"]
+    },
+    {
+    "question": "Would you rather eat chocolate-flavored shit or shit-flavored chocolate?",
+    "options": ["Chocolate-flavored shit", "Shit-flavored chocolate"]
+    },
+    {
+      "question": "Would you rather shit on someone or have someone shit on you?",
+      "options": ["Shit on someone", "Have someone shit on you"]
+    },
+    {
+      "question": "Would you rather have sex with someone with BO or make out with someone with bad breath?",
+      "options": ["Sex with someone with BO", "Make out with someone with bad breath"]
+    },
+    {
+      "question": "Would you rather cheat and be caught or be cheated on and never be told?",
+      "options": ["Cheat and be caught", "Be cheated on and never be told"]
+    },
+    {
+      "question": "Would you rather wear someone else's dirty underwear or use their toothbrush?",
+      "options": ["Dirty underwear", "Toothbrush"]
+    },
+    {
+      "question": "Would you rather be constantly itchy or constantly sticky?",
+      "options": ["Itchy", "Sticky"]
+    },
+    {
+      "question": "Would you rather drink two litres of piss or two litres of sweat?",
+      "options": ["Piss", "Sweat"]
+    },
+    {
+      "question": "Would you rather be constantly naked or always have people watch you have sex?",
+      "options": ["Constantly naked", "Always have people watch you have sex"]
+    },
+    {
+      "question": "Would you rather never leave the country or leave and never come back?",
+      "options": ["Never leave the country", "Leave and never come back"]
+    },
+    {
+      "question": "Would you rather crap yourself once a year in public or every day in private?",
+      "options": ["Once a year in public", "Every day in private"]
+    },
+    {
+      "question": "Would you rather fulfil your biggest wish or resolve your biggest regret?",
+      "options": ["Fulfil your biggest wish", "Resolve your biggest regret"]
+    },
+    {
+      "question": "Would you rather be a feminine man or a masculine woman?",
+      "options": ["Feminine man", "Masculine woman"]
+    },
+    {
+      "question": "Would you rather have an STI and never pass it on or have everyone think you have an STI?",
+      "options": ["Have an STI and never pass it on", "Have everyone think you have an STI"]
+    },
+    {
+      "question": "Would you rather shout all the time or whisper all the time?",
+      "options": ["Shout", "whisper"]
+    },
+    {
+      "question": "Would you rather pay or get paid every time you have sex?",
+      "options": ["Pay", "Get paid"]
+    },
+    {
+      "question": "Would you rather be a homewrecker or be home wrecked?",
+      "options": ["Be a homewrecker", "Be home wrecked"]
+    },
+    {
+      "question": "Would you rather never have to pee again or never have to shit again?",
+      "options": ["Never pee again", "Never shit again"]
+    },
+    {
+      "question": "Would you rather see the texts your ex wrote about you or have them see the texts you wrote about them?",
+      "options": ["See your ex's texts", "Have them see your texts"]
+    },
+    {
+      "question": "Would you rather eat a whole jar of mayonnaise or a whole tub of butter?",
+      "options": ["Mayonnaise", "Butter"]
+    },
+    {
+      "question": "Would you rather pee every time you stand up or poop every time you sit down?",
+      "options": ["Pee every time you stand up", "Poop every time you sit down"]
+    },
+    {
+      "question": "Would you rather be a genius that nobody believes or an idiot that everybody believes?",
+      "options": ["Genius that nobody believes", "Idiot that everybody believes"]
+    },
+    {
+      "question": "Would you rather meet the love of your life knowing that they'll die in a year or never meet them?",
+      "options": ["Meet knowing that they'll die", "Never meet them"]
+    },
+    {
+      "question": "Would you rather have the nice house in a bad neighborhood or a shitty house in a fancy neighborhood?",
+      "options": ["Nice house in a bad neighborhood", "Shitty house in a fancy neighborhood"]
+    },
+    {
+      "question": "Would you rather be a member of the Kardashian family or a member of the Obama family?",
+      "options": ["Kardashian family", "Obama family"]
+    },
+    {
+      "question": "Would you rather live in the White House or Buckingham palace?",
+      "options": ["White House", "Buckingham palace"]
+    },
+    {
+      "question": "Would you rather live without music or live without tv shows?",
+      "options": ["Without music", "Without tv shows"]
+    },
+    {
+      "question": "Would you rather live your life over as the opposite gender or start your life over as a kid again?",
+      "options": ["As the opposite gender", "As a kid again"]
+    },
+    {
+      "question": "Would you rather sneeze all the time or have hiccups all the time?",
+      "options": ["Sneeze", "Hiccups"]
+    },
+    {
+      "question": "Would you rather die by a zombie attack or a shark attack?",
+      "options": ["Zombie attack", "Shark attack"]
+    },
+    {
+      "question": "Would you rather always forget who you are or always forget who everyone else is?",
+      "options": ["Forget who you are", "Forget who everyone else is"]
+    },
+    {
+      "question": "Would you rather have a rewind button or a pause button in your life?",
+      "options": ["Rewind button", "Pause button"]
+    },
+    {
+      "question": "Would you rather fight 100 duck sized horses or one horse sized duck?",
+      "options": ["100 duck sized horses", "1 horse sized duck"]
+    },
+    {
+      "question": "Would you rather be able to speak to animals or every language in the world?",
+      "options": ["Animals", "Every language in the world"]
     }
   ]
 }
