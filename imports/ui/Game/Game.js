@@ -80,7 +80,8 @@ class Game extends Component {
   }
 
   getRecipient(question) {
-    return this.props.players.find(player => player._id == question.recipientId);
+    if (question)
+      return this.props.players.find(player => player._id == question.recipientId);
   }
 
   getAnsweredQuestions() {
