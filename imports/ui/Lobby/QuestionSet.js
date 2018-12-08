@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
-import { FormField, FormInput, Button, Glyph, Row, Col, Dropdown, InputGroup } from 'elemental';
+import { FormInput, Glyph, Row, Col } from 'elemental';
 
 import OptionsDropdown from './OptionsDropdown';
 import { questionBank } from './questionBank';
@@ -20,6 +19,7 @@ export default class QuestionSet extends Component {
     this.generateQuestion = this.generateQuestion.bind(this);
     this.state = {
       question: '',
+      format: '',
       options: ['', '']
     };
   }
@@ -27,13 +27,14 @@ export default class QuestionSet extends Component {
   generateQuestion() {
     let qna = questionBank[Math.floor(Math.random() * questionBank.length)];
     if (Array.isArray(qna.options)) {
+      qna.format = 'mcq';
       this.setState(qna);
     } else if (qna.options == 'players') {
       this.setState({
         question: qna.question,
-        options: this.props.playerNames
+        format: 'players',
+        options: []
       });
-
     }
   }
 
@@ -58,6 +59,7 @@ export default class QuestionSet extends Component {
   nextQuestion() {
     let qna = {
       question: this.state.question,
+      format: this.state.format,
       options: this.state.options.filter(String)
     }
     this.props.changeQuestion(this.props.questionNo, qna, true);
@@ -67,7 +69,7 @@ export default class QuestionSet extends Component {
     this.props.changeQuestion(this.props.questionNo, this.state, false);
   }
 
-  optionField(value, optionNo) {
+  optionField(_, optionNo) {
     return (
       <div key={optionNo} className="paddingBottom">
         <FormInput
@@ -83,13 +85,25 @@ export default class QuestionSet extends Component {
   setOptionType(type) {
     let options = [];
     if (type === 0) {
+      format = 'mcq';
       options = ['True', 'False'];
     } else if (type === 1) {
+      format = 'mcq';
       options = ['Yes', 'No'];
     } else if (type === 2) {
-      options = this.props.playerNames;
+      format = 'players';
+      options = [];
+    } else if (type === 3) {
+      format = 'ssm';
+      options = ['','',''];
+    } else if (type === 4) {
+      format = 'mcq';
+      options = ['',''];
+    } else if (type === 5) {
+      format = 'open';
+      options = [];
     }
-    this.setState({ options: options })
+    this.setState({ format, options })
   }
 
   renderButtons() {
@@ -159,13 +173,27 @@ export default class QuestionSet extends Component {
         <div className="paddingTop paddingBottom">
           <OptionsDropdown onSelect={this.setOptionType} />
         </div>
+        
 
+        {this.state.format == 'open' && (
+          <div className="paddingBottom">
+            <FormInput placeholder='Open-ended (Best answer wins)' disabled/>
+          </div>
+        )}
+        {this.state.format == 'players' && (
+          <div className="paddingBottom">          
+            <FormInput placeholder='Players as options (excluding answering player)' disabled/>
+          </div>
+        )}
+        
         {this.state.options.map(this.optionField)}
 
-        <button className="addOption" onClick={this.addOption}>
-          <Glyph icon="plus" className="circle"/>
-          {' Add option'}
-        </button>
+        {this.state.format == 'mcq' && (
+          <button className="addOption" onClick={this.addOption}>
+            <Glyph icon="plus" className="circle"/>
+            {' Add option'}
+          </button>
+        )}
 
         {this.renderButtons()}
       </div>

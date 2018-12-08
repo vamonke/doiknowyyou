@@ -153,10 +153,6 @@
       "options": ["Taking a stroll at the park", "Exercising", "Enjoying a cup of tea/coffee", "Reading a book"]
     },
     {
-      "question": "What is your spirit animal?",
-      "options": ["Horse", "Mouse", "Peacock", "Wolf"]
-    },
-    {
       "question": "Which is your favorite TV show?",
       "options": ["Friends", "Game of Thrones", "Running Man", "Master Chef"]
     },
@@ -165,7 +161,7 @@
       "options": ["Korean", "American", "Hong Kong", "Mediacorp"]
     },
     {
-      "question": "Which movie genre do you enjoy the most?",
+      "question": "Favourite movie genre?",
       "options": ["Comedy", "Thriller", "Action", "Horror"]
     },
     {
@@ -277,7 +273,7 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "If you get (someone) pregnant before marriage, would you (ask her to) abort the baby?",
+      "question": "If you got (someone) pregnant before marriage, would you (ask her to) abort the baby?",
       "options": ["Yes", "No"]
     },
     {
@@ -546,7 +542,7 @@
     },
     {
       "question": "Would you rather shout all the time or whisper all the time?",
-      "options": ["Shout", "whisper"]
+      "options": ["Shout", "Whisper"]
     },
     {
       "question": "Would you rather pay or get paid every time you have sex?",
@@ -585,16 +581,8 @@
       "options": ["Nice house in a bad neighborhood", "Shitty house in a fancy neighborhood"]
     },
     {
-      "question": "Would you rather be a member of the Kardashian family or a member of the Obama family?",
-      "options": ["Kardashian family", "Obama family"]
-    },
-    {
-      "question": "Would you rather live in the White House or Buckingham palace?",
-      "options": ["White House", "Buckingham palace"]
-    },
-    {
-      "question": "Would you rather live without music or live without tv shows?",
-      "options": ["Without music", "Without tv shows"]
+      "question": "Would you rather live without music or live without YouTube?",
+      "options": ["Without music", "Without YouTube"]
     },
     {
       "question": "Would you rather live your life over as the opposite gender or start your life over as a kid again?",

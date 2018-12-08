@@ -99,14 +99,14 @@ CurrentQuestionBox.propTypes = {
 
 CurrentQuestionBox.defaultProps = {
   recipient: {
-    _id: 'abc'
+    _id: ''
   },
   question: {
-    _id: 'abc',
+    _id: '',
     options: []
   },
   viewer: {
-    _id: 'abc',
+    _id: '',
     isReady: false
   },
 }

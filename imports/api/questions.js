@@ -26,6 +26,7 @@ Meteor.methods({
         number: i + 1,
         round: null,
         text: set.question,
+        format: set.format,
         options: set.options,
         status: 'unasked',
         recipientId: null,
@@ -33,6 +34,12 @@ Meteor.methods({
         answeredAt: null,
         createdAt: new Date(),
       });
+    });
+  },
+  'questions.setPlayersAsOptions'(gameId) { // set player names as options
+    let playerNames = Players.find({ gameId: gameId }).map(player => player.name);
+    Questions.update({ gameId: gameId, format: 'players' }, {
+      $set: { options: playerNames }
     });
   },
   'questions.select'(gameId, round) { // choose a question

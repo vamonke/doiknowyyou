@@ -32,7 +32,7 @@ export default class OptionsDropdown extends Component {
   }
 
   render() {
-    let optionTypes = ['True/False', 'Yes/No', 'Players']
+    let optionTypes = ['True/False', 'Yes/No', 'Players', 'SSM', 'Custom', 'Open-Ended']
     return (
       <div className="dropdownContainer">
         Options

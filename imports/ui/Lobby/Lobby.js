@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Table, Card, FormField, FormInput, Button, Spinner, Glyph } from 'elemental';
+import { Table, Glyph } from 'elemental';
 
 import { Games } from '../../api/games.js';
 import { Players } from '../../api/players.js';

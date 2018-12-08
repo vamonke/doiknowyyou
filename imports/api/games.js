@@ -40,6 +40,7 @@ Meteor.methods({
     console.log('games.start:', id);
     let game = Games.findOne(id, { fields: { status: 1 }});
     if (game.status == 'waiting') {
+      Meteor.call('questions.setPlayersAsOptions', id);
       Meteor.call('questions.select', id, 1);
       Games.update(id, {
         $set: {
