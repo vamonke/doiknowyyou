@@ -1,0 +1,45 @@
+.gameover {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  padding: 15vh 15px 0;
+  color: white;
+}
+
+.gameover .close {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.gameover .close:active {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+}
+
+.gameover h3 {
+  letter-spacing: 3px;
+}
+
+.gameover h1 {
+  margin-bottom: 10px;
+}
+
+.gameover .pad {
+  padding: 5vh 0 8vh;
+}
+
+.gameover h1, .gameover h3 {
+  color: white;
+}

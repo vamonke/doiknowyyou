@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { createContainer } from 'meteor/react-meteor-data';
-
-import { Link } from 'react-router-dom';
-import { Card, Row, Col, Button, FormField, FormInput, Table } from 'elemental';
 
 import { Games } from '../../api/games.js';
 import { Players } from '../../api/players.js';
@@ -16,6 +12,7 @@ import AnsweredQuestion from './AnsweredQuestion';
 import QuestionResultsModal from './QuestionResultsModal';
 import PlayerList from './PlayerList';
 import CurrentQuestionBox from './CurrentQuestionBox';
+import GameOver from './GameOver';
 
 import './Game.css';
 
@@ -142,8 +139,11 @@ class Game extends Component {
           </div>
         )}
         {this.props.game.status === 'ended' && (
-          <div className="header">
-            results
+          <div>
+            <GameOver players={this.props.players} />
+            <div className="header">
+              results
+            </div>
           </div>
         )}
 

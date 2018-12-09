@@ -24,9 +24,11 @@ function QuestionResultsModal(props) {
         <div className="resultsQuestion">
           {props.question.text}
         </div>
-        <div className="recipient">
-          {recipient && recipient.name}
-          {'\'s answer: '}
+        <div className="roundedCorners">
+          <div className="recipient">
+            {recipient && recipient.name}
+            {'\'s answer: '}
+          </div>
           <div className="answer">
             {correctAnswer}
           </div>
@@ -38,9 +40,9 @@ function QuestionResultsModal(props) {
         />
       </ModalBody>
       <ModalFooter>
-        <Button onClick={props.toggleModal} type="primary" block>
+        <button className="blueButton" onClick={props.toggleModal}>
           Continue
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   );

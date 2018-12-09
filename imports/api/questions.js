@@ -40,7 +40,7 @@ Meteor.methods({
     let playerNames = Players.find({ gameId: gameId }).map(player => player.name);
     Questions.update({ gameId: gameId, format: 'players' }, {
       $set: { options: playerNames }
-    });
+    }, { multi: true });
   },
   'questions.select'(gameId, round) { // choose a question
     let unaskedIds = Questions.find({ gameId: gameId, status: 'unasked' }, { fields: { _id: 1 } }).fetch();

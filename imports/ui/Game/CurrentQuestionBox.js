@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Card, Row, Col, Button } from 'elemental';
+import { Card, Row, Col } from 'elemental';
 
 import './Game.css';
 

@@ -3,52 +3,6 @@
   margin: 20px 0;
 }
 
-.blueButton {
-  color: white;
-  text-align: center;
-  cursor: pointer;
-
-  width:  100%;
-  height: auto;
-  min-height: 44px;
-  padding: 8px;
-  line-height: 1.4em;
-  
-  font-family: 'Roboto', sans-serif;
-  overflow: auto;
-  
-  border-radius: 0.3em;
-  border: 1px solid transparent;
-  border-color: #1177cd #0f6ab6 #0d5c9e;
-
-  background-image: -webkit-linear-gradient(top,#2591ed 0,#1177cd 100%);
-  background-image: -o-linear-gradient(top,#2591ed 0,#1177cd 100%);
-  background-image: linear-gradient(to bottom,#2591ed 0,#1177cd 100%);
-  background-color: #1385e5;
-  background-repeat: repeat-x;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-
-  -webkit-transition: 0.1s -webkit-filter linear;
-  -moz-transition: 0.1s -moz-filter linear;
-  -moz-transition: 0.1s filter linear;
-  -ms-transition: 0.1s -ms-filter linear;
-  -o-transition: 0.1s -o-filter linear;
-  transition: 0.1s filter linear, 0.1s -webkit-filter linear;  
-}
-
-.blueButton.selected {
-  background-image: -webkit-linear-gradient(top, #36C042 0%, #22A12C 100%);
-  background-image: -o-linear-gradient(top, #36C042 0%, #22A12C 100%);
-  background-image: linear-gradient(to bottom, #36C042 0%, #22A12C 100%);
-  background-color: #27B533;
-  border-color: #22A12C #1C8D26 #17791F;
-}
-
-.blueButton.selected:hover {
-  filter: brightness(100%);
-}
-
 .questionLight {
   color: #7f8c8d;
   margin-bottom: 15px;
