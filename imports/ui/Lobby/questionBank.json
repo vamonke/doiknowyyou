@@ -77,10 +77,6 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Would you rather lose both arms or lose both legs?",
-      "options": ["Lose both arms", "Lose both legs"]
-    },
-    {
       "question": "When it comes to relationships, are you a settler or a reacher?",
       "options": ["Settler", "Reacher"]
     },
@@ -109,10 +105,6 @@
       "options": ["Woof", "Meow"]
     },
     {
-      "question": "Which parent are you closer to?",
-      "options": ["Mom", "Dad"]
-    },
-    {
       "question": "Would you ever take back someone who cheated?",
       "options": ["Yes. I forgive and forget.", "No. I never give chances."]
     },
@@ -125,7 +117,7 @@
       "options": ["Dishonesty", "Impatience", "Narcissism", "Jealousy"]
     },
     {
-      "question": "Which negative emotion would you say affects you the most?",
+      "question": "Which are you most guilty of?",
       "options": ["Dishonesty", "Impatience", "Narcissism", "Jealousy"]
     },
     {
@@ -137,7 +129,7 @@
       "options": ["Lust", "Gluttony", "Greed", "Sloth", "Wrath", "Envy", "Pride"]
     },
     {
-      "question": "Favorite kind of vacation?",
+      "question": "Favorite type of vacation?",
       "options": ["Cultural", "Active", "Exotic"]
     },
     {
@@ -377,7 +369,7 @@
       "options": ["Eyes", "Chest", "Butt", "Legs"]
     },
     {
-      "question": "Would you go to a nude beach?",
+      "question": "Would you ever go to a nude beach?",
       "options": ["Yes", "No"]
     },
     {
@@ -433,7 +425,7 @@
       "options": ["Introvert", "Extrovert"]
     },
     {
-      "question": "Have you watched porn in the past week",
+      "question": "Have you watched porn in the past week?",
       "options": ["Yes", "No"]
     },
     {
@@ -477,8 +469,8 @@
       "options": "players"
     },
     {
-      "question": "Would you rather date a spoilt brat or someone extremely lazy?",
-      "options": ["Brat", "Sloth"]
+      "question": "Would you rather date a spoilt brat or an extremely lazy person?",
+      "options": ["Spoilt brat", "Extremely lazy person"]
     },
     {
       "question": "Favourite subject?",
@@ -517,12 +509,8 @@
       "options": ["Piss", "Sweat"]
     },
     {
-      "question": "Would you rather be constantly naked or always have people watch you have sex?",
-      "options": ["Constantly naked", "Always have people watch you have sex"]
-    },
-    {
-      "question": "Would you rather never leave the country or leave and never come back?",
-      "options": ["Never leave the country", "Leave and never come back"]
+      "question": "Would you rather stay overseas for 5 years or not travel for 20 years?",
+      "options": ["Stay overseas", "Not travel"]
     },
     {
       "question": "Would you rather crap yourself once a year in public or every day in private?",
@@ -537,8 +525,8 @@
       "options": ["Feminine man", "Masculine woman"]
     },
     {
-      "question": "Would you rather have an STI and never pass it on or have everyone think you have an STI?",
-      "options": ["Have an STI and never pass it on", "Have everyone think you have an STI"]
+      "question": "Would you rather have an STD and never pass it on or have everyone think you have an STD?",
+      "options": ["Have an STD and never pass it on", "Have everyone think you have an STD"]
     },
     {
       "question": "Would you rather shout all the time or whisper all the time?",
@@ -611,6 +599,22 @@
     {
       "question": "Would you rather be able to speak to animals or every language in the world?",
       "options": ["Animals", "Every language in the world"]
+    },
+    {
+      "question": "Would you rather die in a hot desert or in antarctica?",
+      "options": ["Desert", "Antarctica"]
+    },
+    {
+      "question": "Would you rather never use social media again or never watch another movie or TV show?",
+      "options": ["Never use social media again", "Never watch another movie or TV show"]
+    },
+    {
+      "question": "Would you rather be able to read minds or fly?",
+      "options": ["Read minds", "Be able to fly"]
+    },
+    {
+      "question": "For $1M, would you live on an island for a year, without any contact to the outside world?",
+      "options": ["Yes", "No"]
     }
   ]
 }
