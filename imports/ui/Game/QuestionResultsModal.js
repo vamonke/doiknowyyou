@@ -3,19 +3,29 @@ import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Answers } from '../../api/answers.js';
 
-import { Card, Row, Col, Button, Modal, ModalHeader,  ModalBody, ModalFooter } from 'elemental';
+import { Modal, ModalHeader,  ModalBody, ModalFooter } from 'elemental';
 
 import ResultsTable from './ResultsTable.js';
 import './QuestionResults.css';
 
 function QuestionResultsModal(props) {
-  let recipient = props.players.find(player => (player._id === props.question.recipientId));
-  let correctAnswer = props.question.options[props.question.correctAnswer];
+  let recipient = props.players.find(player => (player._id === props.question.recipientId)) || '';
   let modalHeader = (
     <div className="modalHeader">
       {'Round ' + props.question.round + ' results'}
     </div>
   );
+
+  function displayCorrect() {
+    if (!props.question.correctAnswer || props.question.correctAnswer.length === 0)
+      return '';
+    let correctAnswers = props.question.correctAnswer.map(correct => props.question.options[correct]);
+    if (correctAnswers.length === 1)
+      return correctAnswers[0];
+    return correctAnswers.map(answer => (
+      <div>{answer}<hr /></div>
+    ));
+  }
 
   return (
     <Modal isOpen={props.modalIsOpen} onCancel={props.toggleModal} backdropClosesModal className="center">
@@ -30,7 +40,7 @@ function QuestionResultsModal(props) {
             {'\'s answer: '}
           </div>
           <div className="answer">
-            {correctAnswer}
+            {displayCorrect()}
           </div>
         </div>
         <ResultsTable
@@ -50,10 +60,10 @@ function QuestionResultsModal(props) {
 
 QuestionResultsModal.defaultProps = {
   question: {
-    _id: 'abc',
-    playerId: 'abc',
+    _id: '',
+    playerId: '',
     text: '',
-    recipient: 'abc',
+    recipient: '',
     options: []
   },
   answers: [],

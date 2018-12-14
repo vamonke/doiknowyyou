@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Session } from 'meteor/session';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Table } from 'elemental';
-
-import { Players } from '../../api/players.js';
 import { Answers } from '../../api/answers.js';
-
-import AnsweredQuestion from './AnsweredQuestion';
-import QuestionResults from './QuestionResults';
 
 import './Game.css';
 

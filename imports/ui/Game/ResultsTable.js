@@ -19,7 +19,7 @@ export default function ResultsTable(props) {
   }
   let answerSets = parseQuestionResults(props.question, props.players, answers);
   let options = props.question.options;
-  let correctOption = props.question.correctAnswer;
+  let correctOptions = props.question.correctAnswer;
 
   function playersWhoSelected(option) {
     const answerSet = answerSets.find(answerSet => (answerSet.option == option));
@@ -39,7 +39,7 @@ export default function ResultsTable(props) {
             <Col xs="1/2" className="borderRight cellPadding grayBackground">
               <b>
                 {option}
-                {correctOption === index && correct}
+                {correctOptions.includes(index) && correct}
               </b>
             </Col>
             <Col key={option} xs="1/2" className="borderRight cellPadding">

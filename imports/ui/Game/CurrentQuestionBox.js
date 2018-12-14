@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Card, Row, Col } from 'elemental';
-
 import './Game.css';
+import OpenEndedAnswer from './OpenEndedAnswer';
 
 class CurrentQuestionBox extends Component {
   constructor(props) {
     super(props);
     this.submitAnswer = this.submitAnswer.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.state = {
-      selected: null,
-    }
+    this.state = { selected: null }
   }
 
   componentWillReceiveProps(newProps) { // Reset state on question change
@@ -55,28 +53,37 @@ class CurrentQuestionBox extends Component {
           <div className="underline" />
         </div>
         <hr />
-        <div className="marginBottom">
-          {(this.props.recipient._id !== this.props.viewer._id) && (
-            `Guess ${this.props.recipient.name}'s answer`
-          )}
-        </div>
-        <Row>
-          {
-            currentQuestion.options.map((option, index) => (
-              <Col xs={buttonWidth} key={index} className="paddingBottom">
-                <button
-                  name={index}
-                  className={`blueButton${this.state.selected == index ? ' selected' : ''}`}
-                  onClick={this.handleSelect}>
-                  {option}
-                </button>
-              </Col>
-            ))
-          }
-        </Row>
-        {(this.props.recipient._id === this.props.viewer._id) && (
+        { currentQuestion.format == 'open' ? (
+          // Open-ended question
+          <OpenEndedAnswer
+            viewerId={this.props.viewer._id}
+            question={currentQuestion}
+            recipientName={this.props.recipient.name}
+            submitAnswer={this.submitOpenAnswer} />
+        ) : (
           <div>
-            (Answer honestly and let the other players guess your answer)
+            <div className="marginBottom">
+              {(this.props.recipient._id !== this.props.viewer._id) && (
+                `Guess ${this.props.recipient.name}'s answer`
+              )}
+            </div>
+            <Row>
+              {currentQuestion.options.map((option, index) => (
+                <Col xs={buttonWidth} key={index} className="paddingBottom">
+                  <button
+                    name={index}
+                    className={`blueButton${this.state.selected == index ? ' selected' : ''}`}
+                    onClick={this.handleSelect}>
+                    {option}
+                  </button>
+                </Col>
+              ))}
+            </Row>
+            {(this.props.recipient._id === this.props.viewer._id) && (
+              <div>
+                (Answer honestly and let the other players guess your answer)
+              </div>
+            )}
           </div>
         )}
       </Card>
@@ -87,6 +94,7 @@ class CurrentQuestionBox extends Component {
 CurrentQuestionBox.propTypes = {
   recipient: PropTypes.shape({
     _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
   }),
   question: PropTypes.shape({
     _id: PropTypes.string.isRequired,
@@ -99,7 +107,8 @@ CurrentQuestionBox.propTypes = {
 
 CurrentQuestionBox.defaultProps = {
   recipient: {
-    _id: ''
+    _id: '',
+    name: ''
   },
   question: {
     _id: '',

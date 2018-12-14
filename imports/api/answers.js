@@ -49,5 +49,12 @@ Meteor.methods({
     ) {
       Meteor.call('questions.complete', questionId);
     };
+  },
+  async 'answers.insertOpen'(gameId, questionId, playerId, submission) {
+    console.log('answers.insertOpen:', gameId, questionId, playerId, submission);
+    // Add option to question
+    const selection = await Meteor.call('questions.addOption', questionId, submission);
+    // Insert answer
+    Meteor.call('answers.insert', gameId, questionId, playerId, selection);
   }
 });

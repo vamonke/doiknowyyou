@@ -78,20 +78,27 @@ Meteor.methods({
     Answers.find({ questionId: id }).fetch().map(answer => {
       if (
         (answer.playerId !== question.recipientId) &&
-        (answer.selected === question.correctAnswer)
+        (question.correctAnswer.includes(answer.selected))
       ) {
         Meteor.call('players.addScore', answer.playerId);
       }
     });
     Meteor.call('questions.select', question.gameId, question.round + 1);
   },
+  async 'questions.addOption'(id, answer) { // insert open-ended option
+    await Questions.update(id, { $push: { options: answer } });
+    const question = Questions.findOne(id);
+    const answerIndex = question.options.findIndex(option => option == answer);
+    return answerIndex;
+  },
   'questions.answer'(playerId, id, answer) { // set the recipient's answer as the correct answer
-    let question = Questions.findOne({ _id: id });
+    let question = Questions.findOne(id);
     if (playerId === question.recipientId) {
+      if (!Array.isArray(answer))
+        answer = [answer];
+      answer = answer.map(Number);
       Questions.update({ _id: id }, {
-        $set: {
-          correctAnswer: Number(answer),
-        }
+        $set: { correctAnswer: answer }
       });
     }
   },
