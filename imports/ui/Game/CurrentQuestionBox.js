@@ -61,6 +61,7 @@ class CurrentQuestionBox extends Component {
             recipientName={this.props.recipient.name}
             submitAnswer={this.submitOpenAnswer} />
         ) : (
+          // Close-ended question
           <div>
             <div className="marginBottom">
               {(this.props.recipient._id !== this.props.viewer._id) && (

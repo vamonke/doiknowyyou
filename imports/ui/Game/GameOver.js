@@ -17,7 +17,7 @@ class GameOver extends Component {
   }
 
   render() {
-    if (!this.state.open)
+    if (!this.props.open || !this.state.open)
       return null;
     const highscore = this.props.players[0].score;
     let winners = this.props.players
@@ -47,5 +47,11 @@ class GameOver extends Component {
 GameOver.propTypes = {
   players: PropTypes.array,
 };
+
+GameOver.defaultProps = {
+  players: [{
+    score: 0
+  }]
+}
 
 export default createContainer(props => props, GameOver);

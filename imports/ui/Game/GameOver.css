@@ -21,11 +21,22 @@
   -khtml-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
+  
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
 }
 
-.gameover .close:active {
-  background-color: rgba(255, 255, 255, 0.8);
+.gameover .close:hover, .gameover .close:active {
+  background-color: rgba(255, 255, 255, 1);
   color: black;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
 }
 
 .gameover h3 {

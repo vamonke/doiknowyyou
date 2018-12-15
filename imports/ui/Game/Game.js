@@ -24,7 +24,8 @@ class Game extends Component {
     // this.checkSessionId = this.checkSessionId.bind(this);
     this.state = {
       modalQuestionId: null,
-      modalIsOpen: false
+      modalIsOpen: false,
+      showGameOver: false
     }
   }
 
@@ -37,7 +38,8 @@ class Game extends Component {
     if (previousQuestion && (previousQuestion._id !== this.state.modalQuestionId)) {
       this.setState({
         modalQuestionId: previousQuestion._id,
-        modalIsOpen: true
+        modalIsOpen: true,
+        showGameOver: false
       });
     }
   }
@@ -67,7 +69,8 @@ class Game extends Component {
 
   toggleModal() {
     this.setState({
-      modalIsOpen: false
+      modalIsOpen: false,
+      showGameOver: true
     });
   }
 
@@ -131,7 +134,6 @@ class Game extends Component {
               question={currentQuestion}
               recipient={recipient}
               viewer={this.props.viewer}
-              toggleModal={this.toggleModal}
             />
             <div className="header">
               players
@@ -140,7 +142,7 @@ class Game extends Component {
         )}
         {this.props.game.status === 'ended' && (
           <div>
-            <GameOver players={this.props.players} />
+            <GameOver players={this.props.players} open={this.state.showGameOver} />
             <div className="header">
               results
             </div>
