@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
-import { FormInput } from 'elemental';
+import { FormInput, Glyph } from 'elemental';
+
+import './OpenEndedAnswer.css';
 
 function addOrRemove(array, value) {
   const index = array.indexOf(value);
@@ -83,9 +85,11 @@ class OpenEndedAnswer extends Component {
   }
 
   renderOptions(option, index) {
+    let className = this.state.correct.includes(index + '') ? ' selected' : '';
     return (
       <div key={index} className="paddingBottom">
-        <button name={index} className='whiteButton' onClick={this.handleSelect}>
+        <button name={index} className={'whiteButton' + className} onClick={this.handleSelect}>
+          <Glyph icon="check" className="tick"/>
           {option}
         </button>
       </div>

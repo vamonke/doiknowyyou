@@ -22,9 +22,15 @@ function QuestionResultsModal(props) {
     let correctAnswers = props.question.correctAnswer.map(correct => props.question.options[correct]);
     if (correctAnswers.length === 1)
       return correctAnswers[0];
-    return correctAnswers.map(answer => (
-      <div>{answer}<hr /></div>
-    ));
+    return correctAnswers.map((answer, index) => {
+      console.log(index);
+      return (
+        <div>
+          {answer}
+          {correctAnswers.length-1 !== index && (<hr />)}
+        </div>
+      );
+    });
   }
 
   return (
@@ -37,7 +43,8 @@ function QuestionResultsModal(props) {
         <div className="roundedCorners">
           <div className="recipient">
             {recipient && recipient.name}
-            {'\'s answer: '}
+            {'\'s '}
+            {props.question.correctAnswer && props.question.correctAnswer.length > 1 ? 'answers: ' : 'answer: '}
           </div>
           <div className="answer">
             {displayCorrect()}

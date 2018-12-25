@@ -1,0 +1,57 @@
+.whiteButton {  
+  border: 1px solid #f2f2f2;
+  background-color: #f2f2f2;
+  
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(50, 50, 50, 0.15);
+  -moz-box-shadow:    0px 3px 3px -2px rgba(50, 50, 50, 0.15);
+  box-shadow:         0px 3px 3px -2px rgba(50, 50, 50, 0.15);
+
+  position: relative;
+  height: auto;
+  min-height: 44px;
+  padding: 8px;
+  border-radius: 7px;
+  line-height: 1.4em;
+  
+  font-family: 'Roboto', sans-serif;
+  overflow: auto;
+  font-weight: bold;
+  letter-spacing: 0;
+  color: black;
+
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.selected {
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
+  border-color: #2ecc71;
+}
+
+.tick {
+  position: absolute;
+  opacity: 0;
+  left: 12px;
+  top: 12px;
+  color: #2ecc71;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.selected .tick {
+  opacity: 1;
+}
