@@ -11,8 +11,14 @@ h1, h2, h3, h4 {
   font-family: 'Montserrat Alternates', sans-serif;
 }
 
-button:focus {
+button:focus, button:hover {
   outline: none;
+  -webkit-transition: 0.1s -webkit-filter linear;
+  -moz-transition: 0.1s -moz-filter linear;
+  -moz-transition: 0.1s filter linear;
+  -ms-transition: 0.1s -ms-filter linear;
+  -o-transition: 0.1s -o-filter linear;
+  transition: 0.1s filter linear, 0.1s -webkit-filter linear;
 }
 
 .heading {
@@ -67,16 +73,6 @@ button:focus {
   box-shadow:         0px 3px 3px -2px rgba(50, 50, 50, 0.25);
 }
 
-.redButton:hover, .greenButton:hover, .blueButton:hover {
-  filter: brightness(110%);
-  -webkit-transition: 0.1s -webkit-filter linear;
-  -moz-transition: 0.1s -moz-filter linear;
-  -moz-transition: 0.1s filter linear;
-  -ms-transition: 0.1s -ms-filter linear;
-  -o-transition: 0.1s -o-filter linear;
-  transition: 0.1s filter linear, 0.1s -webkit-filter linear;
-}
-
 .redButton {
   background-image: -moz-linear-gradient(45deg, rgba(249,50,70,1) 0%, rgba(249,154,70,1) 100%);
   background-image: -webkit-linear-gradient(45deg, rgba(249,50,70,1) 0%,rgba(249,154,70,1) 100%);
@@ -87,6 +83,25 @@ button:focus {
   background-image: -moz-linear-gradient(45deg, rgba(0,145,175,1) 0%, rgba(0,225,155,1) 100%);
   background-image: -webkit-linear-gradient(45deg, rgba(0,145,175,1) 0%,rgba(0,225,155,1) 100%);
   background-image: linear-gradient(45deg, rgba(0,145,175,1) 0%,rgba(0,225,155,1) 100%);
+}
+
+.whiteButton {
+  color: black;
+  background-color: #EEE;
+
+  height: auto;
+  min-height: 44px;
+  padding: 8px;
+  line-height: 1.4em;
+  
+  font-family: 'Roboto', sans-serif;
+  overflow: auto;
+  font-weight: bold;
+  letter-spacing: 0;
+
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(50, 50, 50, 0.15);
+  -moz-box-shadow:    0px 3px 3px -2px rgba(50, 50, 50, 0.15);
+  box-shadow:         0px 3px 3px -2px rgba(50, 50, 50, 0.15);
 }
 
 .blueButton {
@@ -105,12 +120,39 @@ button:focus {
   background-image: -o-linear-gradient(45deg,#2591ed 0,#1177cd 100%);
   background-image: linear-gradient(45deg,#2591ed 0,#1177cd 100%);
   background-color: #1385e5;
+
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.blueButton:disabled {
+  color: #055ba4;
+  cursor: not-allowed;
+}
+
+.whiteButton:hover {
+  filter: brightness(102%);
+}
+
+.redButton:hover, .redButton:focus {
+  filter: brightness(130%);
+}
+
+.greenButton:hover, .greenButton:focus {
+  filter: brightness(102%);
+}
+
+.blueButton:hover, .blueButton:focus {
+  filter: brightness(105%);
 }
 
 .card {
   background-color: white;
   padding: 20px 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 10px 30px -2px rgba(50, 50, 50, 0.25);
   -moz-box-shadow:    0px 10px 30px -2px rgba(50, 50, 50, 0.25);

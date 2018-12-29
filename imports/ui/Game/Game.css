@@ -13,6 +13,10 @@
   font-size: small;
 }
 
+.lessBottomPadding {
+  padding-bottom: 5px;
+}
+
 .marginBottom {
   margin-bottom: 15px;
 }

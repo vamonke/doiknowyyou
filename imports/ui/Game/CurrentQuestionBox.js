@@ -40,7 +40,7 @@ class CurrentQuestionBox extends Component {
       currentQuestion.options.some(option => option.length > 26);
     let buttonWidth = multiline ? '100%' : '50%';
     return (
-      <Card className="center">
+      <div className="card center lessBottomPadding">
         <div className="questionLight">
           {'Round ' + currentQuestion.round}
         </div>
@@ -87,7 +87,7 @@ class CurrentQuestionBox extends Component {
             )}
           </div>
         )}
-      </Card>
+      </div>
     );
   };
 }

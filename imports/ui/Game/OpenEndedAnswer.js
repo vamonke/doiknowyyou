@@ -87,12 +87,9 @@ class OpenEndedAnswer extends Component {
   renderOptions(option, index) {
     let className = this.state.correct.includes(index + '') ? ' selected' : '';
     return (
-      <div key={index} className="paddingBottom">
-        <button name={index} className={'whiteButton' + className} onClick={this.handleSelect}>
-          <Glyph icon="check" className="tick"/>
-          {option}
-        </button>
-      </div>
+      <button name={index} className={'whiteButton option' + className} onClick={this.handleSelect}>
+        {option}
+      </button>
     );
   }
 
@@ -104,11 +101,12 @@ class OpenEndedAnswer extends Component {
     // Options available
     return (
       <div>
-        <div className="marginBottom">
+        <div>
           Pick the best guess(es)
         </div>
         {this.props.question.options.map(this.renderOptions)}
-        <button className='blueButton' onClick={this.answer}>
+        <hr />
+        <button className='blueButton' onClick={this.answer} disabled={this.state.correct.length === 0}>
           Submit
         </button>
       </div>
