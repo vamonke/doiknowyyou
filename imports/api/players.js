@@ -81,4 +81,7 @@ Meteor.methods({
   'players.deselect'(gameId) {
     Players.update({ gameId: gameId, isRecipient: true }, { $set: { isRecipient: false } });
   },
+  'players.rename'(id, name) {
+    Players.update({ _id: id }, { $set: { name } });
+  },
 });

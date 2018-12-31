@@ -211,3 +211,54 @@
         transform: rotate(360deg);
     }
 }
+
+/* Edit name */
+
+.newName {
+  display: inline-block;
+  width: calc(100% - 80px);
+  max-width: 200px;
+}
+
+.editName button {
+  background-color: transparent;
+  border: none
+}
+
+.editName button.edit:hover {
+  color: #666;
+}
+
+.editName button.edit {
+  color: #CCC;
+  padding: 0 5px;
+  margin-left: 2px;
+}
+
+.editName button.check, .editName button.cancel {
+  border-radius: 50px;
+  width: 30px;
+  padding: 0;
+  margin-left: 10px;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  
+  -webkit-transition: filter 0.1s;
+  -moz-transition: filter 0.1s;
+  -o-transition: filter 0.1s;
+  -ms-transition: filter 0.1s;
+  transition: filter 0.1s;
+}
+
+.editName button.check {
+  background-color: #00c4a2;
+}
+
+.editName button.cancel {
+  background-color: #CCC;
+}
+
+.editName button.check:hover, .editName button.cancel:hover {
+  filter: brightness(105%);
+}

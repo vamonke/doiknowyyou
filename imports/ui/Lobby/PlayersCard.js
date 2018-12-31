@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'elemental';
 
+import EditName from './EditName';
+
 export default function PlayersCard(props) {
   const { players, viewer } = props;
   return (
@@ -19,8 +21,8 @@ export default function PlayersCard(props) {
         </thead>
         <tbody>
           {players.map((player) => {
-            const playerName = (player._id === viewer._id)
-              ? <strong>{player.name}</strong>
+            const playerName = player._id === viewer._id
+              ? <EditName viewer={viewer} />
               : player.name;
             return (
               <tr key={player._id}>
@@ -47,6 +49,7 @@ PlayersCard.propTypes = {
     }),
   ),
   viewer: PropTypes.shape({
+    _id: PropTypes.string,
     isReady: PropTypes.bool,
   }),
 };

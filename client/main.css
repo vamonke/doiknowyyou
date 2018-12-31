@@ -88,20 +88,6 @@ button:focus, button:hover {
 .whiteButton {
   color: black;
   background-color: #EEE;
-
-  height: auto;
-  min-height: 44px;
-  padding: 8px;
-  line-height: 1.4em;
-  
-  font-family: 'Roboto', sans-serif;
-  overflow: auto;
-  font-weight: bold;
-  letter-spacing: 0;
-
-  -webkit-box-shadow: 0px 3px 3px -2px rgba(50, 50, 50, 0.15);
-  -moz-box-shadow:    0px 3px 3px -2px rgba(50, 50, 50, 0.15);
-  box-shadow:         0px 3px 3px -2px rgba(50, 50, 50, 0.15);
 }
 
 .blueButton {
@@ -142,7 +128,7 @@ button:focus, button:hover {
 }
 
 .greenButton:hover, .greenButton:focus {
-  filter: brightness(102%);
+  filter: brightness(105%);
 }
 
 .blueButton:hover, .blueButton:focus {

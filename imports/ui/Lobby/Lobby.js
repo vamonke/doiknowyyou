@@ -117,9 +117,7 @@ class Lobby extends Component {
           <div id="loader" />
         </div>
         <div className="paddingBottom">
-          Waiting for
-          {players.length === 1 ? ' more ' : ' other '}
-          players
+          {`Waiting for ${players.length === 1 ? ' more ' : ' other '} players`}
         </div>
         <button type="button" className="whiteButton" onClick={this.editQuestions}>
           <Glyph icon="pencil" />
@@ -146,15 +144,10 @@ class Lobby extends Component {
     return (
       <div>
         <div className="center relative">
-          Game Code:
-          {' '}
-          <strong>
-            {code}
-          </strong>
+          {'Game Code: '}
+          <strong>{code}</strong>
         </div>
-        <div className="header">
-          your questions
-        </div>
+        <div className="header">your questions</div>
         <div className="card animateHeight">
           {[1, 2, 3].map((qNo, index) => (
             <QuestionSet
@@ -169,9 +162,7 @@ class Lobby extends Component {
           {stage === 3 && this.waitingBooth(game, players)}
         </div>
 
-        <div className="header">
-          players
-        </div>
+        <div className="header">players</div>
         <PlayersCard players={players} viewer={viewer} />
 
         <div className="paddingTop paddingBottom" />
