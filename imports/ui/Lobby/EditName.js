@@ -10,18 +10,11 @@ export default class EditName extends Component {
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
-    this.cancel = this.cancel.bind(this);
+    this.reset = this.reset.bind(this);
     this.state = {
       edit: false,
       newName: '',
     };
-  }
-
-  submit() {
-    const { newName } = this.state;
-    const { viewer: { _id } } = this.props;
-    Meteor.call('players.rename', _id, newName);
-    this.toggle();
   }
 
   handleChange(event) {
@@ -34,9 +27,18 @@ export default class EditName extends Component {
     this.setState({ edit: !edit });
   }
 
-  cancel() {
+  reset() {
     this.setState({ newName: '' });
     this.toggle();
+  }
+
+  submit() {
+    const { newName } = this.state;
+    if (newName) {
+      const { viewer: { _id } } = this.props;
+      Meteor.call('players.rename', _id, newName);
+    }
+    this.reset();
   }
 
   render() {
@@ -54,7 +56,7 @@ export default class EditName extends Component {
           <button type="submit" className="check" onClick={this.submit}>
             <Glyph icon="check" />
           </button>
-          <button type="button" className="cancel" onClick={this.cancel}>
+          <button type="button" className="cancel" onClick={this.reset}>
             <Glyph icon="x" />
           </button>
         </form>
