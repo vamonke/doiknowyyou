@@ -1,0 +1,16 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "node": true,
+        "meteor": true
+    },
+    "rules": {
+        "max-len": ["error", 120, 4, { "ignoreComments": true }],
+        "import/no-unresolved": ["error", { "ignore": ["^meteor/", "^/"] }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+        "linebreak-style": ["error", "windows"],
+        "no-console": ["error", { "allow": ["log", "warn", "error"] }]
+    }
+}

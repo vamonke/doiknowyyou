@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Card, Row, Col } from 'elemental';
-import './Game.css';
+import { Row, Col } from 'elemental';
+
 import OpenEndedAnswer from './OpenEndedAnswer';
 
 class CurrentQuestionBox extends Component {
@@ -10,21 +10,23 @@ class CurrentQuestionBox extends Component {
     super(props);
     this.submitAnswer = this.submitAnswer.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.state = { selected: null }
+    this.state = { selected: null };
   }
 
   componentWillReceiveProps(newProps) { // Reset state on question change
-    if (newProps.question._id != this.props.question._id)
+    const { question } = this.props;
+    if (newProps.question._id !== question._id) {
       this.setState({ selected: null });
+    }
   }
 
   submitAnswer(answer) {
+    const { question, viewer } = this.props;
     Meteor.call('answers.insert',
-      this.props.question.gameId,
-      this.props.question._id,
-      this.props.viewer._id,
-      answer
-    );
+      question.gameId,
+      question._id,
+      viewer._id,
+      answer);
   }
 
   handleSelect(event) {
@@ -34,62 +36,63 @@ class CurrentQuestionBox extends Component {
   }
 
   render() {
-    let currentQuestion = this.props.question;
-    let multiline =
-      currentQuestion.options.length > 2 ||
-      currentQuestion.options.some(option => option.length > 26);
-    let buttonWidth = multiline ? '100%' : '50%';
+    const { question, recipient, viewer } = this.props;
+    const { selected } = this.state;
+    const multiline = question.options.length > 2
+      || question.options.some(option => option.length > 26);
+    const buttonWidth = multiline ? '100%' : '50%';
     return (
       <div className="card center lessBottomPadding">
         <div className="questionLight">
-          {'Round ' + currentQuestion.round}
+          {`Round ${question.round}`}
         </div>
         <hr />
         <div className="currentQuestion">
-          {currentQuestion.text}
+          {question.text}
           <br />
-          {this.props.recipient.name}
+          {recipient.name}
           {': '}
           <div className="underline" />
         </div>
         <hr />
-        { currentQuestion.format == 'open' ? (
+        { question.format === 'open' ? (
           // Open-ended question
           <OpenEndedAnswer
-            viewerId={this.props.viewer._id}
-            question={currentQuestion}
-            recipientName={this.props.recipient.name}
-            submitAnswer={this.submitOpenAnswer} />
+            viewerId={viewer._id}
+            question={question}
+            recipientName={recipient.name}
+            submitAnswer={this.submitOpenAnswer}
+          />
         ) : (
           // Close-ended question
           <div>
             <div className="marginBottom">
-              {(this.props.recipient._id !== this.props.viewer._id) && (
-                `Guess ${this.props.recipient.name}'s answer`
+              {(recipient._id !== viewer._id) && (
+                `Guess ${recipient.name}'s answer`
               )}
             </div>
             <Row>
-              {currentQuestion.options.map((option, index) => (
+              {question.options.map((option, index) => (
                 <Col xs={buttonWidth} key={index} className="paddingBottom">
                   <button
+                    type="button"
                     name={index}
-                    className={`blueButton${this.state.selected == index ? ' selected' : ''}`}
-                    onClick={this.handleSelect}>
+                    className={`blueButton${selected === index ? ' selected' : ''}`}
+                    onClick={this.handleSelect}
+                  >
                     {option}
                   </button>
                 </Col>
               ))}
             </Row>
-            {(this.props.recipient._id === this.props.viewer._id) && (
-              <div>
-                (Answer honestly and let the other players guess your answer)
-              </div>
+            {(recipient._id === viewer._id) && (
+              <div id="honestly">(Answer honestly and let the other players guess your answer)</div>
             )}
           </div>
         )}
       </div>
     );
-  };
+  }
 }
 
 CurrentQuestionBox.propTypes = {
@@ -99,26 +102,26 @@ CurrentQuestionBox.propTypes = {
   }),
   question: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    options: PropTypes.array.isRequired
+    options: PropTypes.array.isRequired,
   }),
   viewer: PropTypes.shape({
-    _id: PropTypes.string.isRequired
-  })
+    _id: PropTypes.string.isRequired,
+  }),
 };
 
 CurrentQuestionBox.defaultProps = {
   recipient: {
     _id: '',
-    name: ''
+    name: '',
   },
   question: {
     _id: '',
-    options: []
+    options: [],
   },
   viewer: {
     _id: '',
-    isReady: false
+    isReady: false,
   },
-}
+};
 
 export default createContainer(props => props, CurrentQuestionBox);

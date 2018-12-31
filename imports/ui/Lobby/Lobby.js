@@ -2,16 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Table, Glyph } from 'elemental';
+import { Glyph } from 'elemental';
 
-import { Games } from '../../api/games.js';
-import { Players } from '../../api/players.js';
-import { Questions } from '../../api/questions.js';
+import { Games } from '../../api/games';
+import { Players } from '../../api/players';
 
 import Countdown from './Countdown';
 import QuestionSet from './QuestionSet';
+import PlayersCard from './PlayersCard';
 
 import './Lobby.css';
+
+function getPlayerNames(players) {
+  return players.map(player => player.name);
+}
+
+function removePlayer() {
+  const playerId = Session.get('currentUserId');
+  Meteor.call('players.remove', playerId);
+}
 
 // Game lobby component
 class Lobby extends Component {
@@ -20,42 +29,30 @@ class Lobby extends Component {
     this.submitQuestions = this.submitQuestions.bind(this);
     this.changeQuestion = this.changeQuestion.bind(this);
     this.editQuestions = this.editQuestions.bind(this);
-    this.getPlayerNames = this.getPlayerNames.bind(this);
     this.waitingBooth = this.waitingBooth.bind(this);
     this.startGame = this.startGame.bind(this);
     this.checkSessionId = this.checkSessionId.bind(this);
     this.state = {
       stage: 0,
-      questions: [{}, {}, {}]
-    }
-  }
-  componentDidUpdate() {
-    document.title = `Game ${this.props.game.code}`;
-    this.checkSessionId();
-  }
-
-  checkSessionId() {
-    let currentUserId = Session.get('currentUserId');
-    if (
-      !currentUserId || (
-        this.props.players.length > 0 &&
-        !this.props.players.map(player => player._id).includes(currentUserId)
-      )
-    ) {
-      console.error('Player not found');
-      this.props.history.push('/');
-    }
+      questions: [{}, {}, {}],
+    };
   }
 
   componentWillMount() {
-    window.onbeforeunload = event => {
-      let confirmationMessage = 'Exit game?';
-      (event || window.event).returnValue = confirmationMessage;  // Gecko + IE
-      return confirmationMessage;                                 // Webkit, Safari, Chrome
+    window.onbeforeunload = (event) => {
+      const confirmationMessage = 'Exit game?';
+      // eslint-disable-next-line no-param-reassign
+      (event || window.event).returnValue = confirmationMessage; // Gecko + IE
+      return confirmationMessage; // Webkit, Safari, Chrome
     };
+    window.onpagehide = removePlayer;
+    window.onunload = removePlayer;
+  }
 
-    window.onpagehide = this.removePlayer;
-    window.onunload = this.removePlayer;
+  componentDidUpdate() {
+    const { game: { code } } = this.props;
+    document.title = `Game ${code}`;
+    this.checkSessionId();
   }
 
   componentWillUnmount() {
@@ -63,18 +60,28 @@ class Lobby extends Component {
     window.onunload = () => {};
   }
 
-  removePlayer() {
-    let playerId = Session.get('currentUserId');
-    Meteor.call('players.remove', playerId);
+  checkSessionId() {
+    const { players } = this.props;
+    const currentUserId = Session.get('currentUserId');
+    if (
+      !currentUserId || (
+        players.length > 0
+        && !players.map(player => player._id).includes(currentUserId)
+      )
+    ) {
+      console.error('Player not found');
+      const { history: push } = this.props;
+      push('/');
+    }
   }
 
   changeQuestion(questionNo, qna, direction) {
-    let questions = this.state.questions;
+    const { questions, stage } = this.state;
     questions[questionNo] = qna;
-    const newStage = this.state.stage + (direction ? 1 : -1);
+    const newStage = stage + (direction ? 1 : -1);
     this.setState({
-      questions: questions,
-      stage: newStage
+      questions,
+      stage: newStage,
     });
     if (newStage === 3) {
       this.submitQuestions();
@@ -82,64 +89,39 @@ class Lobby extends Component {
   }
 
   submitQuestions() {
-    const qna = this.state.questions;
-    const gameId = this.props.game._id;
+    const { questions } = this.state;
+    const { game: { _id } } = this.props;
     const playerId = Session.get('currentUserId');
 
-    Meteor.call('questions.insert', gameId, playerId, qna);
-    Meteor.call('players.ready', playerId, gameId);
+    Meteor.call('questions.insert', _id, playerId, questions);
+    Meteor.call('players.ready', playerId, _id);
   }
 
   editQuestions() {
-    let playerId = Session.get('currentUserId');
+    const playerId = Session.get('currentUserId');
     Meteor.call('players.unReady', playerId);
     this.setState({ stage: 0 });
   }
 
-  renderPlayers() {
-    return this.props.players.map((player) => {
-      let playerName = (player._id === this.props.viewer._id) ? (<strong>{player.name}</strong>) : player.name;
-      return (
-        <tr key={player._id}>
-          <td>
-            {playerName}
-          </td>
-          <td>
-            {
-              player.isReady ?
-              <div className="ready">Ready</div>
-              :
-              'Not ready'
-            }
-          </td>
-        </tr>
-      )
-    });
-  }
-
-  getPlayerNames() {
-    return this.props.players.map(player => player.name);
-  }
-
-  waitingBooth() {
-    if (this.props.game.status == 'started') {
+  waitingBooth(game, players) {
+    if (game.status === 'started') {
       return (
         <div className="center paddingBottom">
-          <Countdown gameId={this.props.game._id} startGame={this.startGame}/>
+          <Countdown gameId={game._id} startGame={this.startGame} />
         </div>
       );
     }
     return (
       <div className="center">
         <div id="preloader">
-          <div id="loader"></div>
+          <div id="loader" />
         </div>
         <div className="paddingBottom">
           Waiting for
-          {this.props.players.length === 1 ? ' more ' : ' other '}
+          {players.length === 1 ? ' more ' : ' other '}
           players
         </div>
-        <button className="whiteButton" onClick={this.editQuestions}>
+        <button type="button" className="whiteButton" onClick={this.editQuestions}>
           <Glyph icon="pencil" />
           {' Edit questions'}
         </button>
@@ -148,65 +130,50 @@ class Lobby extends Component {
   }
 
   startGame() {
-    let id = this.props.game._id;
-    this.props.history.push(`/game/${id}`);
+    const { history, game: { _id } } = this.props;
+    history.push(`/game/${_id}`);
   }
 
   render() {
+    const {
+      game,
+      game: { code },
+      players,
+      viewer,
+    } = this.props;
+    const { stage } = this.state;
+    const playerNames = getPlayerNames(players);
     return (
       <div>
         <div className="center relative">
           Game Code:
           {' '}
           <strong>
-            {this.props.game.code}
+            {code}
           </strong>
         </div>
         <div className="header">
           your questions
         </div>
         <div className="card animateHeight">
-          {['','',''].map((_, index) => {
-            return (
-              <QuestionSet
-                key={index}
-                display={this.state.stage === index}
-                playerNames={this.getPlayerNames()}
-                questionNo={index}
-                ready={this.submitQuestions}
-                changeQuestion={this.changeQuestion} />
-            );
-          })}
-          {this.state.stage === 3 && this.waitingBooth()}
+          {[1, 2, 3].map((qNo, index) => (
+            <QuestionSet
+              key={`q + ${qNo}`}
+              display={stage === index}
+              playerNames={playerNames}
+              questionNo={index}
+              ready={this.submitQuestions}
+              changeQuestion={this.changeQuestion}
+            />
+          ))}
+          {stage === 3 && this.waitingBooth(game, players)}
         </div>
 
         <div className="header">
           players
         </div>
-        <div className="card">
-          <Table className="reduceTop">
-            <colgroup>
-              <col width="" />
-              <col width="100" />
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.renderPlayers()}
-            </tbody>
-          </Table>
-          {/*<div className="center">
-            <Button type="hollow-primary" size="sm">
-              <Glyph icon="plus" className="plusIcon" />
-              {' '}
-              Invite friends
-            </Button>
-          </div>*/}
-        </div>
+        <PlayersCard players={players} viewer={viewer} />
+
         <div className="paddingTop paddingBottom" />
         <div className="center">
           <a href="/">Home</a>
@@ -217,42 +184,43 @@ class Lobby extends Component {
 }
 
 Lobby.propTypes = {
-  players: PropTypes.array.isRequired,
-  questions: PropTypes.array.isRequired,
-  viewer: PropTypes.shape({
-    isReady: PropTypes.bool
-  }),
   game: PropTypes.shape({
     code: PropTypes.number,
-    _id: PropTypes.string
-  })
+    _id: PropTypes.string,
+  }),
+  players: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+    }),
+  ),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+  viewer: PropTypes.shape({
+    isReady: PropTypes.bool,
+  }),
 };
 
 Lobby.defaultProps = {
   game: {
     code: null,
-    _id: null
+    _id: null,
   },
   players: [],
   viewer: {
-    isReady: false
+    isReady: false,
   },
-  questions: []
-}
+  history: {
+    push: () => null,
+  },
+};
 
-export default createContainer(value => {
-  let gameId = value.match.params.id;
-  Meteor.subscribe('games');
+export default createContainer((value) => {
+  const gameId = value.match.params.id;
   Meteor.subscribe('games');
   Meteor.subscribe('players');
-  Meteor.subscribe('questions');
-  let players = Players.find({ gameId: gameId }).fetch();
-  let viewer = players.find(player => player._id == Session.get('currentUserId'));
-  let questions = viewer ? Questions.find({ playerId: viewer._id, gameCode: gameId }).fetch() : [];
-  return {
-    game: Games.findOne(gameId),
-    players: players,
-    questions: questions,
-    viewer: viewer
-  };
+  const game = Games.findOne(gameId);
+  const players = Players.find({ gameId }).fetch();
+  const viewer = players.find(player => player._id === Session.get('currentUserId'));
+  return { game, players, viewer };
 }, Lobby);
