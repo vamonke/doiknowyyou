@@ -73,11 +73,11 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Do you think you are vain?",
+      "question": "Do you consider yourself vain?",
       "options": ["Yes", "No"]
     },
     {
-      "question": "When it comes to relationships, are you a settler or a reacher?",
+      "question": "When it comes to relationships, do you think you are a settler or a reacher?",
       "options": ["Settler", "Reacher"]
     },
     {
@@ -201,14 +201,6 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever played strip poker?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever been had a one night stand?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you ever had a crush on a teacher?",
       "options": ["Yes", "No"]
     },
@@ -246,10 +238,6 @@
     },
     {
       "question": "Have you ever gotten together with your friend's ex?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever taken a shower with the opposite sex?",
       "options": ["Yes", "No"]
     },
     {
@@ -365,10 +353,6 @@
       "options": ["Fitness tracker watch", "Sunglasses and sunblock", "Toilet bowl", "Makeup kit with mirror", "Pillow and bolster"]
     },
     {
-      "question": "Which physical feature attracts you the most?",
-      "options": ["Eyes", "Chest", "Butt", "Legs"]
-    },
-    {
       "question": "Would you ever go to a nude beach?",
       "options": ["Yes", "No"]
     },
@@ -425,14 +409,6 @@
       "options": ["Introvert", "Extrovert"]
     },
     {
-      "question": "Have you watched porn in the past week?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "When was the last time your watched porn?",
-      "options": ["Yesterday", "Last week", "Last month", "Never"]
-    },
-    {
       "question": "Would you rather cheat or be cheated on?",
       "options": ["Cheat", "Be cheated on"]
     },
@@ -449,7 +425,7 @@
       "options": "players"
     },
     {
-      "question": "If you had to, who here would you slap? (Other than yourself)",
+      "question": "If you had to, who here would you slap?",
       "options": "players"
     },
     {
@@ -465,7 +441,7 @@
       "options": "players"
     },
     {
-      "question": "Who do you think will be divorced in the future?",
+      "question": "Who do you think will get a divorce in the future?",
       "options": "players"
     },
     {
@@ -489,10 +465,6 @@
       "options": ["Shit on someone", "Have someone shit on you"]
     },
     {
-      "question": "Would you rather have sex with someone with BO or make out with someone with bad breath?",
-      "options": ["Sex with someone with BO", "Make out with someone with bad breath"]
-    },
-    {
       "question": "Would you rather cheat and be caught or be cheated on and never be told?",
       "options": ["Cheat and be caught", "Be cheated on and never be told"]
     },
@@ -505,7 +477,7 @@
       "options": ["Itchy", "Sticky"]
     },
     {
-      "question": "Would you rather drink two litres of piss or two litres of sweat?",
+      "question": "Would you rather drink a litre of piss or a litre of sweat?",
       "options": ["Piss", "Sweat"]
     },
     {
@@ -615,6 +587,10 @@
     {
       "question": "For $1M, would you live on an island for a year, without any contact to the outside world?",
       "options": ["Yes", "No"]
+    },
+    {
+      "question": "Who do you think will most likely burn the kitchen if they cook?",
+      "options": "players"
     }
   ]
 }
