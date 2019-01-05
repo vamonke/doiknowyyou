@@ -158,3 +158,29 @@ button:focus, button:hover {
 .border {
   border-top: 1px solid rgba(0,0,0,.06);
 }
+
+.redButton:disabled, .greenButton:disabled {
+  font-size: 0;
+}
+
+.redButton:disabled::after, .greenButton:disabled::after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0);
+  border-radius: 50%;
+  border-top-color: #fff;
+  border-right-color: #fff;
+  animation: spin 1s linear infinite;
+  -webkit-animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}

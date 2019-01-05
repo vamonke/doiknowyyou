@@ -2,23 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
-import { createContainer } from 'meteor/react-meteor-data';
-
-import { Card, Row, Col, Button } from 'elemental';
-import { Link } from 'react-router-dom';
 
 import Home from './Home';
 import CreateGame from './CreateGame';
 import JoinGame from './JoinGame';
 
-import { Games } from '../../api/games.js';
-
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 'home'
-    }
+      mode: 'home',
+    };
     this.showHome = this.showHome.bind(this);
     this.showJoinGame = this.showJoinGame.bind(this);
     this.showCreateGame = this.showCreateGame.bind(this);
@@ -27,74 +21,68 @@ export default class App extends Component {
   }
 
   componentDidUpdate() {
-    document.title = `Do I Know You?`;
+    document.title = 'Do I Know You?';
   }
-
-  // renderGames() {
-  //   let players = this.props.players;
-  //   return this.props.games.map((game) => (
-  //     <Card key={game._id}>
-  //       <div className='gameTitle'>
-  //         <Link to={`/lobby/${game.code}`}>
-  //           {'Game '}
-  //           {game.code}
-  //         </Link>
-  //       </div>
-  //       {players.filter(player => (player.gameCode === game.code)).map((player, i) => (
-  //         <Pill label={player.name} key={player._id} type='primary' />
-  //       ))}
-  //     </Card>
-  //   ));
-  // }
 
   showHome() {
     this.setState({
-      mode: 'home'
+      mode: 'home',
     });
   }
 
   showJoinGame() {
     this.setState({
-      mode: 'join'
+      mode: 'join',
     });
   }
 
   showCreateGame() {
     this.setState({
-      mode: 'create'
+      mode: 'create',
     });
   }
 
   addPlayer(playerName, gameId, gameCode) {
-    Meteor.call('players.insert', playerName, gameId, gameCode, (error, player) => {
-      if (player && player.gameId) {
-        Session.setTemp('currentUserId', player._id);
-        this.showHome();
-        this.props.history.push(`/lobby/${player.gameId}`);
-      } else {
-        console.error('Game not found. Please check the game code.')
-        // Highlight gameCode field
-      }
+    return new Promise((resolve, reject) => {
+      Meteor.call('players.insert', playerName, gameId, gameCode, (error, player) => {
+        if (error) {
+          return reject(error);
+        }
+        if (player && player.gameId) {
+          Session.setTemp('currentUserId', player._id);
+          this.showHome();
+          this.props.history.push(`/lobby/${player.gameId}`);
+          return resolve(true);
+        }
+        console.error('Failed to add player to game.');
+        return resolve(false);
+      });
     });
   }
 
   createGame(playerName) {
-    Meteor.call('games.insert', (error, gameId) => {
-      this.addPlayer(playerName, gameId, null);
+    return new Promise((resolve, reject) => {
+      Meteor.call('games.insert', async (error, gameId) => {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(this.addPlayer(playerName, gameId, null));
+      });
     });
   }
 
   render() {
+    const { mode } = this.state;
     return (
       <div className="bigCard">
         <Home showJoinGame={this.showJoinGame} showCreateGame={this.showCreateGame} />
         <CreateGame
-          modalIsOpen={(this.state.mode === 'create')}
+          modalIsOpen={(mode === 'create')}
           createGame={this.createGame}
           showHome={this.showHome}
         />
         <JoinGame
-          modalIsOpen={this.state.mode === 'join'}
+          modalIsOpen={mode === 'join'}
           addPlayer={this.addPlayer}
           showHome={this.showHome}
         />

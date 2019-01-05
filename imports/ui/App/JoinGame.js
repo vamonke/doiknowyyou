@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
 
-import { Card, Row, Col, Modal, ModalHeader, ModalBody, FormField, FormInput } from 'elemental';
-import { Link } from 'react-router-dom';
-
-import { Games } from '../../api/games.js';
-import { Players } from '../../api/players.js';
+import { Row, Col, Modal, ModalBody, FormField, FormInput, Glyph } from 'elemental';
 
 import './App.css';
 
@@ -17,27 +10,45 @@ export default class joinGame extends Component {
     super(props);
     this.state = {
       name: '',
-      code: ''
-    }
-    this.handleClick = this.handleClick.bind(this);
+      code: '',
+      disabled: false,
+      errorMsg: ''
+    };
+    this.handleBack = this.handleBack.bind(this);
+    this.handleJoin = this.handleJoin.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCodeChange = this.handleCodeChange.bind(this);
   }
 
   handleNameChange(e) {
     this.setState({
-      name: e.target.value
+      name: e.target.value,
     });
   }
 
   handleCodeChange(e) {
     this.setState({
-      code: Number(e.target.value)
+      code: Number(e.target.value),
     });
   }
 
-  handleClick() {
-    this.props.addPlayer(this.state.name, null, this.state.code);
+  handleBack() {
+    this.setState({ disabled: false, errorMsg: '' });
+    this.props.showHome();
+  }
+
+  async handleJoin() {
+    this.setState({ disabled: true, errorMsg: '' });
+    try {
+      const { name, code } = this.state;
+      if (!name && !code) throw Error('Name and game code cannot be empty');
+      if (!name) throw Error('Name cannot be empty');
+      if (!code) throw Error('Game code cannot be empty');
+      await this.props.addPlayer(name, null, code);
+    } catch (error) {
+      const errorMsg = error.reason || error.message;
+      this.setState({ disabled: false, errorMsg });
+    }
   }
 
   render() {
@@ -51,14 +62,26 @@ export default class joinGame extends Component {
             <FormField>
               <FormInput onChange={this.handleCodeChange} placeholder="Enter the 4-digit game code" type="text" />
             </FormField>
+            {this.state.errorMsg && (
+              <div className="errorMsg">
+                <Glyph icon="alert" />
+                {' '}
+                {this.state.errorMsg}
+              </div>
+            )}
             <Row>
               <Col xs="1/2">
-                <button className="whiteButton" onClick={this.props.showHome}>
+                <button type="button" className="whiteButton" onClick={this.handleBack}>
                   Back
                 </button>
               </Col>
               <Col xs="1/2">
-                <button className="greenButton" onClick={this.handleClick}>
+                <button
+                  type="button"
+                  className="greenButton"
+                  onClick={this.handleJoin}
+                  disabled={this.state.disabled}
+                >
                   Join
                 </button>
               </Col>

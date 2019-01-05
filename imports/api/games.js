@@ -1,27 +1,22 @@
 import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
-import { Promise } from 'meteor/promise';
+// import { check } from 'meteor/check';
 
 export const Games = new Mongo.Collection('games');
 
 if (Meteor.isServer) {
-  Meteor.publish('games', function gamesPublication() {
-    return Games.find();
-  });
+  Meteor.publish('games', () => Games.find());
 }
 
 Meteor.methods({
   'games.insert'() {
     // Generate unique gameCode
-    let existingGameCodes = Games.find({}, { fields: { code: 1 }}).fetch().map(game => game.code);
-    let collision = true;
+    const existingGameCodes = Games.find({}, { fields: { code: 1 } }).fetch().map(game => game.code);
     let code;
-    while (collision) {
+    do {
       code = Math.floor(1000 + Math.random() * 9000);
-      collision = existingGameCodes.includes(code);
-    }
+    } while (existingGameCodes.includes(code));
 
-    let game = {
+    const game = {
       code: code,
       status: 'waiting',
       nextId: null,
@@ -29,7 +24,7 @@ Meteor.methods({
       currentQuestion: null,
     };
 
-    let gameId = Games.insert(game);
+    const gameId = Games.insert(game);
     return gameId;
   },
   'games.findGameByCode'(code) {
@@ -38,8 +33,8 @@ Meteor.methods({
   },
   'games.start'(id) {
     console.log('games.start:', id);
-    let game = Games.findOne(id, { fields: { status: 1 }});
-    if (game.status == 'waiting') {
+    const game = Games.findOne(id, { fields: { status: 1 } });
+    if (game.status === 'waiting') {
       Games.update(id, {
         $set: {
           status: 'started'
@@ -61,13 +56,14 @@ Meteor.methods({
   async 'games.restart'(id) {
     console.log('games.restart:', id);
     if (id) {
-      let newGameId = await Meteor.call('games.insert');
+      const newGameId = await Meteor.call('games.insert');
       Games.update(id, {
         $set: {
           nextId: newGameId
         }
       });
       return newGameId;
-    };
+    }
+    return null;
   },
 });

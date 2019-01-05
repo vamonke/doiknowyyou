@@ -4,21 +4,21 @@ import { Games } from './games';
 export const Players = new Mongo.Collection('players');
 
 if (Meteor.isServer) {
-  Meteor.publish('players', function playersPublication() {
-    return Players.find();
-  });
+  Meteor.publish('players', () => Players.find());
 }
 
 Meteor.methods({
   'players.insert'(name, gameId, gameCode) {
     console.log('players.insert', name, gameId, gameCode);
     if (!gameId) {
-      let game = Games.findOne({ code: gameCode });
+      const game = Games.findOne({ code: gameCode });
       if (game) {
         gameId = game._id;
+      } else {
+        throw new Meteor.Error('wrong-game-code', 'Incorrect game code');
       }
     }
-    let player = {
+    const player = {
       gameId: gameId,
       name: name,
       score: 0,
@@ -27,7 +27,7 @@ Meteor.methods({
       createdAt: new Date(),
     };
 
-    let playerId = Players.insert(player);
+    const playerId = Players.insert(player);
     player._id = playerId;
     return player;
   },
@@ -36,7 +36,7 @@ Meteor.methods({
     Players.remove(id);
   },
   'players.checkAllReady'(gameId) {
-    let playerReady = Players.find({ gameId: gameId }).map(player => player.isReady);
+    const playerReady = Players.find({ gameId: gameId }).map(player => player.isReady);
     return playerReady.length > 1 && !playerReady.includes(false);
   },
   'players.ready'(id, gameId) {
@@ -45,7 +45,7 @@ Meteor.methods({
         isReady: true
       }
     });
-    let allReady = Meteor.call('players.checkAllReady', gameId);
+    const allReady = Meteor.call('players.checkAllReady', gameId);
     if (allReady) {
       Meteor.call('games.start', gameId);
     }
@@ -58,10 +58,10 @@ Meteor.methods({
     });
   },
   'players.getRecipient'(gameId) { // may need refactoring?
-    let current = Players.findOne({ gameId: gameId, isRecipient: true });
+    const current = Players.findOne({ gameId: gameId, isRecipient: true });
     let nextId = '';
     if (current) {
-      let next = Players.findOne({ createdAt: { $gt: current.createdAt } }, { sort: { createdAt: 1 } });
+      const next = Players.findOne({ createdAt: { $gt: current.createdAt } }, { sort: { createdAt: 1 } });
       if (next) {
         nextId = next._id;
       }

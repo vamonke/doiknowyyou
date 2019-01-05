@@ -40,3 +40,9 @@
 .Modal-dialog {
   margin: 0 auto;
 }
+
+.errorMsg {
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
