@@ -13,6 +13,7 @@ export default class QuestionSet extends Component {
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
     this.addOption = this.addOption.bind(this);
+    this.removeOption = this.removeOption.bind(this);
     this.optionField = this.optionField.bind(this);
     this.renderButtons = this.renderButtons.bind(this);
     this.setOptionType = this.setOptionType.bind(this);
@@ -90,6 +91,13 @@ export default class QuestionSet extends Component {
     });
   }
 
+  removeOption() {
+    this.state.options.pop();
+    this.setState({
+      options: this.state.options
+    });
+  }
+
   generateQuestion() {
     const qna = questionBank[Math.floor(Math.random() * questionBank.length)];
     if (Array.isArray(qna.options)) {
@@ -156,7 +164,7 @@ export default class QuestionSet extends Component {
           <b>{`Question ${this.props.questionNo + 1} of 3`}</b>
         </div>
         <button type="button" onClick={this.generateQuestion} className="generateButton">
-          Randomize
+          Random
         </button>
         <FormInput
           placeholder="Write a question to ask other players"
@@ -185,11 +193,21 @@ export default class QuestionSet extends Component {
         {this.state.options.map(this.optionField)}
 
         {this.state.format === 'mcq' && (
-          <button type="button" className="addOption" onClick={this.addOption}>
-            <Glyph icon="plus" className="circle" />
-            {' Add option'}
-          </button>
+          <div className="center">
+            <button type="button" className="addOption" onClick={this.addOption}>
+              <Glyph icon="plus" />
+              {' Add option'}
+            </button>
+            {this.state.options.length > 2 && (
+              <button type="button" className="addOption" onClick={this.removeOption}>
+                <Glyph icon="dash" />
+                {' Remove option'}
+              </button>
+            )}
+          </div>
         )}
+
+        <hr className="noTop" />
 
         {this.renderButtons()}
       </div>
