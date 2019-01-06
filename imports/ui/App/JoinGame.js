@@ -33,7 +33,12 @@ export default class joinGame extends Component {
   }
 
   handleBack() {
-    this.setState({ disabled: false, errorMsg: '' });
+    this.setState({
+      name: '',
+      code: '',
+      disabled: false,
+      errorMsg: ''
+    });
     this.props.showHome();
   }
 

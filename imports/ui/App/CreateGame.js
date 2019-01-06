@@ -22,7 +22,11 @@ export default class createGame extends Component {
   }
 
   handleBack() {
-    this.setState({ disabled: false, errorMsg: '' });
+    this.setState({
+      name: '',
+      disabled: false,
+      errorMsg: ''
+    });
     this.props.showHome();
   }
 
