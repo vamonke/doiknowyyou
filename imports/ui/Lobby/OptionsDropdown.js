@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { Glyph } from 'elemental';
 
@@ -15,15 +14,15 @@ export default class OptionsDropdown extends Component {
   }
 
   toggle() {
-    this.setState({ show: !this.state.show })
+    this.setState({ show: !this.state.show });
   }
 
   open() {
-    this.setState({ show: true })
+    this.setState({ show: true });
   }
 
   close() {
-    this.setState({ show: false })
+    this.setState({ show: false });
   }
 
   handleChange(value) {
@@ -32,12 +31,12 @@ export default class OptionsDropdown extends Component {
   }
 
   render() {
-    let optionTypes = ['True/False', 'Yes/No', 'Players', 'SSM', 'Custom', 'Open-Ended']
+    const optionTypes = ['True/False', 'Yes/No', 'Players', 'Custom', 'Open-Ended']
     return (
       <div className="dropdownContainer">
         Options
-        <button className="optionsButton" onClick={this.toggle}>
-          <Glyph icon={this.state.show ? "chevron-up" : "chevron-down"} />
+        <button type="button" className="optionsButton" onClick={this.toggle}>
+          <Glyph icon={this.state.show ? 'chevron-up' : 'chevron-down'} />
         </button>
         <div className={`optionsDropdown center ${this.state.show && 'show'}`}>
           {

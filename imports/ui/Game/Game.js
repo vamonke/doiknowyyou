@@ -131,13 +131,11 @@ class Game extends Component {
     try {
       if (nextId) {
         await this.addPlayer(nextId);
-        this.setState({ restartDisabled: false });
       } else {
         const currentId = this.props.game._id;
         Meteor.call('games.restart', currentId, async (error, newGameId) => {
           if (error) throw error;
           await this.addPlayer(newGameId);
-          this.setState({ restartDisabled: false });
         });
       }
     } catch (error) {

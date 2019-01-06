@@ -38,8 +38,6 @@ class CurrentQuestionBox extends Component {
   render() {
     const { question, recipient, viewer } = this.props;
     const { selected } = this.state;
-    console.log(question);
-    console.log(recipient);
     const isLoading = !question.text || !recipient.name;
     if (isLoading) {
       return (
@@ -86,8 +84,12 @@ class CurrentQuestionBox extends Component {
               )}
             </div>
             <Row>
-              {question.options.map((option, index) => (
-                <Col xs={buttonWidth} key={index} className="paddingBottom">
+              {question.options.map((option, index, array) => (
+                <Col
+                  xs={buttonWidth}
+                  key={index}
+                  className={(index === array.length - 1) ? '' : 'paddingBottom'}
+                >
                   <button
                     type="button"
                     name={index}

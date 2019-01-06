@@ -16,6 +16,7 @@
         "react/destructuring-assignment": "off",
         "object-curly-newline": "off",
         "comma-dangle": "off",
-        "object-shorthand": "off"
+        "object-shorthand": "off",
+        "no-else-return": ["error", { "allowElseIf": true }]
     }
 }

@@ -19,61 +19,38 @@ export default class QuestionSet extends Component {
     this.generateQuestion = this.generateQuestion.bind(this);
     this.state = {
       question: '',
-      format: '',
+      format: 'mcq',
       options: ['', '']
     };
   }
 
-  generateQuestion() {
-    let qna = questionBank[Math.floor(Math.random() * questionBank.length)];
-    if (Array.isArray(qna.options)) {
-      qna.format = 'mcq';
-      this.setState(qna);
-    } else if (qna.options == 'players') {
-      this.setState({
-        question: qna.question,
-        format: 'players',
-        options: []
-      });
+  setOptionType(type) {
+    let options = [];
+    let format;
+    if (type === 0) { // True/False
+      format = 'mcq';
+      options = ['True', 'False'];
+    } else if (type === 1) { // Yes/No
+      format = 'mcq';
+      options = ['Yes', 'No'];
+    } else if (type === 2) { // Players
+      format = 'players';
+      options = [];
+    } else if (type === 3) { // Custom
+      format = 'mcq';
+      options = ['', ''];
+    } else if (type === 4) { // Open-Ended
+      format = 'open';
+      options = [];
     }
-  }
-
-  addOption() {
-   this.setState({
-     options: this.state.options.concat([''])
-   });
-  }
-
-  handleChange(event) {
-    const field = event.target.name;
-    const value = event.target.value;
-    if (field == 'question') {
-      this.setState({ question: value })
-    } else {
-      let options = this.state.options;
-      options[field] = value;
-      this.setState({ options: options });
-    }
-  }
-
-  nextQuestion() {
-    let qna = {
-      question: this.state.question,
-      format: this.state.format,
-      options: this.state.options.filter(String)
-    }
-    this.props.changeQuestion(this.props.questionNo, qna, true);
-  }
-
-  prevQuestion() {
-    this.props.changeQuestion(this.props.questionNo, this.state, false);
+    this.setState({ format, options });
   }
 
   optionField(_, optionNo) {
     return (
       <div key={optionNo} className="paddingBottom">
         <FormInput
-          placeholder={'Option ' + (optionNo + 1)}
+          placeholder={`Option  ${optionNo + 1}`}
           value={this.state.options[optionNo]}
           name={optionNo.toString()}
           onChange={this.handleChange}
@@ -82,35 +59,56 @@ export default class QuestionSet extends Component {
     );
   }
 
-  setOptionType(type) {
-    let options = [];
-    if (type === 0) {
-      format = 'mcq';
-      options = ['True', 'False'];
-    } else if (type === 1) {
-      format = 'mcq';
-      options = ['Yes', 'No'];
-    } else if (type === 2) {
-      format = 'players';
-      options = [];
-    } else if (type === 3) {
-      format = 'ssm';
-      options = ['','',''];
-    } else if (type === 4) {
-      format = 'mcq';
-      options = ['',''];
-    } else if (type === 5) {
-      format = 'open';
-      options = [];
+  prevQuestion() {
+    this.props.changeQuestion(this.props.questionNo, this.state, false);
+  }
+
+  nextQuestion() {
+    const qna = {
+      question: this.state.question,
+      format: this.state.format,
+      options: this.state.options.filter(String)
+    };
+    this.props.changeQuestion(this.props.questionNo, qna, true);
+  }
+
+  handleChange(event) {
+    const field = event.target.name;
+    const { value } = event.target;
+    if (field === 'question') {
+      this.setState({ question: value });
+    } else {
+      const { options } = this.state;
+      options[field] = value;
+      this.setState({ options: options });
     }
-    this.setState({ format, options })
+  }
+
+  addOption() {
+    this.setState({
+      options: this.state.options.concat([''])
+    });
+  }
+
+  generateQuestion() {
+    const qna = questionBank[Math.floor(Math.random() * questionBank.length)];
+    if (Array.isArray(qna.options)) {
+      qna.format = 'mcq';
+      this.setState(qna);
+    } else if (qna.options === 'players') {
+      this.setState({
+        question: qna.question,
+        format: 'players',
+        options: []
+      });
+    }
   }
 
   renderButtons() {
-    let questionNo = this.props.questionNo;
+    const { questionNo } = this.props;
     if (questionNo === 0) {
       return (
-        <button className="greenButton" onClick={this.nextQuestion}>
+        <button type="button" className="greenButton" onClick={this.nextQuestion}>
           {'Next '}
           <Glyph icon="chevron-right" />
         </button>
@@ -119,46 +117,45 @@ export default class QuestionSet extends Component {
       return (
         <Row>
           <Col xs="1/2">
-            <button className="whiteButton" onClick={this.prevQuestion}>
+            <button type="button" className="whiteButton" onClick={this.prevQuestion}>
               <Glyph icon="chevron-left" />
               {' Previous'}
             </button>
           </Col>
           <Col xs="1/2">
-            <button className="greenButton" onClick={this.nextQuestion}>
+            <button type="button" className="greenButton" onClick={this.nextQuestion}>
               {'Ready ' }
               <Glyph icon="check" />
             </button>
           </Col>
         </Row>
       );
-    } else {
-      return (
-        <Row>
-          <Col xs="1/2">
-            <button className="whiteButton" onClick={this.prevQuestion}>
-              <Glyph icon="chevron-left" />
-              {' Previous'}
-            </button>
-          </Col>
-          <Col xs="1/2">
-            <button className="greenButton" onClick={this.nextQuestion}>
+    }
+    return (
+      <Row>
+        <Col xs="1/2">
+          <button type="button" className="whiteButton" onClick={this.prevQuestion}>
+            <Glyph icon="chevron-left" />
+            {' Previous'}
+          </button>
+        </Col>
+        <Col xs="1/2">
+          <button type="button" className="greenButton" onClick={this.nextQuestion}>
             {'Next '}
             <Glyph icon="chevron-right" />
-            </button>
-          </Col>
-        </Row>
-      );
-    }
+          </button>
+        </Col>
+      </Row>
+    );
   }
 
   render() {
     return (
-      <div style={{display: (this.props.display ? 'block' : 'none')}}>
+      <div style={{ display: (this.props.display ? 'block' : 'none') }}>
         <div className="paddingBottom">
-          <b>{'Question ' + (this.props.questionNo + 1) + ' of 3'}</b>
+          <b>{`Question ${this.props.questionNo + 1} of 3`}</b>
         </div>
-        <button onClick={this.generateQuestion} className="generateButton">
+        <button type="button" onClick={this.generateQuestion} className="generateButton">
           Randomize
         </button>
         <FormInput
@@ -173,24 +170,23 @@ export default class QuestionSet extends Component {
         <div className="paddingTop paddingBottom">
           <OptionsDropdown onSelect={this.setOptionType} />
         </div>
-        
 
-        {this.state.format == 'open' && (
+        {this.state.format === 'open' && (
           <div className="paddingBottom">
-            <FormInput placeholder='Open-ended (Best answer wins)' disabled/>
+            <FormInput placeholder="Open-ended (Best answer wins)" disabled />
           </div>
         )}
-        {this.state.format == 'players' && (
-          <div className="paddingBottom">          
-            <FormInput placeholder='Players as options (excluding answering player)' disabled/>
+        {this.state.format === 'players' && (
+          <div className="paddingBottom">
+            <FormInput placeholder="Players as options (excluding answering player)" disabled />
           </div>
         )}
-        
+
         {this.state.options.map(this.optionField)}
 
-        {this.state.format == 'mcq' && (
-          <button className="addOption" onClick={this.addOption}>
-            <Glyph icon="plus" className="circle"/>
+        {this.state.format === 'mcq' && (
+          <button type="button" className="addOption" onClick={this.addOption}>
+            <Glyph icon="plus" className="circle" />
             {' Add option'}
           </button>
         )}
@@ -203,10 +199,6 @@ export default class QuestionSet extends Component {
 
 QuestionSet.propTypes = {
   questionNo: PropTypes.number.isRequired,
-  changeQuestion: PropTypes.func.isRequired
+  changeQuestion: PropTypes.func.isRequired,
+  display: PropTypes.bool.isRequired,
 };
-
-QuestionSet.defaultProps = {
-  questionNo: 0,
-  changeQuestion: () => null
-}
