@@ -4,9 +4,9 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Games } from '../../api/games.js';
-import { Players } from '../../api/players.js';
-import { Questions } from '../../api/questions.js';
+import { Games } from '../../api/games';
+import { Players } from '../../api/players';
+import { Questions } from '../../api/questions';
 
 import AnsweredQuestion from './AnsweredQuestion';
 import QuestionResultsModal from './QuestionResultsModal';
@@ -25,8 +25,19 @@ class Game extends Component {
     this.state = {
       modalQuestionId: null,
       modalIsOpen: false,
-      showGameOver: false
-    }
+      showGameOver: false,
+      restartDisabled: false,
+    };
+  }
+
+  componentWillMount() {
+    window.onbeforeunload = (event) => {
+      const confirmationMessage = 'Exit game?';
+      (event || window.event).returnValue = confirmationMessage; // Gecko + IE
+      return confirmationMessage; // Webkit, Safari, Chrome
+    };
+    window.onpagehide = () => {};
+    window.onunload = () => {};
   }
 
   componentDidMount() {
@@ -34,7 +45,7 @@ class Game extends Component {
   }
 
   componentDidUpdate() {
-    let previousQuestion = this.getPreviousQuestion();
+    const previousQuestion = this.getPreviousQuestion();
     if (previousQuestion && (previousQuestion._id !== this.state.modalQuestionId)) {
       this.setState({
         modalQuestionId: previousQuestion._id,
@@ -57,14 +68,37 @@ class Game extends Component {
   //   }
   // }
 
-  componentWillMount() {
-    window.onbeforeunload = event => {
-      let confirmationMessage = 'Exit game?';
-      (event || window.event).returnValue = confirmationMessage;  // Gecko + IE
-      return confirmationMessage;                                 // Webkit, Safari, Chrome
-    };
-    window.onpagehide = () => {};
-    window.onunload = () => {};
+  getCurrentQuestion() {
+    const { currentQuestion } = this.props.game;
+    return this.props.questions.find(question => question._id === currentQuestion);
+  }
+
+  getRecipient(question) {
+    if (question) {
+      return this.props.players.find(player => player._id === question.recipientId);
+    }
+    return {};
+  }
+
+  getAnsweredQuestions() {
+    const answeredQuestions = this.props.questions.filter(question => (question.status === 'asked'));
+    if (answeredQuestions.length !== 0) {
+      answeredQuestions.sort((a, b) => (new Date(b.answeredAt) - new Date(a.answeredAt)));
+      return answeredQuestions;
+    }
+    return [];
+  }
+
+  getPreviousQuestion() {
+    const answeredQuestions = this.getAnsweredQuestions();
+    if (answeredQuestions.length === 0) {
+      return null;
+    }
+    return answeredQuestions[0];
+  }
+
+  getPlayer(id) {
+    return this.props.players.find(player => (player._id === id));
   }
 
   toggleModal() {
@@ -74,58 +108,47 @@ class Game extends Component {
     });
   }
 
-  getCurrentQuestion() {
-    let currentQuestionId = this.props.game.currentQuestion;
-    return this.props.questions.find(question => question._id == currentQuestionId);
-  }
-
-  getRecipient(question) {
-    if (question)
-      return this.props.players.find(player => player._id == question.recipientId);
-  }
-
-  getAnsweredQuestions() {
-    let answeredQuestions = this.props.questions.filter((question) => (question.status === 'asked'));
-    if (answeredQuestions.length !== 0) {
-      answeredQuestions.sort((a,b) => ( new Date(b.answeredAt) - new Date(a.answeredAt)));
-      return answeredQuestions;
-    }
-    return [];
-  }
-
-  getPreviousQuestion() {
-    let answeredQuestions = this.getAnsweredQuestions();
-    if (answeredQuestions.length !== 0) {
-      return answeredQuestions[0];
-    }
-  }
-
-  getPlayer(id) {
-    return this.props.players.find(player => (player._id === id));
-  }
-
   addPlayer(newGameId) {
-    Meteor.call('players.insert', this.props.viewer.name, newGameId, null, (error, player) => {
-      Session.setTemp('currentUserId', player._id);
-      this.props.history.push(`/lobby/${player.gameId}`);
+    return new Promise((resolve, reject) => {
+      Meteor.call('players.insert', this.props.viewer.name, newGameId, null, (error, player) => {
+        if (error) {
+          return reject(error);
+        }
+        if (player && player.gameId) {
+          Session.setTemp('currentUserId', player._id);
+          this.props.history.push(`/lobby/${player.gameId}`);
+          return resolve(true);
+        }
+        console.error('Failed to add player to game.');
+        return resolve(false);
+      });
     });
   }
 
-  restartGame() {
-    let nextId = this.props.game.nextId;
-    if (nextId) {
-      this.addPlayer(nextId);
-    } else {
-      let currentId = this.props.game._id;
-      Meteor.call('games.restart', currentId, (error, newGameId) => {
-        this.addPlayer(newGameId);
-      });
+  async restartGame() {
+    const { nextId } = this.props.game;
+    this.setState({ restartDisabled: true });
+    try {
+      if (nextId) {
+        await this.addPlayer(nextId);
+        this.setState({ restartDisabled: false });
+      } else {
+        const currentId = this.props.game._id;
+        Meteor.call('games.restart', currentId, async (error, newGameId) => {
+          if (error) throw error;
+          await this.addPlayer(newGameId);
+          this.setState({ restartDisabled: false });
+        });
+      }
+    } catch (error) {
+      this.setState({ restartDisabled: false });
     }
   }
 
   render() {
-    let currentQuestion = this.getCurrentQuestion();
-    let recipient = this.getRecipient(currentQuestion);
+    const currentQuestion = this.getCurrentQuestion();
+    const recipient = this.getRecipient(currentQuestion);
+    const previousQuestion = this.getPreviousQuestion();
     return (
       <div>
         {this.props.game.status === 'started' && (
@@ -160,8 +183,8 @@ class Game extends Component {
           previous questions
         </div>
 
-        { this.getAnsweredQuestions().length > 0 ?
-          (
+        { this.getAnsweredQuestions().length > 0
+          ? (
             <div className="card lessPadding">
               { this.getAnsweredQuestions().map((question, i) => (
                 <div key={question._id}>
@@ -180,20 +203,27 @@ class Game extends Component {
           )
         }
 
-        <QuestionResultsModal
-          question={this.getPreviousQuestion()}
-          players={this.props.players}
-          modalIsOpen={this.state.modalIsOpen}
-          toggleModal={this.toggleModal}
-        />
+        {previousQuestion && (
+          <QuestionResultsModal
+            question={previousQuestion}
+            players={this.props.players}
+            modalIsOpen={this.state.modalIsOpen}
+            toggleModal={this.toggleModal}
+          />
+        )}
 
         <div className="paddingTop paddingBottom" />
 
-        { (this.props.game.status === 'ended') &&
-          <button className="greenButton" onClick={this.restartGame}>
+        {this.props.game.status === 'ended' && (
+          <button
+            type="button"
+            className="greenButton"
+            onClick={this.restartGame}
+            disabled={this.state.restartDisabled}
+          >
             Restart
           </button>
-        }
+        )}
 
         <div className="center paddingTop">
           <a href="/">Home</a>
@@ -205,32 +235,49 @@ class Game extends Component {
 }
 
 Game.propTypes = {
-  players: PropTypes.array,
-  questions: PropTypes.array,
+  game: PropTypes.shape({
+    _id: PropTypes.string,
+    status: PropTypes.string,
+    nextId: PropTypes.string,
+    currentQuestion: PropTypes.string,
+  }),
+  players: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+    })
+  ),
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      recipientId: PropTypes.string,
+    })
+  ),
+  viewer: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+  }),
 };
 
 Game.defaultProps = {
   game: {
-    _id: 'abc',
+    _id: '',
     status: 'started',
-    currentQuestion: 'abc'
+    currentQuestion: '',
   },
   players: [],
-  questions: [{
-    _id: 'abc',
-    recipientId: 'abc'
-  }],
+  questions: [],
   viewer: {
-    _id: 'abc',
-    isReady: false
+    _id: '',
+    name: '',
+    isReady: false,
   },
-}
+};
 
-export default createContainer(value => {
+export default createContainer((value) => {
   Meteor.subscribe('games');
   Meteor.subscribe('players');
   Meteor.subscribe('questions');
-  let gameId = value.match.params.id;
+  const gameId = value.match.params.id;
   return {
     game: Games.findOne(gameId),
     players: Players.find({ gameId: gameId }, { sort: { score: -1 } }).fetch(),

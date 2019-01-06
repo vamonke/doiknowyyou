@@ -50,7 +50,6 @@ export default class App extends Component {
         }
         if (player && player.gameId) {
           Session.setTemp('currentUserId', player._id);
-          this.showHome();
           this.props.history.push(`/lobby/${player.gameId}`);
           return resolve(true);
         }

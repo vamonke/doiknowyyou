@@ -38,11 +38,25 @@ class CurrentQuestionBox extends Component {
   render() {
     const { question, recipient, viewer } = this.props;
     const { selected } = this.state;
-    const multiline = question.options.length > 2
-      || question.options.some(option => option.length > 26);
+    console.log(question);
+    console.log(recipient);
+    const isLoading = !question.text || !recipient.name;
+    if (isLoading) {
+      return (
+        <div className="card center">
+          <div className="questionLight">
+            Loading question
+          </div>
+          <hr />
+          <div id="greySpinner" />
+        </div>
+      );
+    }
+    const multiline = (question.options && question.options.length > 2)
+    || question.options.some(option => option.length > 26);
     const buttonWidth = multiline ? '100%' : '50%';
     return (
-      <div className="card center lessBottomPadding">
+      <div className="card center">
         <div className="questionLight">
           {`Round ${question.round}`}
         </div>
@@ -97,15 +111,15 @@ class CurrentQuestionBox extends Component {
 
 CurrentQuestionBox.propTypes = {
   recipient: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    _id: PropTypes.string,
+    name: PropTypes.string,
   }),
   question: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    options: PropTypes.array.isRequired,
+    _id: PropTypes.string,
+    options: PropTypes.array,
   }),
   viewer: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    _id: PropTypes.string,
   }),
 };
 
