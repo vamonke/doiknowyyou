@@ -7,19 +7,19 @@ import parseQuestionResults from './parseQuestionResults.js';
 import './QuestionResults.css';
 
 export default function ResultsTable(props) {
-  let correct = (
+  const correct = (
     <span className="correct">
       +1
     </span>
   );
-  let answers = props.answers.slice(0); // Duplicate props.answers array
-  let recipientIndex = answers.findIndex(answer => (answer.playerId === props.question.recipientId));
+  const answers = props.answers.slice(0); // Duplicate props.answers array
+  const recipientIndex = answers.findIndex(answer => (answer.playerId === props.question.recipientId));
   if (recipientIndex > -1) {
     answers.splice(recipientIndex, 1);
   }
-  let answerSets = parseQuestionResults(props.question, props.players, answers);
-  let options = props.question.options;
-  let correctOptions = props.question.correctAnswer;
+  const answerSets = parseQuestionResults(props.question, props.players, answers);
+  const { options } = props.question;
+  const correctOptions = props.question.correctAnswer;
 
   function playersWhoSelected(option) {
     const answerSet = answerSets.find(answerSet => (answerSet.option == option));
@@ -34,19 +34,19 @@ export default function ResultsTable(props) {
 
   return (
     <div className="outline center">
-        {options.map((option, index) => (
-          <Row key={option} className="borderBottom">
-            <Col xs="1/2" className="borderRight cellPadding grayBackground">
-              <b>
-                {option}
-                {correctOptions.includes(index) && correct}
-              </b>
-            </Col>
-            <Col key={option} xs="1/2" className="borderRight cellPadding">
-              {playersWhoSelected(option)}
-            </Col>
-          </Row>
-        ))}
+      {options.map((option, index) => (
+        <Row key={option} className="borderBottom">
+          <Col xs="1/2" className="borderRight cellPadding grayBackground">
+            <b>
+              {option}
+              {(correctOptions && correctOptions.includes(index)) && correct}
+            </b>
+          </Col>
+          <Col key={option} xs="1/2" className="borderRight cellPadding">
+            {playersWhoSelected(option)}
+          </Col>
+        </Row>
+      ))}
     </div>
   );
 }

@@ -88,7 +88,7 @@ class CurrentQuestionBox extends Component {
                 <Col
                   xs={buttonWidth}
                   key={index}
-                  className={(index === array.length - 1) ? '' : 'paddingBottom'}
+                  className={(!multiline || index === array.length - 1) ? '' : 'paddingBottom'}
                 >
                   <button
                     type="button"

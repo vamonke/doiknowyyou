@@ -74,8 +74,8 @@ Meteor.methods({
       }
     });
     // Tabulate scores
-    let question = Questions.findOne(id);
-    Answers.find({ questionId: id }).fetch().map(answer => {
+    const question = Questions.findOne(id);
+    Answers.find({ questionId: id }).fetch().map((answer) => {
       if (
         (answer.playerId !== question.recipientId) &&
         (question.correctAnswer.includes(answer.selected))

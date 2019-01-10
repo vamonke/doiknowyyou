@@ -83,8 +83,7 @@ PlayerList.defaultProps = {
   viewer: {
     _id: 'abc',
   },
-}
-
+};
 
 export default createContainer(props => {
   Meteor.subscribe('answers');

@@ -18,7 +18,7 @@ function QuestionResultsModal(props) {
 
   function displayCorrect() {
     if (!props.question.correctAnswer || props.question.correctAnswer.length === 0)
-      return '';
+      return '-';
     let correctAnswers = props.question.correctAnswer.map(correct => props.question.options[correct]);
     if (correctAnswers.length === 1)
       return correctAnswers[0];

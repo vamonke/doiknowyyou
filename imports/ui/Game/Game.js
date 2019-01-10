@@ -21,6 +21,7 @@ class Game extends Component {
     super(props);
     this.toggleModal = this.toggleModal.bind(this);
     this.restartGame = this.restartGame.bind(this);
+    this.completeQuestion = this.completeQuestion.bind(this);
     // this.checkSessionId = this.checkSessionId.bind(this);
     this.state = {
       modalQuestionId: null,
@@ -143,6 +144,20 @@ class Game extends Component {
     }
   }
 
+  completeQuestion() {
+    const currentQuestion = this.getCurrentQuestion();
+    console.log(currentQuestion);
+    const questionId = currentQuestion._id;
+    if (questionId) {
+      Meteor.call('questions.complete', questionId, (error) => {
+        if (error) {
+          return console.error(error);
+        }
+        return console.log('Complete: ', questionId);
+      });
+    }
+  }
+
   render() {
     const currentQuestion = this.getCurrentQuestion();
     const recipient = this.getRecipient(currentQuestion);
@@ -156,6 +171,11 @@ class Game extends Component {
               recipient={recipient}
               viewer={this.props.viewer}
             />
+            {(this.props.viewer && this.props.viewer.name === 'Varick') && (
+              <button type="button" onClick={this.completeQuestion} className="redButton">
+                Complete question
+              </button>
+            )}
             <div className="header">
               players
             </div>

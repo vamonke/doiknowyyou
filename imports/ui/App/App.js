@@ -50,8 +50,9 @@ export default class App extends Component {
         }
         if (player && player.gameId) {
           Session.setTemp('currentUserId', player._id);
-          this.props.history.push(`/lobby/${player.gameId}`);
-          return resolve(true);
+          this.showHome(); // For closing modal
+          resolve(true);
+          return this.props.history.push(`/lobby/${player.gameId}`);
         }
         console.error('Failed to add player to game.');
         return resolve(false);

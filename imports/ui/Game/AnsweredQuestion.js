@@ -38,7 +38,7 @@ class AnsweredQuestion extends Component {
         <div className={`cardShadow center ${this.state.show && 'show'}`}>
           <div>
             <b>{recipient.name}: </b>
-            {this.props.question.options[correctOption]}
+            {correctOption ? this.props.question.options[correctOption] : '-'}
           </div>
           <ResultsTable
             question={this.props.question}
