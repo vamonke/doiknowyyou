@@ -1,47 +1,43 @@
 {
   "questionBank": [
     {
-      "question": "Would you rather have a horrible job, but be able to retire comfortably in 10 years or have your dream job, but have to work until the day you die?",
-      "options": ["Horrible job for 10 years", "Dream job til the day I die"]
+      "question": "Would you rather have a horrible job but retire comfortably in 10 years OR have your dream job but work until the day you die?",
+      "options": ["Horrible job for 10 years then retire", "Dream job til the day I die"]
     },
     {
-      "question": "Would you rather be able to teleport anywhere or be able to read minds?",
-      "options": ["Teleport", "Read minds"]
-    },
-    {
-      "question": "Would you rather die in 10 years with no regrets or die in 50 years with many regrets?",
-      "options": ["Die in 10 years with no regrets", "Die in 50 years with many regrets?"]
+      "question": "Would you rather die in 10 years with no regrets, or die in 50 years with some regrets?",
+      "options": ["Die in 10 years with no regrets", "Die in 50 years with some regrets?"]
     },
     {
       "question": "Would you rather never lose your phone again or never lose your wallet again?",
       "options": ["Never lose your phone again", "Never lose your wallet again"]
     },
     {
-      "question": "Would you rather live in a beach house or in a cabin in the woods?",
+      "question": "Which would you rather live in?",
       "options": ["Beach house", "Cabin in the woods"]
     },
     {
-      "question": "Would you rather spend two years with your soul mate only to have them die and you never love again or spend your life with someone nice you settled for?",
-      "options": ["Two years with your soul mate and die", "Settle for someone nice for life"]
+      "question": "Would you rather spend 10 years with your soulmate only to have them die and you never love again, OR spend your life with someone nice you settled for?",
+      "options": ["10 years with your soulmate and never love again", "Settle for someone nice for life"]
     },
     {
-      "question": "Would you rather wear slippers or shoes for the rest of your life?",
-      "options": ["Slippers", "Shoes"]
+      "question": "Adidas or Nike?",
+      "options": ["Adidas", "Nike"]
     },
     {
       "question": "Do you prefer a good book or a good movie?",
       "options": ["Book", "Movie"]
     },
     {
-      "question": "Would you rather have three kids and no money, or no kids with $2,000,000?",
-      "options": ["Three kids and no money", "No kids with $2,000,000"]
+      "question": "Would you rather have three kids and no money, or no kids with $5M?",
+      "options": ["Three kids and no money", "No kids with $5M"]
     },
     {
       "question": "Would you rather know how you will die or when you will die?",
       "options": ["How I will die", "When I will die"]
     },
     {
-      "question": "Do you consider yourself an extrovert or introvert?",
+      "question": "Are you an extrovert or introvert?",
       "options": ["Extrovert", "Introvert"]
     },
     {
@@ -61,15 +57,11 @@
       "options": ["AIDS", "No sex forever"]
     },
     {
-      "question": "Would you allow your one of us to marry your sibling?",
+      "question": "Have you ever done anything illegal?",
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you done anything illegal?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you made someone cry before? (Excluding your parents)",
+      "question": "Have you made someone cry before? (Excluding family members)",
       "options": ["Yes", "No"]
     },
     {
@@ -77,11 +69,11 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "When it comes to relationships, do you think you are a settler or a reacher?",
+      "question": "When it comes to relationships, are you a settler or a reacher?",
       "options": ["Settler", "Reacher"]
     },
     {
-      "question": "Will you ever consider to be a househusband/housewife?",
+      "question": "Will you ever consider becoming a househusband/housewife?",
       "options": ["Yes", "No"]
     },
     {
@@ -90,11 +82,11 @@
     },
     {
       "question": "Which do you consider the most important in a relationship?",
-      "options": ["Physical chemistry", "Lifestyle compatibility", "Emotional compatibility", "Intellectual compatibility"]
+      "options": ["Similar interests and hobbies", "Similar sense of humour", "Similar maturity level", "Similar background"]
     },
     {
       "question": "What was the best phase in your life?",
-      "options": ["Secondary School", "Poly/JC", "Uni", "Working"]
+      "options": ["Secondary school", "Poly/JC", "NS", "Uni", "Working"]
     },
     {
       "question": "What was the worst phase in your life?",
@@ -105,16 +97,12 @@
       "options": ["Woof", "Meow"]
     },
     {
-      "question": "Would you ever take back someone who cheated?",
-      "options": ["Yes. I forgive and forget.", "No. I never give chances."]
+      "question": "Which do you think is your biggest strength?",
+      "options": ["Compassion", "Positivity", "Loyalty", "Trustworthy"]
     },
     {
-      "question": "Which do you consider to be your biggest strength?",
-      "options": ["Compassion", "Positivity", "Enthusiasm", "Trustworthy"]
-    },
-    {
-      "question": "Which characteristic do you hate the most in other people?",
-      "options": ["Dishonesty", "Impatience", "Narcissism", "Jealousy"]
+      "question": "What type of people annoys you the most?",
+      "options": ["People who complain about MRT breakdowns", "E-scooter riders that blast their techno music", "Insurance agents", "Aunties that humble-brag about their children"]
     },
     {
       "question": "Which are you most guilty of?",
@@ -130,7 +118,7 @@
     },
     {
       "question": "Favorite type of vacation?",
-      "options": ["Cultural", "Active", "Exotic"]
+      "options": ["Cultural", "Active", "Exotic", "Relaxed"]
     },
     {
       "question": "Choice of vacation?",
@@ -162,7 +150,7 @@
     },
     {
       "question": "What's your texting style?",
-      "options": ["Short", "Full sentences with correct grammer", "I just txt as quickly as pssible whtevr", "I rarely text"]
+      "options": ["Full sentences with correct grammar", "Multiple short messages", "I just txt as quickly as pssible whtevr", "I rarely text"]
     },
     {
       "question": "Which do you regret more?",
@@ -182,7 +170,7 @@
     },
     {
       "question": "Have you ever had detention?",
-      "options": ["Yes. I'm a badboi.", "No. I love following rules."]
+      "options": ["Yes. I'm a badboi", "No. I love following rules"]
     },
     {
       "question": "Have you ever been drunk in public?",
@@ -193,11 +181,7 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever been wasted in public?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever dated more than one person at once?",
+      "question": "Have you ever dated more than one person at the same time?",
       "options": ["Yes", "No"]
     },
     {
@@ -213,10 +197,6 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever showered with someone of the opposite sex?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you ever cheated in a test or exam?",
       "options": ["Yes", "No"]
     },
@@ -226,10 +206,6 @@
     },
     {
       "question": "Have you ever had doubts in your sexuality?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever smoked weed?",
       "options": ["Yes", "No"]
     },
     {
@@ -245,15 +221,11 @@
       "options": ["Yes. Make it rain!", "No"]
     },
     {
-      "question": "Have you ever given a suitor a fake number?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you ever kissed someone of the same sex?",
       "options": ["Yes", "No"]
     },
     {
-      "question": "If you got (someone) pregnant before marriage, would you (ask her to) abort the baby?",
+      "question": "If you (or your partner) got pregnant before marriage, would you abort the baby?",
       "options": ["Yes", "No"]
     },
     {
@@ -269,7 +241,7 @@
       "options": "players"
     },
     {
-      "question": "Who do you think will be the most successful in future?",
+      "question": "Who do you think will be the richest in future?",
       "options": "players"
     },
     {
@@ -277,7 +249,7 @@
       "options": "players"
     },
     {
-      "question": "Who do you think is bisexual?",
+      "question": "Who do you think is most likely to come out of the closet?",
       "options": "players"
     },
     {
@@ -294,6 +266,18 @@
     },
     {
       "question": "Who do you think has the lowest IQ?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think is the wisest?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think is the most mature?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think is the most immature?",
       "options": "players"
     },
     {
@@ -321,11 +305,15 @@
       "options": "players"
     },
     {
-      "question": "Who do you think is the sluttiest?",
+      "question": "Who do you think is a player?",
       "options": "players"
     },
     {
       "question": "Who do you think has the worst fasion sense?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think has the best fasion sense?",
       "options": "players"
     },
     {
@@ -334,6 +322,10 @@
     },
     {
       "question": "Who do you think would be the worst person to date?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think would be the best person to date?",
       "options": "players"
     },
     {
@@ -369,6 +361,10 @@
       "options": "players"
     },
     {
+      "question": "Who do you think is the least innocent?",
+      "options": "players"
+    },
+    {
       "question": "What is the last app you use on your phone before sleeping?",
       "options": ["Facebook", "YouTube", "Instagram", "WhatsApp"]
     },
@@ -378,6 +374,10 @@
     },
     {
       "question": "Who do you think has the highest alcohol tolerance?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think has the lowest alcohol tolerance?",
       "options": "players"
     },
     {
@@ -393,16 +393,8 @@
       "options": ["Americano", "Latte", "Mocha", "Cappuccino"]
     },
     {
-      "question": "Which would you rather be addicted to?",
-      "options": ["Gambling", "Smoking", "Drugs", "Drinking"]
-    },
-    {
-      "question": "Would you rather be gay/lesbian and unlimited partners or straight with an ugly partner?",
-      "options": "players"
-    },
-    {
-      "question": "Would you rather lick someone's balls or have a mouthful of pubic hair?",
-      "options": ["Lick balls", "Mouthful of hair"]
+      "question": "Would you rather lick someone's armpits or have a mouthful of hair?",
+      "options": ["Lick armpits", "Mouthful of hair"]
     },
     {
       "question": "Would you rather date an introvert or extrovert?",
@@ -417,11 +409,19 @@
       "options": "players"
     },
     {
+      "question": "Who gave you the best first impression?",
+      "options": "players"
+    },
+    {
       "question": "Who is the most different from your first impression of them and now?",
       "options": "players"
     },
     {
       "question": "Who do you think is the rudest person here?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think is the most pleasant person here?",
       "options": "players"
     },
     {
@@ -437,11 +437,11 @@
       "options": ["Macs", "KFC", "LJS", "Subway", "Pizza Hut"]
     },
     {
-      "question": "Who do you think will go bankrupt in the future?",
+      "question": "Who do you think will most likely go bankrupt in the future?",
       "options": "players"
     },
     {
-      "question": "Who do you think will get a divorce in the future?",
+      "question": "Who do you think will most likely get a divorce in the future?",
       "options": "players"
     },
     {
@@ -449,7 +449,7 @@
       "options": ["Spoilt brat", "Extremely lazy person"]
     },
     {
-      "question": "Favourite subject?",
+      "question": "Favourite subject in school?",
       "options": ["English", "Chinese", "Math", "Science"]
     },
     {
@@ -457,15 +457,23 @@
       "options": ["Yes", "No"]
     },
     {
-    "question": "Would you rather eat chocolate-flavored shit or shit-flavored chocolate?",
-    "options": ["Chocolate-flavored shit", "Shit-flavored chocolate"]
+      "question": "Would you rather eat chocolate-flavored shit or shit-flavored chocolate?",
+      "options": ["Chocolate-flavored shit", "Shit-flavored chocolate"]
+    },
+    {
+      "question": "McNuggets or McWings?",
+      "options": ["Nuggets", "Wings"]
+    },
+    {
+      "question": "Mala spicy level?",
+      "options": ["不辣", "小辣", "中辣", "大辣", "超辣"]
     },
     {
       "question": "Would you rather shit on someone or have someone shit on you?",
       "options": ["Shit on someone", "Have someone shit on you"]
     },
     {
-      "question": "Would you rather cheat and be caught or be cheated on and never be told?",
+      "question": "Would you rather cheat and be caught, or be cheated on and never be told?",
       "options": ["Cheat and be caught", "Be cheated on and never be told"]
     },
     {
@@ -477,12 +485,12 @@
       "options": ["Itchy", "Sticky"]
     },
     {
-      "question": "Would you rather drink a litre of piss or a litre of sweat?",
-      "options": ["Piss", "Sweat"]
+      "question": "Would you rather drink a litre of sweat or a litre of piss?",
+      "options": ["Sweat", "Piss"]
     },
     {
       "question": "Would you rather stay overseas for 5 years or not travel for 20 years?",
-      "options": ["Stay overseas", "Not travel"]
+      "options": ["Stay overseas for 5 years", "Not travel for 20 years"]
     },
     {
       "question": "Would you rather crap yourself once a year in public or every day in private?",
@@ -541,7 +549,7 @@
       "options": ["Nice house in a bad neighborhood", "Shitty house in a fancy neighborhood"]
     },
     {
-      "question": "Would you rather live without music or live without YouTube?",
+      "question": "Would you rather live without music or without YouTube?",
       "options": ["Without music", "Without YouTube"]
     },
     {
@@ -549,23 +557,15 @@
       "options": ["As the opposite gender", "As a kid again"]
     },
     {
-      "question": "Would you rather sneeze all the time or have hiccups all the time?",
-      "options": ["Sneeze", "Hiccups"]
-    },
-    {
       "question": "Would you rather die by a zombie attack or a shark attack?",
       "options": ["Zombie attack", "Shark attack"]
-    },
-    {
-      "question": "Would you rather always forget who you are or always forget who everyone else is?",
-      "options": ["Forget who you are", "Forget who everyone else is"]
     },
     {
       "question": "Would you rather have a rewind button or a pause button in your life?",
       "options": ["Rewind button", "Pause button"]
     },
     {
-      "question": "Would you rather fight 100 duck sized horses or one horse sized duck?",
+      "question": "Would you rather fight 100 duck sized horses, or 1 horse sized duck?",
       "options": ["100 duck sized horses", "1 horse sized duck"]
     },
     {
@@ -581,16 +581,100 @@
       "options": ["Never use social media again", "Never watch another movie or TV show"]
     },
     {
-      "question": "Would you rather be able to read minds or fly?",
-      "options": ["Read minds", "Be able to fly"]
-    },
-    {
       "question": "For $1M, would you live on an island for a year, without any contact to the outside world?",
       "options": ["Yes", "No"]
     },
     {
-      "question": "Who do you think will most likely burn the kitchen if they cook?",
+      "question": "Who do you think will most likely burn the kitchen down if they cook?",
       "options": "players"
+    },
+    {
+      "question": "How many exes do you have?",
+      "options": ["0", "1", "2", "3", "4", "> 5"]
+    },
+    {
+      "question": "Are you a foodie?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Milk tea with or without pearl?",
+      "options": ["With pearl", "No pearl"]
+    },
+    {
+      "question": "What super power would you want to have?",
+      "options": ["Read minds", "Be able to fly", "Super speed", "X-ray vision", "Invisibility"]
+    },
+    {
+      "question": "Would you rather..?",
+      "options": ["Sneeze all the time", "Hiccups all the time", "Fart all the time", "Burp all the time"]
+    },
+    {
+      "question": "谁讲的华语最差？",
+      "options": "players"
+    },
+    {
+      "question": "Would you rather marry one of your exes or marry a complete stranger?",
+      "options": ["Ex", "Stranger"]
+    },
+    {
+      "question": "Ketchup or chilli?",
+      "options": ["Ketchup", "chilli"]
+    },
+    {
+      "question": "French fries or potato chips?",
+      "options": ["French fries", "Potato chips"]
+    },
+    {
+      "question": "Chicken wing or chicken drumlet?",
+      "options": ["Wings", "Drums"]
+    },
+    {
+      "question": "Favourite Subway cookie?",
+      "options": ["Peanut Butter", "White Chip Macadamia Nut", "Oatmeal Raisin", "Raspberry Cheesecake", "Chocolate Chip", "Double Chocolate"]
+    },
+    {
+      "question": "Pancakes or waffles?",
+      "options": ["Pancakes", "Waffles"]
+    },
+    {
+      "question": "Favourite McDonalds ice cream?",
+      "options": ["McFlurry", "Vanilla/Choco Cone", "Sundae"]
+    },
+    {
+      "question": "Favourite type of chocolate?",
+      "options": ["White chocolate", "Milk chocolate", "Dark chocolate"]
+    },
+    {
+      "question": "How many alarms do you set before sleeping?",
+      "options": ["No alarm. Wake up naturally", "Just 1. You snooze you lose", "5. Maybe 6, just in case"]
+    },
+    {
+      "question": "If you had to lose weight, would you rather go on a diet or exercise regularly?",
+      "options": ["Diet", "Exercise"]
+    },
+    {
+      "question": "Milk tea sugar level?",
+      "options": ["0%", "25%", "50%", "75%", "100%", "125%"]
+    },
+    {
+      "question": "Would you rather be a tree or have to live in a tree for the rest of your life?",
+      "options": ["Be a tree", "Live in a tree"]
+    },
+    {
+      "question": "Would you rather be a giant hamster or a tiny rhino?",
+      "options": ["Giant hamster", "Tiny rhino"]
+    },
+    {
+      "question": "Would you rather be rich and ugly or poor and good-looking?",
+      "options": ["Rich and ugly", "Poor and good-looking"]
+    },
+    {
+      "question": "Would you rather give bad advice or take bad advice?",
+      "options": ["Give bad advice", "Take bad advice"]
+    },
+    {
+      "question": "Would you rather be born with an elephant trunk or a giraffe neck?",
+      "options": ["Elephant trunk", "Giraffe neck"]
     }
   ]
 }
