@@ -109,6 +109,12 @@ export default class QuestionSet extends Component {
         format: 'players',
         options: []
       });
+    } else if (qna.options === 'open') {
+      this.setState({
+        question: qna.question,
+        format: 'open',
+        options: []
+      });
     }
   }
 
@@ -181,12 +187,12 @@ export default class QuestionSet extends Component {
 
         {this.state.format === 'open' && (
           <div className="paddingBottom">
-            <FormInput placeholder="Open-ended (Best answer wins)" disabled />
+            <FormInput placeholder="Open-ended (best answer selected)" disabled />
           </div>
         )}
         {this.state.format === 'players' && (
           <div className="paddingBottom">
-            <FormInput placeholder="Players as options (excluding answering player)" disabled />
+            <FormInput placeholder="Players" disabled />
           </div>
         )}
 

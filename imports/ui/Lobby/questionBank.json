@@ -5,8 +5,8 @@
       "options": ["Horrible job for 10 years then retire", "Dream job til the day I die"]
     },
     {
-      "question": "Would you rather die in 10 years with no regrets, or die in 50 years with some regrets?",
-      "options": ["Die in 10 years with no regrets", "Die in 50 years with some regrets?"]
+      "question": "Would you rather die in 10 years with no regrets, or die in 50 years with many regrets?",
+      "options": ["Die in 10 years with no regrets", "Die in 50 years with many regrets?"]
     },
     {
       "question": "Would you rather never lose your phone again or never lose your wallet again?",
@@ -15,6 +15,10 @@
     {
       "question": "Which would you rather live in?",
       "options": ["Beach house", "Cabin in the woods"]
+    },
+    {
+      "question": "What type of house would you want to live in?",
+      "options": ["2-room HDB", "3-room HDB", "4-room HDB", "5-room HDB", "Landed property", "Condo"]
     },
     {
       "question": "Would you rather spend 10 years with your soulmate only to have them die and you never love again, OR spend your life with someone nice you settled for?",
@@ -41,16 +45,16 @@
       "options": ["Extrovert", "Introvert"]
     },
     {
-      "question": "What age do you think you'll be married?",
-      "options": ["Below 28", "28-30",  "30-32", "Above 32"]
+      "question": "What age do you think you'll get married?",
+      "options": ["Before 28", "28-29",  "30-32", "After 32"]
     },
     {
       "question": "Are you confrontational?",
       "options": ["Yes. FITE ME.",  "No. I'm a pussy."]
     },
     {
-      "question": "Would you rather be loved or love?",
-      "options": ["Be loved",  "Love"]
+      "question": "Would you rather love or be loved?",
+      "options": ["Love", "Be loved"]
     },
     {
       "question": "Would you rather have AIDS or no sex forever?",
@@ -62,10 +66,6 @@
     },
     {
       "question": "Have you made someone cry before? (Excluding family members)",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Do you consider yourself vain?",
       "options": ["Yes", "No"]
     },
     {
@@ -98,7 +98,7 @@
     },
     {
       "question": "Which do you think is your biggest strength?",
-      "options": ["Compassion", "Positivity", "Loyalty", "Trustworthy"]
+      "options": ["Compassion", "Positivity", "Humility", "Trustworthy"]
     },
     {
       "question": "What type of people annoys you the most?",
@@ -117,12 +117,16 @@
       "options": ["Lust", "Gluttony", "Greed", "Sloth", "Wrath", "Envy", "Pride"]
     },
     {
-      "question": "Favorite type of vacation?",
+      "question": "Favourite type of vacation?",
       "options": ["Cultural", "Active", "Exotic", "Relaxed"]
     },
     {
-      "question": "Choice of vacation?",
-      "options": ["USA", "Europe", "Asia"]
+      "question": "Which continent do you most want to visit?",
+      "options": ["North America", "South America", "Antarctica", "Europe", "Asia", "Africa", "Australia"]
+    },
+    {
+      "question": "If you could travel to any country in the world, where would you go?",
+      "options": "open"
     },
     {
       "question": "Choice of honeymoon?",
@@ -130,15 +134,39 @@
     },
     {
       "question": "Pick your favourite activity",
-      "options": ["Taking a stroll at the park", "Exercising", "Enjoying a cup of tea/coffee", "Reading a book"]
+      "options": ["Watching a movie", "Exercising", "Playing video games", "Playing a musical instrument", "Reading/journaling"]
     },
     {
-      "question": "Which is your favorite TV show?",
+      "question": "What activity makes you feel the happiest?",
+      "options": "open"
+    },
+    {
+      "question": "Which is your favourite TV show?",
       "options": ["Friends", "Game of Thrones", "Running Man", "Master Chef"]
     },
     {
       "question": "Which type of TV drama do you enjoy the most?",
       "options": ["Korean", "American", "Hong Kong", "Mediacorp"]
+    },
+    {
+      "question": "What is your favourite TV show?",
+      "options": "open"
+    },
+    {
+      "question": "What is your favourite food?",
+      "options": "open"
+    },
+    {
+      "question": "What is your most hated food?",
+      "options": "open"
+    },
+    {
+      "question": "What is your favourite drink?",
+      "options": "open"
+    },
+    {
+      "question": "What is your favourite Disney movie?",
+      "options": "open"
     },
     {
       "question": "Favourite movie genre?",
@@ -321,11 +349,15 @@
       "options": "players"
     },
     {
-      "question": "Who do you think would be the worst person to date?",
+      "question": "Who do you think is the worst person to date?",
       "options": "players"
     },
     {
-      "question": "Who do you think would be the best person to date?",
+      "question": "Who do you think is the best person to date?",
+      "options": "players"
+    },
+    {
+      "question": "Ideal partner?",
       "options": "players"
     },
     {
@@ -389,8 +421,12 @@
       "options": ["Betray a close friend", "Lose my partner"]
     },
     {
-      "question": "Favourite type of coffee?",
-      "options": ["Americano", "Latte", "Mocha", "Cappuccino"]
+      "question": "How do you like your kopi?",
+      "options": ["Kopi", "Kopi Peng", "Kopi O", "Kopi C", "Kopi Kosong", "Kopi O Kosong"]
+    },
+    {
+      "question": "Kopi or teh?",
+      "options": ["Kopi", "Teh"]
     },
     {
       "question": "Would you rather lick someone's armpits or have a mouthful of hair?",
@@ -437,6 +473,10 @@
       "options": ["Macs", "KFC", "LJS", "Subway", "Pizza Hut"]
     },
     {
+      "question": "What is your favourite fast food?",
+      "options": "open"
+    },
+    {
       "question": "Who do you think will most likely go bankrupt in the future?",
       "options": "players"
     },
@@ -469,7 +509,7 @@
       "options": ["不辣", "小辣", "中辣", "大辣", "超辣"]
     },
     {
-      "question": "Would you rather shit on someone or have someone shit on you?",
+      "question": "Would you rather shit on someone you like or have someone you like shit on you?",
       "options": ["Shit on someone", "Have someone shit on you"]
     },
     {
@@ -529,8 +569,8 @@
       "options": ["See your ex's texts", "Have them see your texts"]
     },
     {
-      "question": "Would you rather eat a whole jar of mayonnaise or a whole tub of butter?",
-      "options": ["Mayonnaise", "Butter"]
+      "question": "Would you rather eat a whole jar of mayo or a whole tub of butter?",
+      "options": ["Mayo", "Butter"]
     },
     {
       "question": "Would you rather pee every time you stand up or poop every time you sit down?",
@@ -561,8 +601,8 @@
       "options": ["Zombie attack", "Shark attack"]
     },
     {
-      "question": "Would you rather have a rewind button or a pause button in your life?",
-      "options": ["Rewind button", "Pause button"]
+      "question": "Would you rather have in your life?",
+      "options": ["Rewind button", "Pause button", "Fast-forward button"]
     },
     {
       "question": "Would you rather fight 100 duck sized horses, or 1 horse sized duck?",
@@ -586,6 +626,10 @@
     },
     {
       "question": "Who do you think will most likely burn the kitchen down if they cook?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think is the worst cook?",
       "options": "players"
     },
     {
@@ -669,12 +713,168 @@
       "options": ["Rich and ugly", "Poor and good-looking"]
     },
     {
+      "question": "Would you rather be fit but poor or rich but obese?",
+      "options": ["Fit but poor", "Rich but obese"]
+    },
+    {
       "question": "Would you rather give bad advice or take bad advice?",
       "options": ["Give bad advice", "Take bad advice"]
     },
     {
+      "question": "Favourite type of meat?",
+      "options": ["Chicken", "Beef", "Pork", "Fish", "Vegetarian"]
+    },
+    {
       "question": "Would you rather be born with an elephant trunk or a giraffe neck?",
       "options": ["Elephant trunk", "Giraffe neck"]
+    },
+    {
+      "question": "What is the top on your bucket list?",
+      "options": "open"
+    },
+    {
+      "question": "Which family member are you closest to?",
+      "options": "open"
+    },
+    {
+      "question": "If you could be more like someone else, who would you choose?",
+      "options": "players"
+    },
+    {
+      "question": "Which family member are you closest to?",
+      "options": "open"
+    },
+    {
+      "question": "What is one object that holds the greatest value to you?",
+      "options": "open"
+    },
+    {
+      "question": "If you win $5M tomorrow, what is the first thing you would do with the money?",
+      "options": "open"
+    },
+    {
+      "question": "What is a relationship deal-breaker for you?",
+      "options": "open"
+    },
+    {
+      "question": "Finish this sentence: \"I wish I had someone to share...\"",
+      "options": "open"
+    },
+    {
+      "question": "What is your favourite sport?",
+      "options": "open"
+    },
+    {
+      "question": "If you could choose a superpower, what would it be?",
+      "options": "open"
+    },
+    {
+      "question": "What is your dream job?",
+      "options": "open"
+    },
+    {
+      "question": "Have you ever had surgery?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "What would you do if you only had 24 hours left to live?",
+      "options": "open"
+    },
+    {
+      "question": "What was your childhood ambition?",
+      "options": "open"
+    },
+    {
+      "question": "What type of people do you find the most annoying?",
+      "options": "open"
+    },
+    {
+      "question": "If you had to change your degree/diploma, what would you study?",
+      "options": "open"
+    },
+    {
+      "question": "Have you ever cried from a movie or TV show?",
+      "options": ["Yes", "No"]
+    },
+    {
+      "question": "Do you think you are good-looking?",
+      "options": ["Yes I am gorgeous", "Nah I'm humble"]
+    },
+    {
+      "question": "What is your #1 fear?",
+      "options": "open"
+    },
+    {
+      "question": "What makes you angry?",
+      "options": "open"
+    },
+    {
+      "question": "What is your 'addiction'?",
+      "options": "open"
+    },
+    {
+      "question": "How long do you usually take to get ready in the morning?",
+      "options": ["5 mins", "30 mins", "1 hour", "1.5 hours", "> 1.5 hours"]
+    },
+    {
+      "question": "If you had unlimited money to start your own business, what would it be?",
+      "options": "open"
+    },
+    {
+      "question": "What is your favourite day of the week?",
+      "options": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    },
+    {
+      "question": "If you didn't have to sleep, what would you do with the extra time?",
+      "options": "open"
+    },
+    {
+      "question": "What hobby would you get into if time and money weren't an issue?",
+      "options": "open"
+    },
+    {
+      "question": "Complete this sentence: \"I would win 1st place at a ___ competition\".",
+      "options": "open"
+    },
+    {
+      "question": "What movie title best describes your life?",
+      "options": "open"
+    },
+    {
+      "question": "What is your most used emoji?",
+      "options": "open"
+    },
+    {
+      "question": "What is something you will NEVER do again?",
+      "options": "open"
+    },
+    {
+      "question": "What are you most insecure about?",
+      "options": "open"
+    },
+    {
+      "question": "Choose a Chris from the Marvel Cinematic Universe",
+      "options": ["Chris Evans (Captain America)", "Chris Hemsworth (Thor)", "Chris Pratt (Star-Lord, Guardians of the Galaxy)"]
+    },
+    {
+      "question": "What is something that makes you feel good about yourself?",
+      "options": "open"
+    },
+    {
+      "question": "Would you rather sing or dance in front of a crowd?",
+      "options": ["Sing", "Dance"]
+    },
+    {
+      "question": "If you had to perform in a talent show, what would your talent be?",
+      "options": "open"
+    },
+    {
+      "question": "Who would be the first to die in a zombie apocalypse?",
+      "options": "players"
+    },
+    {
+      "question": "Who could pull off the the bald look the best?",
+      "options": "players"
     }
   ]
 }
