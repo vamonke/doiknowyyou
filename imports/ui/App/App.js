@@ -49,7 +49,7 @@ export default class App extends Component {
           return reject(error);
         }
         if (player && player.gameId) {
-          Session.setTemp('currentUserId', player._id);
+          Session.setPersistent('currentUserId', player._id);
           this.showHome(); // For closing modal
           resolve(true);
           return this.props.history.push(`/lobby/${player.gameId}`);

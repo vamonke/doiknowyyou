@@ -41,9 +41,9 @@ class Game extends Component {
     window.onunload = () => {};
   }
 
-  componentDidMount() {
-    Session.makePersistent('currentUserId');
-  }
+  // componentDidMount() {
+  //   Session.makePersistent('currentUserId');
+  // }
 
   componentDidUpdate() {
     const previousQuestion = this.getPreviousQuestion();
@@ -116,7 +116,7 @@ class Game extends Component {
           return reject(error);
         }
         if (player && player.gameId) {
-          Session.setTemp('currentUserId', player._id);
+          Session.setPersistent('currentUserId', player._id);
           this.props.history.push(`/lobby/${player.gameId}`);
           return resolve(true);
         }
