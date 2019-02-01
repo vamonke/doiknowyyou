@@ -25,16 +25,16 @@
       "options": ["10 years with your soulmate and never love again", "Settle for someone nice for life"]
     },
     {
-      "question": "Adidas or Nike?",
-      "options": ["Adidas", "Nike"]
+      "question": "Favourite sports brand?",
+      "options": ["Adidas", "Nike", "Puma", "Under Amour", "Reebok", "New Balance"]
     },
     {
       "question": "Do you prefer a good book or a good movie?",
       "options": ["Book", "Movie"]
     },
     {
-      "question": "Would you rather have three kids and no money, or no kids with $5M?",
-      "options": ["Three kids and no money", "No kids with $5M"]
+      "question": "Would you rather have three kids and no money, or no kids with $5,000,000?",
+      "options": ["Three kids and no money", "No kids with $5,000,000"]
     },
     {
       "question": "Would you rather know how you will die or when you will die?",
@@ -46,7 +46,7 @@
     },
     {
       "question": "What age do you think you'll get married?",
-      "options": ["Before 28", "28-29",  "30-32", "After 32"]
+      "options": ["Before 25", "26-27", "28-29",  "30-32", "After 32"]
     },
     {
       "question": "Are you confrontational?",
@@ -221,10 +221,6 @@
       "options": ["Yes", "No"]
     },
     {
-      "question": "Have you ever been on a blind date?",
-      "options": ["Yes", "No"]
-    },
-    {
       "question": "Have you ever cheated in a test or exam?",
       "options": ["Yes", "No"]
     },
@@ -239,14 +235,6 @@
     {
       "question": "Have you ever bought undergarments for your partner?",
       "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever gotten together with your friend's ex?",
-      "options": ["Yes", "No"]
-    },
-    {
-      "question": "Have you ever gone to a strip club?",
-      "options": ["Yes. Make it rain!", "No"]
     },
     {
       "question": "Have you ever kissed someone of the same sex?",
@@ -353,6 +341,10 @@
       "options": "players"
     },
     {
+      "question": "Who is the last person you would choose to date?",
+      "options": "players"
+    },
+    {
       "question": "Who do you think is the best person to date?",
       "options": "players"
     },
@@ -366,6 +358,10 @@
     },
     {
       "question": "If you were stranded on a deserted island, who would you NOT want to be stranded with?",
+      "options": "players"
+    },
+    {
+      "question": "Who do you think is most likely to come out of the closet?",
       "options": "players"
     },
     {
@@ -387,6 +383,10 @@
     {
       "question": "Ideal partner?",
       "options": ["Quiet and intelligent", "Loud and outgoing"]
+    },
+    {
+      "question": "Would you enter a long distance relationship?",
+      "options": ["Yes", "No"]
     },
     {
       "question": "Who do you think is the most innocent?",
@@ -601,7 +601,7 @@
       "options": ["Zombie attack", "Shark attack"]
     },
     {
-      "question": "Would you rather have in your life?",
+      "question": "Which would you rather have in your life?",
       "options": ["Rewind button", "Pause button", "Fast-forward button"]
     },
     {
@@ -741,15 +741,11 @@
       "options": "players"
     },
     {
-      "question": "Which family member are you closest to?",
-      "options": "open"
-    },
-    {
       "question": "What is one object that holds the greatest value to you?",
       "options": "open"
     },
     {
-      "question": "If you win $5M tomorrow, what is the first thing you would do with the money?",
+      "question": "If you win $5,000,000 tomorrow, what is the first thing you would do with the money?",
       "options": "open"
     },
     {
@@ -765,7 +761,7 @@
       "options": "open"
     },
     {
-      "question": "If you could choose a superpower, what would it be?",
+      "question": "What superpower do you want?",
       "options": "open"
     },
     {
@@ -789,7 +785,7 @@
       "options": "open"
     },
     {
-      "question": "If you had to change your degree/diploma, what would you study?",
+      "question": "If you had to choose another course of study, what would you pick?",
       "options": "open"
     },
     {
@@ -833,7 +829,7 @@
       "options": "open"
     },
     {
-      "question": "Complete this sentence: \"I would win 1st place at a ___ competition\".",
+      "question": "Complete this sentence: \"I would win 1st place at a ___ competition\"",
       "options": "open"
     },
     {
@@ -875,6 +871,34 @@
     {
       "question": "Who could pull off the the bald look the best?",
       "options": "players"
+    },
+    {
+      "question": "Who do you think will die alone?",
+      "options": "players"
+    },
+    {
+      "question": "If you could have any pet in the world, what animal would you pick?",
+      "options": "players"
+    },
+    {
+      "question": "If you could be any animal, what animal would you like to be?",
+      "options": "open"
+    },
+    {
+      "question": "Describe your ideal partner",
+      "options": "open"
+    },
+    {
+      "question": "If you could only eat one thing for the rest of your life, what would it be?",
+      "options": "open"
+    },
+    {
+      "question": "Favourite bubble tea?",
+      "options": "open"
+    },
+    {
+      "question": "What do you usually order at Macs?",
+      "options": "open"
     }
   ]
 }
