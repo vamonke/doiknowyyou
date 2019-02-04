@@ -17,6 +17,7 @@
         "object-curly-newline": "off",
         "comma-dangle": "off",
         "object-shorthand": "off",
+        "prefer-template": "off",
         "no-else-return": ["error", { "allowElseIf": true }]
     }
 }

@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Answers } from '../../api/answers.js';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'elemental';
 
-import { Modal, ModalHeader,  ModalBody, ModalFooter } from 'elemental';
+import { Answers } from '../../api/answers.js';
 
 import ResultsTable from './ResultsTable.js';
 import './QuestionResults.css';
 
 function QuestionResultsModal(props) {
-  let recipient = props.players.find(player => (player._id === props.question.recipientId)) || '';
-  let modalHeader = (
+  const recipient = props.players.find(player => (player._id === props.question.recipientId)) || '';
+  const modalHeader = (
     <div className="modalHeader">
       {'Round ' + props.question.round + ' results'}
     </div>
   );
 
   function displayCorrect() {
-    if (!props.question.correctAnswer || props.question.correctAnswer.length === 0)
+    if (!props.question.correctAnswer || props.question.correctAnswer.length === 0) {
       return '-';
-    let correctAnswers = props.question.correctAnswer.map(correct => props.question.options[correct]);
-    if (correctAnswers.length === 1)
+    }
+    const correctAnswers = props.question.correctAnswer
+      .map(correct => props.question.options[correct])
+      .filter((v, i, a) => a.indexOf(v) === i);
+    if (correctAnswers.length === 1) {
       return correctAnswers[0];
+    }
     return correctAnswers.map((answer, index) => {
-      console.log(index);
       return (
         <div>
           {answer}
-          {correctAnswers.length-1 !== index && (<hr />)}
+          {correctAnswers.length - 1 !== index && (<hr />)}
         </div>
       );
     });
@@ -57,7 +60,7 @@ function QuestionResultsModal(props) {
         />
       </ModalBody>
       <ModalFooter>
-        <button className="blueButton" onClick={props.toggleModal}>
+        <button type="button" className="blueButton" onClick={props.toggleModal}>
           Continue
         </button>
       </ModalFooter>
@@ -75,7 +78,7 @@ QuestionResultsModal.defaultProps = {
   },
   answers: [],
   players: [],
-}
+};
 
 export default createContainer((props) => {
   let answers = [];

@@ -170,6 +170,7 @@ class Game extends Component {
               question={currentQuestion}
               recipient={recipient}
               viewer={this.props.viewer}
+              playerCount={this.props.players.length}
             />
             {(this.props.viewer && this.props.viewer.name === 'Varick') && (
               <button type="button" onClick={this.completeQuestion} className="redButton">
@@ -276,6 +277,9 @@ Game.propTypes = {
     _id: PropTypes.string,
     name: PropTypes.string,
   }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 };
 
 Game.defaultProps = {
@@ -290,6 +294,9 @@ Game.defaultProps = {
     _id: '',
     name: '',
     isReady: false,
+  },
+  history: {
+    push: () => null,
   },
 };
 

@@ -36,7 +36,7 @@ class CurrentQuestionBox extends Component {
   }
 
   render() {
-    const { question, recipient, viewer } = this.props;
+    const { question, recipient, viewer, playerCount } = this.props;
     const { selected } = this.state;
     const isLoading = !question.text || !recipient.name;
     if (isLoading) {
@@ -74,14 +74,17 @@ class CurrentQuestionBox extends Component {
             question={question}
             recipientName={recipient.name}
             submitAnswer={this.submitOpenAnswer}
+            playerCount={playerCount}
           />
         ) : (
           // Close-ended question
           <div>
             <div className="marginBottom">
-              {(recipient._id !== viewer._id) && (
-                `Guess ${recipient.name}'s answer`
-              )}
+              <i>
+                {(recipient._id !== viewer._id) && (
+                  `Guess ${recipient.name}'s answer`
+                )}
+              </i>
             </div>
             <Row>
               {question.options.map((option, index, array) => (
@@ -102,7 +105,7 @@ class CurrentQuestionBox extends Component {
               ))}
             </Row>
             {(recipient._id === viewer._id) && (
-              <div id="honestly">(Answer honestly and let the other players guess your answer)</div>
+              <div id="honestly"><i>Answer honestly and let the other players guess your answer</i></div>
             )}
           </div>
         )}
@@ -123,6 +126,7 @@ CurrentQuestionBox.propTypes = {
   viewer: PropTypes.shape({
     _id: PropTypes.string,
   }),
+  playerCount: PropTypes.number,
 };
 
 CurrentQuestionBox.defaultProps = {
@@ -138,6 +142,7 @@ CurrentQuestionBox.defaultProps = {
     _id: '',
     isReady: false,
   },
+  playerCount: 100,
 };
 
 export default createContainer(props => props, CurrentQuestionBox);

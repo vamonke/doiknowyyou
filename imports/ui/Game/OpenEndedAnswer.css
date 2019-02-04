@@ -55,3 +55,12 @@
 .selected .tick {
   opacity: 1;
 }
+
+.openEndedGuess {
+  display: inline-block;
+  font-weight: bold;
+  padding: 3px 13px;
+  margin: 10px 5px 0;
+  border-radius: 5px;
+  background-color: #f2f2f2;  
+}
