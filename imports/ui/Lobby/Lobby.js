@@ -7,6 +7,7 @@ import { Glyph } from 'elemental';
 import { Games } from '../../api/games';
 import { Players } from '../../api/players';
 
+import JoinLobby from './JoinLobby';
 import Countdown from './Countdown';
 import QuestionSet from './QuestionSet';
 import PlayersCard from './PlayersCard';
@@ -31,7 +32,7 @@ class Lobby extends Component {
     this.editQuestions = this.editQuestions.bind(this);
     this.waitingBooth = this.waitingBooth.bind(this);
     this.startGame = this.startGame.bind(this);
-    this.checkSessionId = this.checkSessionId.bind(this);
+    // this.checkSessionId = this.checkSessionId.bind(this);
     this.state = {
       stage: 0,
       questions: [{}, {}, {}],
@@ -52,7 +53,7 @@ class Lobby extends Component {
   componentDidUpdate() {
     const { game: { code } } = this.props;
     document.title = `Game ${code}`;
-    this.checkSessionId();
+    // this.checkSessionId();
   }
 
   componentWillUnmount() {
@@ -60,20 +61,20 @@ class Lobby extends Component {
     window.onunload = () => {};
   }
 
-  checkSessionId() {
-    const { players } = this.props;
-    const currentUserId = Session.get('currentUserId');
-    if (
-      !currentUserId || (
-        players.length > 0
-        && !players.map(player => player._id).includes(currentUserId)
-      )
-    ) {
-      console.error('Player not found');
-      const { history: push } = this.props;
-      push('/');
-    }
-  }
+  // checkSessionId() {
+  //   const { players } = this.props;
+  //   const currentUserId = Session.get('currentUserId');
+  //   if (
+  //     !currentUserId || (
+  //       players.length > 0
+  //       && !players.map(player => player._id).includes(currentUserId)
+  //     )
+  //   ) {
+  //     console.error('Player not found');
+  //     const { history: push } = this.props;
+  //     push('/');
+  //   }
+  // }
 
   changeQuestion(questionNo, qna, direction) {
     const { questions, stage } = this.state;
@@ -139,11 +140,26 @@ class Lobby extends Component {
       players,
       viewer,
     } = this.props;
+
+    if (!game._id) {
+      return (
+        <div className="center">
+          <div id="greySpinner" />
+        </div>
+      );
+    }
+
+    if (!viewer._id) {
+      return (
+        <JoinLobby game={game} />
+      );
+    }
+
     const { stage } = this.state;
     const playerNames = getPlayerNames(players);
     return (
       <div>
-        <div className="center relative">
+        <div className="center paddingBottom">
           {'Game Code: '}
           <strong>{code}</strong>
         </div>
@@ -165,7 +181,6 @@ class Lobby extends Component {
         <div className="header">players</div>
         <PlayersCard players={players} viewer={viewer} />
 
-        <div className="paddingTop paddingBottom" />
         <div className="center">
           <a href="/">Home</a>
         </div>
