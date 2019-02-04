@@ -197,6 +197,21 @@ class Game extends Component {
           ended={this.props.game.status === 'ended'}
         />
 
+        {this.props.game.status === 'ended' && (
+          <div className="paddingBottom">
+            <button
+              type="button"
+              className="greenButton"
+              onClick={this.restartGame}
+              disabled={this.state.restartDisabled}
+            >
+              Restart
+            </button>
+            <div className="paddingBottom" />
+          </div>
+        )}
+
+
         <div className="header">
           previous questions
         </div>
@@ -228,19 +243,6 @@ class Game extends Component {
             modalIsOpen={this.state.modalIsOpen}
             toggleModal={this.toggleModal}
           />
-        )}
-
-        <div className="paddingTop paddingBottom" />
-
-        {this.props.game.status === 'ended' && (
-          <button
-            type="button"
-            className="greenButton"
-            onClick={this.restartGame}
-            disabled={this.state.restartDisabled}
-          >
-            Restart
-          </button>
         )}
 
         <div className="center paddingTop">

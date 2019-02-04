@@ -141,7 +141,7 @@ class Lobby extends Component {
       viewer,
     } = this.props;
 
-    if (!game._id) {
+    if (!game._id) { // Wait for server response
       return (
         <div className="center">
           <div id="greySpinner" />
