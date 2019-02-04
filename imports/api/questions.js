@@ -6,23 +6,19 @@ import { Answers } from './answers';
 export const Questions = new Mongo.Collection('questions');
 
 if (Meteor.isServer) {
-  Meteor.publish('questions', function questionsPublication() {
-    return Questions.find();
-  });
+  Meteor.publish('questions', () => Questions.find());
 }
 
 Meteor.methods({
   'questions.insert'(gameId, playerId, qna) {
-    qna.filter(set => {
-      return set.question // remove empty questions
-    }).forEach((set, i) => {
+    qna.filter(set => set.question).forEach((set, i) => { // remove empty questions
       Questions.upsert({
         gameId: gameId,
-        playerId: playerId,
+        authorId: playerId,
         number: i + 1,
       }, {
         gameId: gameId,
-        playerId: playerId,
+        authorId: playerId,
         number: i + 1,
         round: null,
         text: set.question,
@@ -37,16 +33,16 @@ Meteor.methods({
     });
   },
   'questions.setPlayersAsOptions'(gameId) { // set player names as options
-    let playerNames = Players.find({ gameId: gameId }).map(player => player.name);
+    const playerNames = Players.find({ gameId: gameId }).map(player => player.name);
     Questions.update({ gameId: gameId, format: 'players' }, {
       $set: { options: playerNames }
     }, { multi: true });
   },
   'questions.select'(gameId, round) { // choose a question
-    let unaskedIds = Questions.find({ gameId: gameId, status: 'unasked' }, { fields: { _id: 1 } }).fetch();
+    const unaskedIds = Questions.find({ gameId: gameId, status: 'unasked' }, { fields: { _id: 1 } }).fetch();
     if (unaskedIds.length !== 0) {
-      let recipientId = Meteor.call('players.getRecipient', gameId);
-      let questionId = unaskedIds[Math.floor(Math.random() * unaskedIds.length)]._id;
+      const recipientId = Meteor.call('players.getRecipient', gameId);
+      const questionId = unaskedIds[Math.floor(Math.random() * unaskedIds.length)]._id;
       Questions.update(questionId, {
         $set: {
           status: 'asking',
@@ -59,11 +55,10 @@ Meteor.methods({
           currentQuestion: questionId,
         }
       });
-      console.log('New question: ' + questionId);
+      console.log(`New question: ${questionId}`);
     } else { // End game when there no more unasked questions
       Meteor.call('players.deselect', gameId);
       Meteor.call('games.end', gameId);
-      return null;
     }
   },
   'questions.complete'(id) {
@@ -75,10 +70,10 @@ Meteor.methods({
     });
     // Tabulate scores
     const question = Questions.findOne(id);
-    Answers.find({ questionId: id }).fetch().map((answer) => {
+    Answers.find({ questionId: id }).fetch().forEach((answer) => {
       if (
-        (answer.playerId !== question.recipientId) &&
-        (question.correctAnswer.includes(answer.selected))
+        (answer.playerId !== question.recipientId)
+        && (question.correctAnswer.includes(answer.selected))
       ) {
         Meteor.call('players.addScore', answer.playerId);
       }
@@ -86,20 +81,25 @@ Meteor.methods({
     Meteor.call('questions.select', question.gameId, question.round + 1);
   },
   async 'questions.addOption'(id, answer) { // insert open-ended option
-    await Questions.update(id, { $push: { options: answer } });
+    await Questions.update(id, { $push: { options: answer } }); // insert option
     const question = Questions.findOne(id);
-    const answerIndex = question.options.findIndex(option => option == answer);
+    const answerIndex = question.options.findIndex(option => option === answer); // get answer index
     return answerIndex;
   },
   'questions.answer'(playerId, id, answer) { // set the recipient's answer as the correct answer
-    let question = Questions.findOne(id);
+    const question = Questions.findOne(id);
+    let answerArray = answer;
     if (playerId === question.recipientId) {
-      if (!Array.isArray(answer))
-        answer = [answer];
-      answer = answer.map(Number);
+      if (!Array.isArray(answerArray)) {
+        answerArray = [answerArray];
+      }
+      answerArray = answerArray.map(Number);
       Questions.update({ _id: id }, {
-        $set: { correctAnswer: answer }
+        $set: { correctAnswer: answerArray }
       });
     }
   },
+  'questions.removeByPlayerId'(playerId) {
+    Questions.remove({ authorId: playerId, status: 'unasked' });
+  }
 });

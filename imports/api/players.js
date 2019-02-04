@@ -10,16 +10,17 @@ if (Meteor.isServer) {
 Meteor.methods({
   'players.insert'(name, gameId, gameCode) {
     console.log('players.insert', name, gameId, gameCode);
-    if (!gameId) {
+    let validGameId = gameId;
+    if (!validGameId) {
       const game = Games.findOne({ code: gameCode });
       if (game) {
-        gameId = game._id;
+        validGameId = game._id;
       } else {
         throw new Meteor.Error('wrong-game-code', 'Incorrect game code');
       }
     }
     const player = {
-      gameId: gameId,
+      gameId: validGameId,
       name: name,
       score: 0,
       isReady: false,
@@ -34,6 +35,7 @@ Meteor.methods({
   'players.remove'(id) {
     console.log('players.remove:', id);
     Players.remove(id);
+    Meteor.call('questions.removeByPlayerId', id);
   },
   'players.checkAllReady'(gameId) {
     const playerReady = Players.find({ gameId: gameId }).map(player => player.isReady);
