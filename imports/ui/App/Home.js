@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Row, Col } from 'elemental';
 
-import styles from './App.css';
+import './App.css';
 
 export default function Home(props) {
   return (
@@ -11,18 +11,18 @@ export default function Home(props) {
       <div className="logo">
         Do I
         <br />
-        Know
+        know
         <br />
-        You?
+        you?
       </div>
       <Row className="buttonsWrap">
         <Col sm="1/2">
-          <button className="redButton marginTopBottom" onClick={props.showCreateGame} type="success">
+          <button type="button" className="redButton marginTopBottom" onClick={props.showCreateGame}>
             New Game
           </button>
         </Col>
         <Col sm="1/2">
-          <button className="greenButton marginTopBottom" onClick={props.showJoinGame} type="primary">
+          <button type="button" className="greenButton marginTopBottom" onClick={props.showJoinGame}>
             Join Game
           </button>
         </Col>
