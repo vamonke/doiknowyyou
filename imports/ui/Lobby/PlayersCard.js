@@ -5,6 +5,7 @@ import { Table } from 'elemental';
 import EditName from './EditName';
 
 export default function PlayersCard(props) {
+  const encodedText = encodeURI(window.location.href);
   const { players, viewer } = props;
   return (
     <div className="card">
@@ -38,6 +39,14 @@ export default function PlayersCard(props) {
           })}
         </tbody>
       </Table>
+      <div className="center border paddingTop">
+        <a
+          href={`https://wa.me/?text=${encodedText}`}
+          data-action="share/whatsapp/share"
+        >
+          Invite friends
+        </a>
+      </div>
     </div>
   );
 }

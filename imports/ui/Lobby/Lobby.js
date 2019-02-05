@@ -39,16 +39,16 @@ class Lobby extends Component {
     };
   }
 
-  componentWillMount() {
-    window.onbeforeunload = (event) => {
-      const confirmationMessage = 'Exit game?';
-      // eslint-disable-next-line no-param-reassign
-      (event || window.event).returnValue = confirmationMessage; // Gecko + IE
-      return confirmationMessage; // Webkit, Safari, Chrome
-    };
-    window.onpagehide = removePlayer;
-    window.onunload = removePlayer;
-  }
+  // componentWillMount() {
+  //   window.onbeforeunload = (event) => {
+  //     const confirmationMessage = 'Exit game?';
+  //     // eslint-disable-next-line no-param-reassign
+  //     (event || window.event).returnValue = confirmationMessage; // Gecko + IE
+  //     return confirmationMessage; // Webkit, Safari, Chrome
+  //   };
+  //   window.onpagehide = removePlayer;
+  //   window.onunload = removePlayer;
+  // }
 
   componentDidUpdate() {
     const { game: { code } } = this.props;
@@ -56,10 +56,10 @@ class Lobby extends Component {
     // this.checkSessionId();
   }
 
-  componentWillUnmount() {
-    window.onpagehide = () => {};
-    window.onunload = () => {};
-  }
+  // componentWillUnmount() {
+  //   window.onpagehide = () => {};
+  //   window.onunload = () => {};
+  // }
 
   // checkSessionId() {
   //   const { players } = this.props;
