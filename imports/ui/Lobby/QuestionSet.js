@@ -28,18 +28,18 @@ export default class QuestionSet extends Component {
   setOptionType(type) {
     let options = [];
     let format;
-    if (type === 0) { // True/False
+    if (type === 0) { // Custom
       format = 'mcq';
-      options = ['True', 'False'];
+      options = ['', ''];
     } else if (type === 1) { // Yes/No
       format = 'mcq';
       options = ['Yes', 'No'];
-    } else if (type === 2) { // Players
+    } else if (type === 2) { // True/False
+      format = 'mcq';
+      options = ['True', 'False'];
+    } else if (type === 3) { // Players
       format = 'players';
       options = [];
-    } else if (type === 3) { // Custom
-      format = 'mcq';
-      options = ['', ''];
     } else if (type === 4) { // Open-Ended
       format = 'open';
       options = [];
@@ -182,7 +182,7 @@ export default class QuestionSet extends Component {
         />
 
         <div className="paddingTop paddingBottom">
-          <OptionsDropdown onSelect={this.setOptionType} />
+          <OptionsDropdown onSelect={this.setOptionType} format={this.state.format} options={this.state.options} />
         </div>
 
         {this.state.format === 'open' && (

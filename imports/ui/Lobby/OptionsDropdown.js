@@ -1,63 +1,49 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-
-import { Glyph } from 'elemental';
+import PropTypes from 'prop-types';
 
 export default class OptionsDropdown extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.toggle = this.toggle.bind(this);
-    this.open = this.open.bind(this);
-    this.close = this.close.bind(this);
-    this.state = { show: false };
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
-  toggle() {
-    this.setState({ show: !this.state.show });
-  }
-
-  open() {
-    this.setState({ show: true });
-  }
-
-  close() {
-    this.setState({ show: false });
-  }
-
-  handleChange(value) {
-    this.props.onSelect(value);
-    this.close();
+  handleSelect(event) {
+    this.props.onSelect(Number(event.target.value));
   }
 
   render() {
-    const optionTypes = ['True/False', 'Yes/No', 'Players', 'Custom', 'Open-Ended']
+    const { format, options } = this.props;
+    let defaultValue = '0';
+
+    if (format === 'mcq') {
+      if (options.includes('Yes', 'No')) {
+        defaultValue = '1';
+      } else if (options.includes('Yes', 'No')) {
+        defaultValue = '2';
+      }
+    } else if (format === 'players') {
+      defaultValue = '3';
+    } else if (format === 'open') {
+      defaultValue = '4';
+    }
+
     return (
       <div className="dropdownContainer">
-        Options
-        <button type="button" className="optionsButton" onClick={this.toggle}>
-          <Glyph icon={this.state.show ? 'chevron-up' : 'chevron-down'} />
-        </button>
-        <div className={`optionsDropdown center ${this.state.show && 'show'}`}>
-          {
-            optionTypes.map((type, index) => (
-              <div key={index} onClick={() => this.handleChange(index)}>
-                {type}
-              </div>
-            ))
-          }
-        </div>
+        <span className="optionsLabel">Options</span>
+        <select className="floatRight selectType" value={defaultValue} onChange={this.handleSelect}>
+          <option value="-1" disabled hidden>Type</option>
+          <option value="0">Custom</option>
+          <option value="1">Yes/No</option>
+          <option value="2">True/False</option>
+          <option value="3">Players</option>
+          <option value="4">Open-ended</option>
+        </select>
       </div>
     );
   }
 }
 
-// QuestionSet.propTypes = {
-//   questionNo: PropTypes.number.isRequired,
-//   changeQuestion: PropTypes.func.isRequired
-// };
-//
-// QuestionSet.defaultProps = {
-//   questionNo: 0,
-//   changeQuestion: () => null
-// }
+OptionsDropdown.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  format: PropTypes.string.isRequired,
+};
