@@ -169,7 +169,7 @@ export default class QuestionSet extends Component {
         <div className="paddingBottom">
           <b>{`Question ${this.props.questionNo + 1} of 3`}</b>
         </div>
-        <button type="button" onClick={this.generateQuestion} className="generateButton">
+        <button type="button" onClick={this.generateQuestion} id="random">
           Random
         </button>
         <FormInput

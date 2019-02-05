@@ -48,14 +48,14 @@
   display: block;
 }
 
-.generateButton {
+#random {
   display: inline-block;
   position: absolute;
   right: 8px;
   top: 21px;
   background: white;
   border: none;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   font-weight: bold;
   font-size: smaller;
   color: #00c4a2;
