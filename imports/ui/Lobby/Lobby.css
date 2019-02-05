@@ -28,18 +28,6 @@
   padding-right: 3px;
 }
 
-.paddingTop {
-  padding-top: 15px;
-}
-
-.paddingBottom {
-  padding-bottom: 15px;
-}
-
-.paddingRight {
-  padding-right: 10px;
-}
-
 .reduceTop {
   margin-top: -15px;
 }
@@ -49,11 +37,9 @@
 }
 
 #random {
-  display: inline-block;
-  position: absolute;
-  right: 8px;
-  top: 21px;
-  background: white;
+  position: relative;
+  right: -6px;
+  background: transparent;
   border: none;
   letter-spacing: 0.5px;
   font-weight: bold;

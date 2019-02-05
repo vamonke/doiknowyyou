@@ -38,10 +38,10 @@ Meteor.methods({
       $set: { options: playerNames }
     }, { multi: true });
   },
-  'questions.select'(gameId, round) { // choose a question
+  'questions.select'(gameId, round, currentRecipientId) { // choose a question
     const unaskedIds = Questions.find({ gameId: gameId, status: 'unasked' }, { fields: { _id: 1 } }).fetch();
     if (unaskedIds.length !== 0) {
-      const recipientId = Meteor.call('players.getRecipient', gameId);
+      const recipientId = Meteor.call('players.getNewRecipient', gameId, currentRecipientId);
       const questionId = unaskedIds[Math.floor(Math.random() * unaskedIds.length)]._id;
       Questions.update(questionId, {
         $set: {
@@ -57,7 +57,6 @@ Meteor.methods({
       });
       console.log(`New question: ${questionId}`);
     } else { // End game when there no more unasked questions
-      Meteor.call('players.deselect', gameId);
       Meteor.call('games.end', gameId);
     }
   },
@@ -78,7 +77,7 @@ Meteor.methods({
         Meteor.call('players.addScore', answer.playerId);
       }
     });
-    Meteor.call('questions.select', question.gameId, question.round + 1);
+    Meteor.call('questions.select', question.gameId, question.round + 1, question.recipientId);
   },
   async 'questions.addOption'(id, answer) { // insert open-ended option
     await Questions.update(id, { $push: { options: answer } }); // insert option

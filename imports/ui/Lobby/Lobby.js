@@ -32,49 +32,26 @@ class Lobby extends Component {
     this.editQuestions = this.editQuestions.bind(this);
     this.waitingBooth = this.waitingBooth.bind(this);
     this.startGame = this.startGame.bind(this);
-    // this.checkSessionId = this.checkSessionId.bind(this);
     this.state = {
       stage: 0,
       questions: [{}, {}, {}],
     };
   }
 
-  // componentWillMount() {
-  //   window.onbeforeunload = (event) => {
-  //     const confirmationMessage = 'Exit game?';
-  //     // eslint-disable-next-line no-param-reassign
-  //     (event || window.event).returnValue = confirmationMessage; // Gecko + IE
-  //     return confirmationMessage; // Webkit, Safari, Chrome
-  //   };
-  //   window.onpagehide = removePlayer;
-  //   window.onunload = removePlayer;
-  // }
+  componentWillMount() {
+    window.onpagehide = removePlayer;
+    window.onunload = removePlayer;
+  }
 
   componentDidUpdate() {
     const { game: { code } } = this.props;
-    document.title = `Game ${code}`;
-    // this.checkSessionId();
+    document.title = `Do I know you? #${code}`;
   }
 
-  // componentWillUnmount() {
-  //   window.onpagehide = () => {};
-  //   window.onunload = () => {};
-  // }
-
-  // checkSessionId() {
-  //   const { players } = this.props;
-  //   const currentUserId = Session.get('currentUserId');
-  //   if (
-  //     !currentUserId || (
-  //       players.length > 0
-  //       && !players.map(player => player._id).includes(currentUserId)
-  //     )
-  //   ) {
-  //     console.error('Player not found');
-  //     const { history: push } = this.props;
-  //     push('/');
-  //   }
-  // }
+  componentWillUnmount() {
+    window.onpagehide = () => {};
+    window.onunload = () => {};
+  }
 
   changeQuestion(questionNo, qna, direction) {
     const { questions, stage } = this.state;
@@ -164,7 +141,7 @@ class Lobby extends Component {
           <strong>{code}</strong>
         </div>
         <div className="header">your questions</div>
-        <div className="card animateHeight">
+        <div className="card roundBottom">
           {[1, 2, 3].map((qNo, index) => (
             <QuestionSet
               key={`q + ${qNo}`}

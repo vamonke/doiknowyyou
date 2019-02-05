@@ -21,7 +21,7 @@ export default class App extends Component {
   }
 
   componentDidUpdate() {
-    document.title = 'Do I Know You?';
+    document.title = 'Do I know you?';
   }
 
   showHome() {

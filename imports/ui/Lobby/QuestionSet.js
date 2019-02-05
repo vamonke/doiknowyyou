@@ -166,10 +166,10 @@ export default class QuestionSet extends Component {
   render() {
     return (
       <div style={{ display: (this.props.display ? 'block' : 'none') }}>
-        <div className="paddingBottom">
+        <div className="paddingBottom floatLeft">
           <b>{`Question ${this.props.questionNo + 1} of 3`}</b>
         </div>
-        <button type="button" onClick={this.generateQuestion} id="random">
+        <button type="button" onClick={this.generateQuestion} id="random" className="floatRight">
           Random
         </button>
         <FormInput

@@ -12,7 +12,7 @@ export default class createGame extends Component {
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleBack = this.handleBack.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleNameChange(e) {
@@ -30,7 +30,8 @@ export default class createGame extends Component {
     this.props.showHome();
   }
 
-  async handleClick() {
+  async handleSubmit(event) {
+    event.preventDefault();
     this.setState({ disabled: true, errorMsg: '' });
     try {
       const { name } = this.state;
@@ -46,7 +47,7 @@ export default class createGame extends Component {
     return (
       <Modal className="center" isOpen={this.props.modalIsOpen} width={500} backdropClosesModal>
         <ModalBody>
-          <div className="paddingTop">
+          <form onSubmit={this.handleSubmit}>
             <FormField>
               <FormInput onChange={this.handleNameChange} placeholder="Enter your name" type="text" autoFocus />
             </FormField>
@@ -65,16 +66,15 @@ export default class createGame extends Component {
               </Col>
               <Col xs="1/2">
                 <button
-                  type="button"
+                  type="submit"
                   className="redButton"
-                  onClick={this.handleClick}
                   disabled={this.state.disabled}
                 >
                   Create
                 </button>
               </Col>
             </Row>
-          </div>
+          </form>
         </ModalBody>
       </Modal>
     );

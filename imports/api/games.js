@@ -41,7 +41,7 @@ Meteor.methods({
         }
       });
       Meteor.call('questions.setPlayersAsOptions', id);
-      Meteor.call('questions.select', id, 1);
+      Meteor.call('questions.select', id, 1, null);
     }
   },
   'games.end'(id) {

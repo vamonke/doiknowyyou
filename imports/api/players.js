@@ -24,7 +24,6 @@ Meteor.methods({
       name: name,
       score: 0,
       isReady: false,
-      isRecipient: false,
       createdAt: new Date(),
     };
 
@@ -59,29 +58,27 @@ Meteor.methods({
       }
     });
   },
-  'players.getRecipient'(gameId) { // may need refactoring?
-    const current = Players.findOne({ gameId: gameId, isRecipient: true });
+  'players.getNewRecipient'(gameId, currentRecipientId) {
     let nextId = '';
-    if (current) {
-      const next = Players.findOne({ createdAt: { $gt: current.createdAt } }, { sort: { createdAt: 1 } });
+    if (currentRecipientId) {
+      const currentRecipient = Players.findOne(currentRecipientId);
+      const next = Players.findOne({
+        gameId,
+        createdAt: { $gt: currentRecipient.createdAt }
+      }, { sort: { createdAt: 1 } });
       if (next) {
         nextId = next._id;
       }
     }
     if (nextId === '') {
-      nextId = Players.findOne({ gameId: gameId })._id;
+      nextId = Players.findOne({ gameId })._id;
     }
-    Meteor.call('players.deselect', gameId);
-    Players.update({ _id: nextId }, { $set: { isRecipient: true } });
     return nextId;
   },
   'players.addScore'(id) {
     Players.update({ _id: id }, {
       $inc: { score: 1 }
     });
-  },
-  'players.deselect'(gameId) {
-    Players.update({ gameId: gameId, isRecipient: true }, { $set: { isRecipient: false } });
   },
   'players.rename'(id, name) {
     Players.update({ _id: id }, { $set: { name } });

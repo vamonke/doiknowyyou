@@ -40,6 +40,7 @@ class CurrentQuestionBox extends Component {
     const { selected } = this.state;
     const isLoading = !question.text || !recipient.name;
     if (isLoading) {
+      console.log(recipient);
       return (
         <div className="card center">
           <div className="questionLight">

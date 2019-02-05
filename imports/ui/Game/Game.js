@@ -76,7 +76,12 @@ class Game extends Component {
 
   getRecipient(question) {
     if (question) {
-      return this.props.players.find(player => player._id === question.recipientId);
+      console.log('questionId', question.recipientId);
+      const recipient = this.props.players.find(player => player._id === question.recipientId);
+      if (!recipient) {
+        console.error('Missing recipient');
+      }
+      return recipient;
     }
     return {};
   }
@@ -146,7 +151,6 @@ class Game extends Component {
 
   completeQuestion() {
     const currentQuestion = this.getCurrentQuestion();
-    console.log(currentQuestion);
     const questionId = currentQuestion._id;
     if (questionId) {
       Meteor.call('questions.complete', questionId, (error) => {

@@ -15,7 +15,7 @@ export default class joinGame extends Component {
       errorMsg: ''
     };
     this.handleBack = this.handleBack.bind(this);
-    this.handleJoin = this.handleJoin.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCodeChange = this.handleCodeChange.bind(this);
   }
@@ -42,7 +42,8 @@ export default class joinGame extends Component {
     this.props.showHome();
   }
 
-  async handleJoin() {
+  async handleSubmit(event) {
+    event.preventDefault();
     this.setState({ disabled: true, errorMsg: '' });
     try {
       const { name, code } = this.state;
@@ -60,7 +61,7 @@ export default class joinGame extends Component {
     return (
       <Modal className="center" isOpen={this.props.modalIsOpen} width={500} backdropClosesModal>
         <ModalBody>
-          <div className="paddingTop">
+          <form onSubmit={this.handleSubmit}>
             <FormField>
               <FormInput onChange={this.handleNameChange} placeholder="Enter your name" type="text" autoFocus />
             </FormField>
@@ -82,16 +83,15 @@ export default class joinGame extends Component {
               </Col>
               <Col xs="1/2">
                 <button
-                  type="button"
+                  type="submit"
                   className="greenButton"
-                  onClick={this.handleJoin}
                   disabled={this.state.disabled}
                 >
                   Join
                 </button>
               </Col>
             </Row>
-          </div>
+          </form>
         </ModalBody>
       </Modal>
     );
